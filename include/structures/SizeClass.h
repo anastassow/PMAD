@@ -1,5 +1,5 @@
 #ifndef SIZE_CLASS_H
-#define SIZR_CLASS_H
+#define SIZE_CLASS_H
 
 #include "BlockHeader.h"
 #include <stddef.h>
