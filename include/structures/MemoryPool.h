@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "PMAD.h"
 
 typedef struct MemoryPool {
     void* start;
@@ -10,5 +11,7 @@ typedef struct MemoryPool {
     size_t used;
     struct MemoryPool* next;
 } MemoryPool;
+
+void attach_new_pool(PMAD* pmad, void* mem);
 
 #endif
