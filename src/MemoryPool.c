@@ -1,4 +1,4 @@
-#include "MemoryPool.h"
+#include "structures/MemoryPool.h"
 #include "PMAD.h"
 
 void attach_new_pool(PMAD* pmad, void* mem) {

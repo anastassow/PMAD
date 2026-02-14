@@ -1,8 +1,22 @@
-all:
-	gcc -g -c main.c -Iinclude -o main.o
-	gcc -g -c PMAD.c -Iinclude/structures/ -o PMAD.o
-	gcc -g -c MemoryPool.c -Iinclude/structures/ -o MemoryPool.o
-	gcc main.o PMAD.o -o main
+CC = gcc
+CFLAGS = -g -Iinclude
+
+SRC = src/PMAD.c src/MemoryPool.c
+OBJ = PMAD.o MemoryPool.o main.o
+
+all: main
+
+main: $(OBJ)
+	$(CC) $(OBJ) -o main
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c -o main.o
+
+PMAD.o: src/PMAD.c
+	$(CC) $(CFLAGS) -c src/PMAD.c -o PMAD.o
+
+MemoryPool.o: src/MemoryPool.c
+	$(CC) $(CFLAGS) -c src/MemoryPool.c -o MemoryPool.o
 
 clean:
-	rm -f main.o PMAD.o main
+	rm -f $(OBJ) main

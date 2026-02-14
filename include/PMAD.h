@@ -7,7 +7,7 @@
 #define NUM_CLASSES 5
 #define POOL_SIZE (1024 * 1024)
 
-typedef struct {
+typedef struct PMAD{
     MemoryPool* pool_head;
     SizeClass size_classes[NUM_CLASSES];
 } PMAD;
