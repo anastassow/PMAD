@@ -11,3 +11,7 @@ void attach_new_pool(PMAD* pmad, void* mem) {
     pool->next = pmad->pool_head;
     pmad->pool_head = pool;
 }
+
+void split_pool_by_percentage(struct PMAD* pmad, MemoryPool* pool, size_t percentage[NUM_CLASSES]){
+    
+}

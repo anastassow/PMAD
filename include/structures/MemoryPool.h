@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define NUM_CLASSES 5
+
 typedef struct MemoryPool {
     void* start;
     size_t size;
@@ -11,7 +13,8 @@ typedef struct MemoryPool {
     struct MemoryPool* next;
 } MemoryPool;
 
-struct PMAD;
+typedef struct PMAD PMAD;
 void attach_new_pool(struct PMAD* pmad, void* mem);
+void split_pool_by_percentage(struct PMAD* pmad, MemoryPool* pool, size_t percentage[NUM_CLASSES]);
 
 #endif
