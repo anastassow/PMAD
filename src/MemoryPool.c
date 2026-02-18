@@ -12,20 +12,18 @@ void attach_new_pool(PMAD* pmad, void* mem) {
     pmad->pool_head = pool;
 }
 
-void split_pool_by_percentage(struct PMAD* pmad, MemoryPool* pool, size_t percentage[NUM_CLASSES]){
-    // TODO: Initialize a pointer to the start of the memory pool
+void split_pool_by_percentage(struct PMAD* pmad, size_t percentage[NUM_CLASSES]){
+    uint8_t* ptr = (uint8_t*)pmad->pool_head->start;
 
-    // TODO: For each size class (i = 0 to NUM_CLASSES-1):
-        // TODO: Reset the free list of this size class
-        // TODO: Calculate the number of bytes allocated to this size class based on percentages[i]
-        // TODO: Calculate how many blocks of this size fit into the allocated bytes
-        // TODO: Set the total_blocks and allocated_blocks counters for this size class
+    for (int i = 0; i < NUM_CLASSES; i++) {
+        size_t block_size = pmad->size_classes[i].block_size;
+        
+        size_t class_size = (pmad->pool_head->size * percentage[i]) / 100;
+        size_t blocks_fit = class_size / block_size;
 
-        // TODO: For each block in this size class:
-            // TODO: Cast the current pool pointer to a BlockHeader
-            // TODO: Set the block's size_class index
-            // TODO: Push the block to the head of the free list
-            // TODO: Advance the pool pointer by the block size
-
-    // TODO: Done — memory pool is now split and free lists are populated
+        for (int j = 0; j < blocks_fit; j++) {
+            createBlock(ptr, i);
+            ptr += block_size;
+        }
+    }
 }
