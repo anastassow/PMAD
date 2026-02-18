@@ -16,14 +16,15 @@ void split_pool_by_percentage(struct PMAD* pmad, size_t percentage[NUM_CLASSES])
     uint8_t* ptr = (uint8_t*)pmad->pool_head->start;
 
     for (uint8_t i = 0; i < NUM_CLASSES; i++) {
-        size_t block_size = pmad->size_classes[i].block_size;
+        size_t user_block_size = pmad->size_classes[i].block_size;
+        size_t block_size = user_block_size + sizeof(BlockHeader);     
         
         size_t class_size = (pmad->pool_head->size * percentage[i]) / 100;
         size_t blocks_fit = class_size / block_size;
 
         for (int j = 0; j < blocks_fit; j++) {
             createBlock(ptr, i, pmad);
-            pmad->size_classes[i].total_blocks++;
+            pmad->size_classes[i].total_blocks++;   
             ptr += block_size;
         }
     }

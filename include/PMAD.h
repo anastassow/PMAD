@@ -12,7 +12,7 @@ typedef struct PMAD{
     SizeClass size_classes[NUM_CLASSES];
 } PMAD;
 
-void init_pmad(PMAD* pmad);
+void init_pmad(PMAD* pmad, const size_t* class_sizes);
 
 void* get_memory_pool_from_os();
 void free_memory_pool(void* mem);
