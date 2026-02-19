@@ -4,6 +4,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void build_lookup_table(PMAD* pmad) {
+    int class_index = 0;
+    for (int i = 1; i <= MAX_SIZE_OF_SIZE_CLASS / ALIGNMENT; i++) {
+        size_t aligned_size = i * ALIGNMENT;
+
+        while (class_index < NUM_CLASSES && pmad->size_classes[class_index].block_size < aligned_size)
+            class_index++;
+
+        pmad->size_class_reference[i] = (class_index < NUM_CLASSES) ? class_index : -1;
+    }
+}
+
 void init_pmad(PMAD* pmad, const size_t* class_sizes) {
 
     for (size_t i = 0; i < NUM_CLASSES; i++) {
@@ -14,6 +26,7 @@ void init_pmad(PMAD* pmad, const size_t* class_sizes) {
     }
 
     pmad->pool_head = NULL;
+    build_lookup_table(pmad);
 }
 
 void* get_memory_pool_from_os() {
@@ -34,10 +47,18 @@ void* get_memory_pool_from_os() {
     return mem;
 }
 
-void free_memory_pool(void* mem){
+void free_memory_pool(void* mem) {
     if (munmap(mem, POOL_SIZE) != 0) {
         perror("munmap failed");
     }
 
     printf("Memmory freed!");
 }
+
+// size_t roundUp(size_t size) {
+
+// }
+
+// void* pmad_alloc(PMAD* pmad, size_t size) {
+
+// }
