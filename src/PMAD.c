@@ -55,9 +55,9 @@ void free_memory_pool(void* mem) {
     printf("Memmory freed!");
 }
 
-// size_t roundUp(size_t size) {
-
-// }
+size_t roundUp(size_t size) {
+    return (size + 15) & ~((size_t)15);
+}
 
 // void* pmad_alloc(PMAD* pmad, size_t size) {
 
