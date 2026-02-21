@@ -66,6 +66,8 @@ void* pmad_alloc(PMAD* pmad, size_t size) {
     
     void* memory = pmad->size_classes[index].free_list;
     pmad->size_classes[index].free_list = pmad->size_classes[index].free_list->next;
+    pmad->size_classes[index].allocated_blocks++;
+    pmad->size_classes[index].total_blocks--;
 
     return (uint8_t*)memory + sizeof(BlockHeader);
 }
