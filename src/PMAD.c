@@ -63,11 +63,17 @@ void* pmad_alloc(PMAD* pmad, size_t size) {
     
     size_t aligned = roundUp(size);
     int index = pmad->size_class_reference[aligned / ALIGNMENT];
-    
-    void* memory = pmad->size_classes[index].free_list;
-    pmad->size_classes[index].free_list = pmad->size_classes[index].free_list->next;
-    pmad->size_classes[index].allocated_blocks++;
-    pmad->size_classes[index].total_blocks--;
 
-    return (uint8_t*)memory + sizeof(BlockHeader);
+    SizeClass* sc = &pmad->size_classes[index];
+
+    void* memory = sc->free_list;
+    if (!memory) {
+        perror("No memory left!");
+        return NULL;
+    }
+
+    sc->free_list = sc->free_list->next;
+    sc->allocated_blocks++;
+
+    return (void*)((uint8_t*)memory + sizeof(BlockHeader));
 }
