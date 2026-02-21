@@ -32,6 +32,8 @@ for (int i = 0; i < 6; i++) {
 }
 printf("\n");
 
+pmad_free(&pmad, something);
+
 free_memory_pool(memoryPool);
 
 return 0;

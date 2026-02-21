@@ -77,3 +77,16 @@ void* pmad_alloc(PMAD* pmad, size_t size) {
 
     return (void*)((uint8_t*)memory + sizeof(BlockHeader));
 }
+
+void pmad_free(PMAD* pmad, void* memoryToFree) {
+    if (!memoryToFree) return;
+    
+    BlockHeader* block = (BlockHeader*)((uint8_t*)memoryToFree - sizeof(BlockHeader));
+
+    SizeClass* sc = &pmad->size_classes[block->size_class];
+    
+    block->next = sc->free_list;
+    sc->free_list = block;
+
+    sc->allocated_blocks--;
+}

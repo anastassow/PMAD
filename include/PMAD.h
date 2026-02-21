@@ -23,5 +23,6 @@ void* get_memory_pool_from_os();
 void free_memory_pool(void* mem);
 
 void* pmad_alloc(PMAD* pmad, size_t size);
+void pmad_free(PMAD* pmad, void* memoryToFree);
 
 #endif
