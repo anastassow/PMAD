@@ -59,6 +59,13 @@ size_t roundUp(size_t size) {
     return (size + 15) & ~((size_t)15);
 }
 
-// void* pmad_alloc(PMAD* pmad, size_t size) {
+void* pmad_alloc(PMAD* pmad, size_t size) {
+    
+    size_t aligned = roundUp(size);
+    int index = pmad->size_class_reference[aligned / ALIGNMENT];
+    
+    void* memory = pmad->size_classes[index].free_list;
+    pmad->size_classes[index].free_list = pmad->size_classes[index].free_list->next;
 
-// }
+    return (uint8_t*)memory + sizeof(BlockHeader);
+}

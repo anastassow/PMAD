@@ -15,6 +15,13 @@ size_t percentages[5] = {10, 20, 20, 20, 30};
 split_pool_by_percentage(&pmad, percentages);
 printf("Here\n");
 
+int* something = pmad_alloc(&pmad, sizeof(int));
+printf("This is the header: %hhu\n", ((BlockHeader*)something)->size_class);
+printf("This is the header: %p\n", ((BlockHeader*)something)->next);
+
+*something = 42;
+printf("This is the value: %d\n", *something);
+
 free_memory_pool(memoryPool);
 
 return 0;

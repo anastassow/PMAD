@@ -22,6 +22,6 @@ void build_lookup_table(PMAD* pmad);
 void* get_memory_pool_from_os();
 void free_memory_pool(void* mem);
 
-// void* pmad_alloc(PMAD* pmad, size_t size);
+void* pmad_alloc(PMAD* pmad, size_t size);
 
 #endif
