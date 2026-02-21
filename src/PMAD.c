@@ -16,7 +16,7 @@ void build_lookup_table(PMAD* pmad) {
     }
 }
 
-void init_pmad(PMAD* pmad, const size_t* class_sizes) {
+void PMAD_init(PMAD* pmad, const size_t* class_sizes) {
 
     for (size_t i = 0; i < NUM_CLASSES; i++) {
         pmad->size_classes[i].block_size = class_sizes[i];
@@ -59,7 +59,7 @@ size_t roundUp(size_t size) {
     return (size + 15) & ~((size_t)15);
 }
 
-void* pmad_alloc(PMAD* pmad, size_t size) {
+void* PMAD_alloc(PMAD* pmad, size_t size) {
     
     size_t aligned = roundUp(size);
     int index = pmad->size_class_reference[aligned / ALIGNMENT];
@@ -78,7 +78,7 @@ void* pmad_alloc(PMAD* pmad, size_t size) {
     return (void*)((uint8_t*)memory + sizeof(BlockHeader));
 }
 
-void pmad_free(PMAD* pmad, void* memoryToFree) {
+void PMAD_free(PMAD* pmad, void* memoryToFree) {
     if (!memoryToFree) return;
     
     BlockHeader* block = (BlockHeader*)((uint8_t*)memoryToFree - sizeof(BlockHeader));

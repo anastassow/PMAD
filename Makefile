@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -g -Iinclude
 
-SRC = src/PMAD.c src/MemoryPool.c src/BlockHeader.c
-OBJ = PMAD.o MemoryPool.o BlockHeader.o main.o 
+SRC = src/PMAD.c src/incPMAD.c src/MemoryPool.c src/BlockHeader.c
+OBJ = PMAD.o incPMAD.o MemoryPool.o BlockHeader.o main.o 
 
 all: main
 
@@ -14,6 +14,9 @@ main.o: main.c
 
 PMAD.o: src/PMAD.c
 	$(CC) $(CFLAGS) -c src/PMAD.c -o PMAD.o
+
+incPMAD.o: src/incPMAD.c
+	$(CC) $(CFLAGS) -c src/incPMAD.c -o incPMAD.o
 
 MemoryPool.o: src/MemoryPool.c
 	$(CC) $(CFLAGS) -c src/MemoryPool.c -o MemoryPool.o
