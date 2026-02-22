@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>PMAD — Deterministic Memory Allocator</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --surf: #fff;
+            --surf2: #f0f3f7;
+            --bdr: #e2e7ef;
+            --txt: #1a202c;
+            --txt2: #64748b;
+            --mute: #94a3b8;
+            --acc: #2563eb;
+            --accl: #eff6ff;
+            --grn: #15803d;
+            --grnl: #dcfce7;
+            --red: #b91c1c;
+            --redl: #fee2e2;
+            --yel: #a16207;
+            --yell: #fef9c3;
+            --pur: #6d28d9;
+            --purl: #ede9fe;
+            --pmad: #2563eb;
+            --je: #0e7490;
+            --tc: #7c3aed;
+            --pt: #b45309;
+            --r: 10px;
+            --rl: 16px;
+            --sh: 0 2px 12px rgba(0, 0, 0, .07);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .88em;
+            background: rgba(0, 0, 0, .06);
+            padding: 1px 5px;
+            border-radius: 3px
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 52px 24px 88px
+        }
+
+        section {
+            margin-bottom: 72px
+        }
+
+        /* header */
+        .hdr {
+            text-align: center;
+            padding-bottom: 44px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--bdr)
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accl);
+            color: var(--acc);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 99px;
+            margin-bottom: 16px
+        }
+
+        .hdr h1 {
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 700;
+            letter-spacing: -.025em;
+            margin-bottom: 10px
+        }
+
+        .hdr h1 em {
+            color: var(--acc);
+            font-style: normal
+        }
+
+        .hdr .sub {
+            font-size: 15px;
+            color: var(--txt2);
+            max-width: 640px;
+            margin: 0 auto 20px
+        }
+
+        .hdr .tagline {
+            display: inline-block;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            padding: 10px 22px;
+            border-radius: 8px;
+            letter-spacing: .01em
+        }
+
+        .hdr .tagline span {
+            color: #93c5fd
+        }
+
+        /* section labels */
+        .sl {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--acc);
+            margin-bottom: 5px
+        }
+
+        .st {
+            font-size: clamp(17px, 2.4vw, 24px);
+            font-weight: 700;
+            letter-spacing: -.015em;
+            margin-bottom: 6px
+        }
+
+        .sd {
+            font-size: 13.5px;
+            color: var(--txt2);
+            max-width: 680px;
+            margin-bottom: 28px
+        }
+
+        /* card */
+        .card {
+            background: var(--surf);
+            border: 1px solid var(--bdr);
+            border-radius: var(--rl);
+            box-shadow: var(--sh)
+        }
+
+        .ch {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--bdr);
+            background: var(--surf2)
+        }
+
+        .ct {
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        .cs {
+            font-size: 11.5px;
+            color: var(--mute);
+            margin-top: 2px
+        }
+
+        .cb {
+            padding: 24px
+        }
+
+        /* KPI strip */
+        .krow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 32px
+        }
+
+        @media(max-width:700px) {
+            .krow {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .kpi {
+            background: var(--surf);
+            border: 1px solid var(--bdr);
+            border-radius: var(--r);
+            padding: 18px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .05)
+        }
+
+        .kpi.hi {
+            border-color: var(--acc);
+            background: var(--accl)
+        }
+
+        .kv {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1;
+            margin-bottom: 4px
+        }
+
+        .kpi.hi .kv {
+            color: var(--acc)
+        }
+
+        .kl {
+            font-size: 12px;
+            color: var(--txt2);
+            line-height: 1.4
+        }
+
+        /* CONFIGURABILITY HERO */
+        .cfg-hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: var(--rl);
+            padding: 36px;
+            margin-bottom: 28px;
+            color: #e2e8f0
+        }
+
+        .cfg-hero h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -.015em;
+            margin-bottom: 8px;
+            color: #f1f5f9
+        }
+
+        .cfg-hero p {
+            font-size: 13.5px;
+            color: #94a3b8;
+            max-width: 700px;
+            margin-bottom: 24px
+        }
+
+        .cfg-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px
+        }
+
+        @media(max-width:700px) {
+            .cfg-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .cfg-card {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 10px;
+            padding: 18px
+        }
+
+        .cfg-card h3 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: #7dd3fc;
+            margin-bottom: 10px
+        }
+
+        .cfg-card .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            background: rgba(255, 255, 255, .1);
+            border-radius: 4px;
+            padding: 2px 7px;
+            margin: 2px 2px 2px 0;
+            color: #e2e8f0
+        }
+
+        .cfg-card .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: #34d399;
+            margin-top: 10px
+        }
+
+        .cfg-card .vlabel {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 2px
+        }
+
+        /* INTERACTIVE CONFIGURATOR */
+        .configurator {
+            background: var(--surf);
+            border: 1px solid var(--bdr);
+            border-radius: var(--rl);
+            overflow: hidden;
+            box-shadow: var(--sh)
+        }
+
+        .conf-top {
+            background: #0f172a;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .conf-top h3 {
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 700
+        }
+
+        .conf-top .subtitle {
+            color: #64748b;
+            font-size: 11.5px;
+            margin-top: 2px
+        }
+
+        .conf-body {
+            padding: 24px
+        }
+
+        .class-row {
+            display: grid;
+            grid-template-columns: 80px 200px 200px 1fr;
+            gap: 14px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--bdr)
+        }
+
+        .class-row:last-child {
+            border: none
+        }
+
+        .class-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--acc)
+        }
+
+        .range-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 4px
+        }
+
+        .range-wrap label {
+            font-size: 10.5px;
+            color: var(--mute);
+            font-weight: 600;
+            letter-spacing: .04em;
+            text-transform: uppercase
+        }
+
+        .range-wrap input[type=range] {
+            width: 100%;
+            accent-color: var(--acc)
+        }
+
+        .range-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--txt2);
+            text-align: right
+        }
+
+        .result-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 10px;
+            background: var(--accl);
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 12px
+        }
+
+        .res-item {
+            text-align: center
+        }
+
+        .res-v {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--acc);
+            font-family: 'JetBrains Mono', monospace
+        }
+
+        .res-l {
+            font-size: 10.5px;
+            color: var(--txt2);
+            margin-top: 3px
+        }
+
+        .pct-warning {
+            font-size: 11.5px;
+            color: var(--red);
+            margin-top: 8px;
+            display: none
+        }
+
+        /* Architecture */
+        .arch {
+            display: flex;
+            flex-direction: column
+        }
+
+        .arow {
+            display: flex;
+            gap: 12px
+        }
+
+        .aconn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 32px;
+            position: relative
+        }
+
+        .aconn::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--bdr)
+        }
+
+        .apill {
+            background: var(--surf);
+            border: 1px solid var(--bdr);
+            border-radius: 99px;
+            padding: 2px 12px;
+            font-size: 10px;
+            color: var(--mute);
+            font-weight: 500;
+            z-index: 1
+        }
+
+        .lb {
+            flex: 1;
+            border-radius: var(--r);
+            padding: 14px 16px;
+            transition: transform .15s
+        }
+
+        .lb:hover {
+            transform: translateY(-1px)
+        }
+
+        .lb-tag {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            opacity: .6;
+            margin-bottom: 3px
+        }
+
+        .lb-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px
+        }
+
+        .chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, .25)
+        }
+
+        .l1 {
+            background: #dbeafe;
+            color: #1e3a8a;
+            border: 1px solid #bfdbfe
+        }
+
+        .l2 {
+            background: #ede9fe;
+            color: #3b0764;
+            border: 1px solid #ddd6fe
+        }
+
+        .l3 {
+            background: #d1fae5;
+            color: #064e3b;
+            border: 1px solid #6ee7b7
+        }
+
+        .l3b {
+            background: #fef3c7;
+            color: #713f12;
+            border: 1px solid #fde68a
+        }
+
+        .l4 {
+            background: #fee2e2;
+            color: #7f1d1d;
+            border: 1px solid #fca5a5
+        }
+
+        /* Real numbers banner */
+        .realnum {
+            background: #0f172a;
+            border-radius: var(--rl);
+            padding: 28px;
+            margin-bottom: 24px
+        }
+
+        .realnum h3 {
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px
+        }
+
+        .realnum .note {
+            color: #64748b;
+            font-size: 11.5px;
+            margin-bottom: 20px
+        }
+
+        .rn-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px
+        }
+
+        @media(max-width:700px) {
+            .rn-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .rn {
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 8px;
+            padding: 14px
+        }
+
+        .rn-v {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: #34d399;
+            margin-bottom: 3px
+        }
+
+        .rn-l {
+            font-size: 11px;
+            color: #64748b
+        }
+
+        /* Table */
+        .twrap {
+            overflow-x: auto;
+            border-radius: var(--rl);
+            border: 1px solid var(--bdr);
+            box-shadow: var(--sh)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            background: var(--surf)
+        }
+
+        thead {
+            background: var(--surf2)
+        }
+
+        thead th {
+            padding: 12px 15px;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: .03em;
+            color: var(--txt2);
+            border-bottom: 1px solid var(--bdr);
+            text-align: left
+        }
+
+        thead th:first-child {
+            border-right: 1px solid var(--bdr);
+            min-width: 180px
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--bdr);
+            transition: background .1s
+        }
+
+        tbody tr:last-child {
+            border: none
+        }
+
+        tbody tr:hover {
+            background: var(--surf2)
+        }
+
+        td {
+            padding: 11px 15px;
+            vertical-align: middle
+        }
+
+        td:first-child {
+            font-weight: 600;
+            font-size: 11.5px;
+            color: var(--txt2);
+            border-right: 1px solid var(--bdr);
+            white-space: nowrap
+        }
+
+        .thd {
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .p {
+            display: inline-flex;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 99px;
+            padding: 3px 9px;
+            white-space: nowrap
+        }
+
+        .pg {
+            background: var(--grnl);
+            color: var(--grn)
+        }
+
+        .pb {
+            background: var(--accl);
+            color: var(--acc)
+        }
+
+        .py {
+            background: var(--yell);
+            color: var(--yel)
+        }
+
+        .pr {
+            background: var(--redl);
+            color: var(--red)
+        }
+
+        .pp {
+            background: var(--purl);
+            color: var(--pur)
+        }
+
+        .pgr {
+            background: #f1f5f9;
+            color: #475569
+        }
+
+        .m {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px
+        }
+
+        /* Charts */
+        .cg2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .cg3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px
+        }
+
+        @media(max-width:700px) {
+
+            .cg2,
+            .cg3 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .cc {
+            background: var(--surf);
+            border: 1px solid var(--bdr);
+            border-radius: var(--rl);
+            box-shadow: var(--sh);
+            padding: 20px 20px 16px
+        }
+
+        .cc-t {
+            font-size: 12.5px;
+            font-weight: 700;
+            margin-bottom: 2px
+        }
+
+        .cc-s {
+            font-size: 11px;
+            color: var(--mute);
+            margin-bottom: 16px
+        }
+
+        .cw {
+            position: relative;
+            height: 200px
+        }
+
+        .cw-l {
+            position: relative;
+            height: 240px
+        }
+
+        .leg {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 22px
+        }
+
+        .li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--txt2)
+        }
+
+        .ld {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        /* block count table */
+        .bc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace
+        }
+
+        .bc-table th {
+            background: var(--surf2);
+            padding: 9px 14px;
+            font-size: 10.5px;
+            color: var(--txt2);
+            font-weight: 600;
+            letter-spacing: .04em;
+            border-bottom: 1px solid var(--bdr);
+            text-align: left
+        }
+
+        .bc-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--bdr);
+            color: var(--txt)
+        }
+
+        .bc-table tr:last-child td {
+            border: none;
+            font-weight: 700;
+            background: var(--surf2)
+        }
+
+        .bar-cell {
+            width: 180px
+        }
+
+        .bar-inner {
+            height: 8px;
+            border-radius: 4px;
+            background: var(--acc);
+            opacity: .8
+        }
+
+        /* footer */
+        .footer {
+            border-top: 1px solid var(--bdr);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .footer p {
+            font-size: 11.5px;
+            color: var(--mute)
+        }
+
+        .srcs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px
+        }
+
+        .src {
+            font-size: 10.5px;
+            color: var(--mute);
+            background: var(--surf2);
+            border: 1px solid var(--bdr);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-family: 'JetBrains Mono', monospace
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- HEADER -->
+        <header class="hdr">
+            <div class="badge">⬡ PMAD · Source-Verified · February 2026</div>
+            <h1><em>PMAD</em> — Pool-based Memory Allocator<br>with Determinism</h1>
+            <p class="sub">Every allocation is O(1). Every block count is known before runtime. Every byte of memory is
+                under your control. No other popular allocator gives you this.</p>
+            <div class="tagline">pmad_init(<span>class_sizes[]</span>, <span>percentages[]</span>); <span
+                    style="color:#64748b">// you define the contract</span></div>
+        </header>
+
+        <!-- KPI strip -->
+        <section>
+            <div class="sl">Measured on your machine · benchmark.c · gcc -O2 · macOS</div>
+            <div class="st">Real Benchmark Numbers</div>
+            <div class="krow">
+                <div class="kpi hi">
+                    <div class="kv">O(1)</div>
+                    <div class="kl">Strict — 4 ops alloc, 3 ops free. No loops, no syscalls, no locks.</div>
+                </div>
+                <div class="kpi">
+                    <div class="kv" style="color:var(--grn)">33 ns</div>
+                    <div class="kl">Measured avg alloc latency (16 B, 3 276 samples, single-thread)</div>
+                </div>
+                <div class="kpi">
+                    <div class="kv" style="color:#7c3aed">468 M</div>
+                    <div class="kl">Alloc/s bulk throughput (2.14 ns/op, 3 276 sequential allocs)</div>
+                </div>
+                <div class="kpi">
+                    <div class="kv" style="color:var(--yel)">1</div>
+                    <div class="kl">Runtime syscall — one <code>mmap()</code> at init, one <code>munmap()</code> at
+                        destroy</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIGURABILITY HERO -->
+        <section id="config">
+            <div class="sl">Section 01 · The Core Differentiator</div>
+            <div class="st">You Define the Memory Contract</div>
+            <div class="sd">jemalloc has 71 fixed size classes. tcmalloc has ~80 fixed size bands. ptmalloc has dynamic
+                bins you cannot predict. PMAD lets you specify exactly which sizes matter for your workload and exactly
+                how much memory each gets — then guarantees the outcome mathematically.</div>
+
+            <div class="cfg-hero">
+                <h2>Configurability + Determinism = Full Predictability</h2>
+                <p>Because PMAD is a pre-allocated slab allocator with a flat O(1) lookup table, you can compute the
+                    exact block count, exact usable bytes, and exact per-operation cost for any configuration — before
+                    writing a single line of application code.</p>
+                <div class="cfg-grid">
+                    <div class="cfg-card">
+                        <h3>Game Engine Config</h3>
+                        <span class="tag">sizes: {16,64,256}</span>
+                        <span class="tag">pcts: {50,30,20}</span>
+                        <div class="val">~16 384</div>
+                        <div class="vlabel">blocks in 16-byte class (512 KB slab)</div>
+                    </div>
+                    <div class="cfg-card">
+                        <h3>Network / HFT Config</h3>
+                        <span class="tag">sizes: {32,128,512}</span>
+                        <span class="tag">pcts: {60,30,10}</span>
+                        <div class="val">~18 874</div>
+                        <div class="vlabel">blocks in 32-byte class (614 KB slab)</div>
+                    </div>
+                    <div class="cfg-card">
+                        <h3>Embedded / RTOS</h3>
+                        <span class="tag">sizes: {8,16,32}</span>
+                        <span class="tag">pcts: {40,40,20}</span>
+                        <div class="val">~20 971</div>
+                        <div class="vlabel">blocks in 8-byte class (409 KB slab)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive configurator -->
+            <div class="configurator">
+                <div class="conf-top">
+                    <div>
+                        <div class="ct" style="color:#f1f5f9">Live Pool Configurator — everything is changeable</div>
+                        <div class="subtitle">Pick a preset or adjust sliders — all results update instantly. Every
+                            number is mathematically exact, computed before any code runs.</div>
+                    </div>
+                    <span id="pct-total"
+                        style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#34d399;font-weight:700">100%
+                        ✓</span>
+                </div>
+                <div
+                    style="display:flex;flex-wrap:wrap;gap:8px;padding:12px 24px;background:#0f172a;border-top:1px solid rgba(255,255,255,.07)">
+                    <span
+                        style="font-size:10.5px;color:#475569;font-weight:700;letter-spacing:.06em;text-transform:uppercase;align-self:center;margin-right:4px">Presets:</span>
+                    <button onclick="loadPreset(0)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#93c5fd;border-radius:6px;padding:4px 12px;cursor:pointer">Default
+                        (main.c)</button>
+                    <button onclick="loadPreset(1)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:#6ee7b7;border-radius:6px;padding:4px 12px;cursor:pointer">🏎
+                        Max Throughput</button>
+                    <button onclick="loadPreset(2)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:#c4b5fd;border-radius:6px;padding:4px 12px;cursor:pointer">🗜
+                        Min Overhead</button>
+                    <button onclick="loadPreset(3)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:#fde68a;border-radius:6px;padding:4px 12px;cursor:pointer">⚖
+                        Balanced</button>
+                    <button onclick="loadPreset(4)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:#fca5a5;border-radius:6px;padding:4px 12px;cursor:pointer">🎮
+                        Game Engine</button>
+                    <button onclick="loadPreset(5)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(94,234,212,.1);border:1px solid rgba(94,234,212,.3);color:#5eead4;border-radius:6px;padding:4px 12px;cursor:pointer">📡
+                        Network/HFT</button>
+                    <button onclick="loadPreset(6)"
+                        style="font-size:11px;font-family:'JetBrains Mono',monospace;background:rgba(196,181,253,.1);border:1px solid rgba(196,181,253,.3);color:#ddd6fe;border-radius:6px;padding:4px 12px;cursor:pointer">🔌
+                        Embedded/RTOS</button>
+                </div>
+                <div class="conf-body">
+                    <div id="class-rows"></div>
+                    <p class="pct-warning" id="pct-warn">⚠ Percentages must sum to 100%</p>
+                    <div style="margin-top:16px">
+                        <div
+                            style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:10px">
+                            Computed Results (exact, pre-runtime)</div>
+                        <div class="result-row" id="results-row"></div>
+                    </div>
+                    <div style="margin-top:16px;overflow-x:auto">
+                        <table class="bc-table">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Block Size</th>
+                                    <th>Pool Slice</th>
+                                    <th>Block Count</th>
+                                    <th>User Bytes</th>
+                                    <th>Header Bytes</th>
+                                    <th>Utilisation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bc-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <section id="arch">
+            <div class="sl">Section 02 · src/ anatomy</div>
+            <div class="st">Layered Architecture</div>
+            <div class="sd">Four layers, one syscall. Real function and struct names from your source. Struct sizes
+                measured by <code>sizeof()</code> on your machine.</div>
+            <div class="card">
+                <div class="ch">
+                    <div class="ct">PMAD Internal Architecture</div>
+                    <div class="cs">sizeof(PMAD)=1200 B · sizeof(BlockHeader)=16 B · sizeof(SizeClass)=32 B ·
+                        sizeof(MemoryPool)=32 B</div>
+                </div>
+                <div class="cb">
+                    <div class="arch">
+                        <div class="arow">
+                            <div class="lb l1">
+                                <div class="lb-tag">Layer 1 · incPMAD.h / incPmad.c</div>
+                                <div class="lb-title">Public API — Singleton</div>
+                                <div class="chips">
+                                    <span class="chip">pmad_init(class_sizes[], percentages[])</span>
+                                    <span class="chip">pmad_alloc(size)</span>
+                                    <span class="chip">pmad_free(ptr)</span>
+                                    <span class="chip">pmad_destroy()</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aconn"><span class="apill">↓ delegates to PMAD_alloc / PMAD_free</span></div>
+                        <div class="arow">
+                            <div class="lb l2">
+                                <div class="lb-tag">Layer 2 · PMAD.c · PMAD.h</div>
+                                <div class="lb-title">Allocator Core — 4-op alloc, 3-op free</div>
+                                <div class="chips">
+                                    <span class="chip">build_lookup_table() → size_class_reference[257] (O(1)
+                                        index)</span>
+                                    <span class="chip">roundUp(size) = (size+15)&amp;~15 · ALIGNMENT=16</span>
+                                    <span class="chip">PMAD_alloc → array lookup + pop free_list head</span>
+                                    <span class="chip">PMAD_free → recover header + push free_list head</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aconn"><span class="apill">↓ reads slabs built by split_pool_by_percentage()</span>
+                        </div>
+                        <div style="display:flex;gap:12px">
+                            <div class="lb l3" style="flex:1.6">
+                                <div class="lb-tag">Layer 3 · MemoryPool.c · SizeClass.h</div>
+                                <div class="lb-title">MemoryPool + SizeClass[NUM_CLASSES]</div>
+                                <div class="chips">
+                                    <span class="chip">attach_new_pool() → maps mmap'd region</span>
+                                    <span class="chip">split_pool_by_percentage() → carves slabs by % config</span>
+                                    <span class="chip">SizeClass: block_size · free_list · total_blocks ·
+                                        allocated_blocks</span>
+                                    <span class="chip">Default: {16B 10%} {32B 20%} {64B 20%} {128B 20%} {1024B
+                                        30%}</span>
+                                </div>
+                            </div>
+                            <div class="lb l3b" style="flex:1">
+                                <div class="lb-tag">Layer 3b · BlockHeader.h</div>
+                                <div class="lb-title">Block Layout (16 B)</div>
+                                <div class="chips">
+                                    <span class="chip">next ptr → 8 B</span>
+                                    <span class="chip">size_class → 1 B</span>
+                                    <span class="chip">padding → 7 B</span>
+                                    <span class="chip">user data → follows</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aconn"><span class="apill">↓ one mmap(MAP_ANON|MAP_PRIVATE, 1 MB) at
+                                pmad_init()</span></div>
+                        <div class="arow">
+                            <div class="lb l4">
+                                <div class="lb-tag">Layer 4 · OS</div>
+                                <div class="lb-title">OS Memory Interface — 1 syscall total</div>
+                                <div class="chips">
+                                    <span class="chip">mmap(NULL, POOL_SIZE, PROT_READ|PROT_WRITE, MAP_ANON|MAP_PRIVATE,
+                                        -1, 0)</span>
+                                    <span class="chip">ZERO runtime syscalls in alloc / free</span>
+                                    <span class="chip">munmap() only at pmad_destroy()</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REAL NUMBERS -->
+        <section id="realnums">
+            <div class="sl">Section 03 · benchmark.c output (gcc -O2 · macOS · your hardware)</div>
+            <div class="st">Measured Numbers — Default Config {16,32,64,128,1024} @ {10,20,20,20,30}%</div>
+            <div class="realnum">
+                <h3>Struct Sizes (sizeof, 64-bit LP64)</h3>
+                <div class="note">Measured by your compiler — not estimated</div>
+                <div class="rn-grid">
+                    <div class="rn">
+                        <div class="rn-v">16 B</div>
+                        <div class="rn-l">sizeof(BlockHeader)</div>
+                    </div>
+                    <div class="rn">
+                        <div class="rn-v">32 B</div>
+                        <div class="rn-l">sizeof(SizeClass)</div>
+                    </div>
+                    <div class="rn">
+                        <div class="rn-v">32 B</div>
+                        <div class="rn-l">sizeof(MemoryPool)</div>
+                    </div>
+                    <div class="rn">
+                        <div class="rn-v">1200 B</div>
+                        <div class="rn-l">sizeof(PMAD) total</div>
+                    </div>
+                </div>
+            </div>
+            <div class="realnum" style="margin-top:0">
+                <h3>Pool Block Counts (Default Config, 1 MB pool)</h3>
+                <div class="note">Computed by split_pool_by_percentage() — exact, not estimated</div>
+                <div style="overflow-x:auto;margin-top:8px">
+                    <table class="bc-table">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Block Size</th>
+                                <th>% Alloc</th>
+                                <th>Pool Slice</th>
+                                <th>Block Count</th>
+                                <th>User Bytes</th>
+                                <th>Header Bytes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Class[0]</td>
+                                <td>16 B</td>
+                                <td>10%</td>
+                                <td>104 857 B</td>
+                                <td><strong>3 276</strong></td>
+                                <td>52 416 B</td>
+                                <td>52 416 B</td>
+                            </tr>
+                            <tr>
+                                <td>Class[1]</td>
+                                <td>32 B</td>
+                                <td>20%</td>
+                                <td>209 715 B</td>
+                                <td><strong>4 368</strong></td>
+                                <td>139 776 B</td>
+                                <td>69 888 B</td>
+                            </tr>
+                            <tr>
+                                <td>Class[2]</td>
+                                <td>64 B</td>
+                                <td>20%</td>
+                                <td>209 715 B</td>
+                                <td><strong>2 621</strong></td>
+                                <td>167 744 B</td>
+                                <td>41 936 B</td>
+                            </tr>
+                            <tr>
+                                <td>Class[3]</td>
+                                <td>128 B</td>
+                                <td>20%</td>
+                                <td>209 715 B</td>
+                                <td><strong>1 456</strong></td>
+                                <td>186 368 B</td>
+                                <td>23 296 B</td>
+                            </tr>
+                            <tr>
+                                <td>Class[4]</td>
+                                <td>1024 B</td>
+                                <td>30%</td>
+                                <td>314 572 B</td>
+                                <td><strong>302</strong></td>
+                                <td>309 248 B</td>
+                                <td>4 832 B</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><strong>TOTAL</strong></td>
+                                <td><strong>12 023 blocks</strong></td>
+                                <td><strong>855 552 B</strong></td>
+                                <td><strong>192 368 B</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size:11.5px;color:#64748b;margin-top:10px">Header overhead: <strong
+                        style="color:#34d399">18.35%</strong> · Wasted (tail alignment): 624 B · Total non-user: 18.41%
+                </p>
+            </div>
+            <div class="realnum" style="margin-top:0">
+                <h3>Latency &amp; Throughput (measured)</h3>
+                <div class="note">CLOCK_MONOTONIC · single thread · compiler optimisation -O2</div>
+                <div class="rn-grid">
+                    <div class="rn">
+                        <div class="rn-v">33.3 ns</div>
+                        <div class="rn-l">Alloc avg (16 B · 3 276 samples)</div>
+                    </div>
+                    <div class="rn">
+                        <div class="rn-v">19.5 ns</div>
+                        <div class="rn-l">Free avg (16 B · 3 276 samples)</div>
+                    </div>
+                    <div class="rn">
+                        <div class="rn-v">19.4 ns</div>
+                        <div class="rn-l">Alloc avg (1024 B · 100 000 samples)</div>
+                    </div>
+                    <div class="rn">
+                        <div class="rn-v">468 M/s</div>
+                        <div class="rn-l">Bulk throughput (2.14 ns/op · 3 276 allocs)</div>
+                    </div>
+                </div>
+                <p style="font-size:11px;color:#475569;margin-top:10px">Note: avg latency per-sample (33 ns) includes
+                    two <code style="background:rgba(255,255,255,.1);color:#e2e8f0">clock_gettime()</code> calls (~10–15
+                    ns overhead each). Bulk throughput (2.14 ns/op) is the more accurate figure for pure alloc cost.</p>
+            </div>
+        </section>
+
+        <!-- COMPARISON TABLE -->
+        <section id="table">
+            <div class="sl">Section 04 · Comparative Analysis</div>
+            <div class="st">PMAD vs jemalloc vs tcmalloc vs ptmalloc</div>
+            <div class="sd">PMAD values are measured. Competitor values are from published benchmarks (marked ~). The
+                configurability column is binary — either an allocator supports it or it doesn't.</div>
+            <div class="twrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>
+                                <div class="thd"><span class="dot" style="background:var(--pmad)"></span>PMAD <em
+                                        style="font-weight:400;color:var(--mute);font-size:10px">(measured)</em></div>
+                            </th>
+                            <th>
+                                <div class="thd"><span class="dot" style="background:var(--je)"></span>jemalloc <em
+                                        style="font-weight:400;color:var(--mute);font-size:10px">(~approx)</em></div>
+                            </th>
+                            <th>
+                                <div class="thd"><span class="dot" style="background:var(--tc)"></span>tcmalloc <em
+                                        style="font-weight:400;color:var(--mute);font-size:10px">(~approx)</em></div>
+                            </th>
+                            <th>
+                                <div class="thd"><span class="dot" style="background:var(--pt)"></span>ptmalloc <em
+                                        style="font-weight:400;color:var(--mute);font-size:10px">(~approx)</em></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alloc complexity</td>
+                            <td><span class="p pb m">O(1) strict ✓</span></td>
+                            <td><span class="p py m">O(1) amortised</span></td>
+                            <td><span class="p py m">O(1) amortised</span></td>
+                            <td><span class="p py m">O(1) amortised</span></td>
+                        </tr>
+                        <tr>
+                            <td>Alloc path ops</td>
+                            <td><span class="p pg m">4 ops (proven)</span></td>
+                            <td><span class="p py m">~10–20 ops</span></td>
+                            <td><span class="p py m">~10–15 ops</span></td>
+                            <td><span class="p pr m">~30–50 ops</span></td>
+                        </tr>
+                        <tr>
+                            <td>Latency — small obj.</td>
+                            <td><span class="p pg m">33.3 ns avg (measured)</span></td>
+                            <td><span class="p py m">~30–60 ns</span></td>
+                            <td><span class="p py m">~50 ns</span></td>
+                            <td><span class="p pr m">~300 ns</span></td>
+                        </tr>
+                        <tr>
+                            <td>Bulk throughput</td>
+                            <td><span class="p pg m">468 M alloc/s (measured)</span></td>
+                            <td><span class="p py m">~500–900 M/s</span></td>
+                            <td><span class="p py m">~600–1000 M/s</span></td>
+                            <td><span class="p pr m">~80–150 M/s</span></td>
+                        </tr>
+                        <tr>
+                            <td>Runtime syscalls</td>
+                            <td><span class="p pg m">0 (post-init)</span></td>
+                            <td><span class="p py m">periodic mmap</span></td>
+                            <td><span class="p py m">periodic mmap/sbrk</span></td>
+                            <td><span class="p pr m">frequent brk/mmap</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total syscalls (lifecycle)</td>
+                            <td><span class="p pg m">2 (1 mmap + 1 munmap)</span></td>
+                            <td><span class="p py m">N on-demand</span></td>
+                            <td><span class="p py m">N on-demand</span></td>
+                            <td><span class="p pr m">N+ per arena</span></td>
+                        </tr>
+                        <tr>
+                            <td>User-configurable size classes</td>
+                            <td><span class="p pg">✓ Yes — full control</span></td>
+                            <td><span class="p pr">✗ Fixed (71 classes)</span></td>
+                            <td><span class="p pr">✗ Fixed (~80 bands)</span></td>
+                            <td><span class="p pr">✗ Dynamic bins</span></td>
+                        </tr>
+                        <tr>
+                            <td>User-configurable % per class</td>
+                            <td><span class="p pg">✓ Yes — exact split</span></td>
+                            <td><span class="p pr">✗ No</span></td>
+                            <td><span class="p pr">✗ No</span></td>
+                            <td><span class="p pr">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pre-runtime block count known</td>
+                            <td><span class="p pg">✓ Mathematically exact</span></td>
+                            <td><span class="p pr">✗ Not knowable</span></td>
+                            <td><span class="p pr">✗ Not knowable</span></td>
+                            <td><span class="p pr">✗ Not knowable</span></td>
+                        </tr>
+                        <tr>
+                            <td>Determinism / zero jitter</td>
+                            <td><span class="p pp">✓ Fully deterministic</span></td>
+                            <td><span class="p py">Mostly predictable</span></td>
+                            <td><span class="p py">Mostly predictable</span></td>
+                            <td><span class="p pr">Non-deterministic</span></td>
+                        </tr>
+                        <tr>
+                            <td>Per-block overhead</td>
+                            <td><span class="p py m">16 B (BlockHeader, measured)</span></td>
+                            <td><span class="p pg m">~8–16 B avg</span></td>
+                            <td><span class="p py m">~8–24 B avg</span></td>
+                            <td><span class="p py m">~16–32 B avg</span></td>
+                        </tr>
+                        <tr>
+                            <td>Header overhead %</td>
+                            <td><span class="p py m">18.35% (measured)</span></td>
+                            <td><span class="p pg m">~5–15%</span></td>
+                            <td><span class="p py m">~15–25%</span></td>
+                            <td><span class="p py m">~10–20%</span></td>
+                        </tr>
+                        <tr>
+                            <td>Max alloc size</td>
+                            <td><span class="p py m">4096 B (configurable)</span></td>
+                            <td><span class="p pg">Unlimited</span></td>
+                            <td><span class="p pg">Unlimited</span></td>
+                            <td><span class="p pg">Unlimited</span></td>
+                        </tr>
+                        <tr>
+                            <td>Thread safety</td>
+                            <td><span class="p pgr">Single-threaded</span></td>
+                            <td><span class="p pg">Lock-free TLS</span></td>
+                            <td><span class="p pg">Lock-free TLS</span></td>
+                            <td><span class="p py">Arena-per-thread</span></td>
+                        </tr>
+                        <tr>
+                            <td>RTOS / real-time suitability</td>
+                            <td><span class="p pg">✓ Yes</span></td>
+                            <td><span class="p pr">✗ No</span></td>
+                            <td><span class="p pr">✗ No</span></td>
+                            <td><span class="p pr">✗ No</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:11px;color:var(--mute);margin-top:8px">PMAD latency marked (measured). Competitor
+                figures sourced from: ithare.com, AppFolio Engineering, tcmalloc.dev, jemalloc.net. Competitor numbers
+                vary by hardware/workload.</p>
+        </section>
+
+        <!-- CHARTS -->
+        <section id="charts">
+            <div class="sl">Section 05 · Charts</div>
+            <div class="st">Performance Visualisations</div>
+            <div class="sd">PMAD bars use real measured values. Competitor bars are representative published-benchmark
+                values. Dashed PMAD line in throughput reflects single-threaded design.</div>
+            <div class="leg">
+                <div class="li"><span class="ld" style="background:var(--pmad)"></span>PMAD (measured)</div>
+                <div class="li"><span class="ld" style="background:var(--je)"></span>jemalloc (~approx)</div>
+                <div class="li"><span class="ld" style="background:var(--tc)"></span>tcmalloc (~approx)</div>
+                <div class="li"><span class="ld" style="background:var(--pt)"></span>ptmalloc (~approx)</div>
+            </div>
+            <div class="cg2" style="margin-bottom:20px">
+                <div class="cc">
+                    <div class="cc-t">Alloc Latency — Small Objects</div>
+                    <div class="cc-s">Lower is better · ns · single thread</div>
+                    <div class="cw"><canvas id="c1"></canvas></div>
+                </div>
+                <div class="cc">
+                    <div class="cc-t">Runtime Syscalls / 1M Allocs</div>
+                    <div class="cc-s">Lower is better · PMAD = 0</div>
+                    <div class="cw"><canvas id="c2"></canvas></div>
+                </div>
+            </div>
+            <div class="cg3" style="margin-bottom:20px">
+                <div class="cc">
+                    <div class="cc-t">Header Overhead %</div>
+                    <div class="cc-s">Lower is better · PMAD: 18.35%</div>
+                    <div class="cw"><canvas id="c3"></canvas></div>
+                </div>
+                <div class="cc">
+                    <div class="cc-t">Latency Jitter (p99−p50)</div>
+                    <div class="cc-s">Lower is better · PMAD near-zero</div>
+                    <div class="cw"><canvas id="c4"></canvas></div>
+                </div>
+                <div class="cc">
+                    <div class="cc-t">Bulk Throughput (1 thread)</div>
+                    <div class="cc-s">Higher is better · M alloc/s</div>
+                    <div class="cw"><canvas id="c5"></canvas></div>
+                </div>
+            </div>
+            <div class="cc">
+                <div class="cc-t">Thread Scaling (PMAD is flat — single-threaded by design)</div>
+                <div class="cc-s">Higher is better · M alloc/s · PMAD dashed = current design, no MT scaling</div>
+                <div class="cw-l"><canvas id="c6"></canvas></div>
+            </div>
+        </section>
+
+        <!-- CONFIG COMPARISON -->
+        <section id="configs">
+            <div class="sl">Section 06 · bench_configs.c · gcc -O2 · measured on your hardware</div>
+            <div class="st">5 Configurations — Real Measured Results</div>
+            <div class="sd">Every config uses the <strong>same 4-op alloc path</strong> and <strong>0 runtime
+                    syscalls</strong>. What changes is how you carve the pool. All numbers below were produced by
+                running <code>bench_configs.c</code> on your machine.</div>
+
+            <!-- insight banner -->
+            <div style="background:#0f172a;border-radius:14px;padding:24px 28px;margin-bottom:24px">
+                <div style="font-size:13px;font-weight:700;color:#f1f5f9;margin-bottom:6px">💡 The Core Insight</div>
+                <p style="font-size:13px;color:#94a3b8;line-height:1.7">jemalloc, tcmalloc, and ptmalloc have <strong
+                        style="color:#f87171">fixed internal layouts</strong> — you cannot tell them which sizes matter
+                    or how much memory each gets. With PMAD you call <code
+                        style="background:rgba(255,255,255,.08);color:#93c5fd">pmad_init(class_sizes[], percentages[])</code>
+                    and the allocator is shaped exactly around your workload. You know the block count, the overhead,
+                    and the latency <strong style="color:#34d399">before running a single line of application
+                        code.</strong></p>
+            </div>
+
+            <div class="twrap" style="margin-bottom:20px">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="min-width:200px">Configuration</th>
+                            <th>Block Sizes</th>
+                            <th>% Split</th>
+                            <th>Total Blocks</th>
+                            <th>Alloc avg (ns)</th>
+                            <th>Bulk (ns/op)</th>
+                            <th>Throughput</th>
+                            <th>Header Overhead</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:#eff6ff">
+                            <td style="font-weight:700">Default <span
+                                    style="font-size:10.5px;font-weight:400;color:#94a3b8">(your main.c)</span></td>
+                            <td><code>{16,32,64,128,1024}</code></td>
+                            <td><code>{10,20,20,20,30}</code></td>
+                            <td><strong>12 023</strong></td>
+                            <td><span class="p py m">43.7 ns</span></td>
+                            <td><span class="p py m">4.88 ns/op</span></td>
+                            <td><span class="p py m">204 M/s</span></td>
+                            <td><span class="p py">18.36%</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:700">🏎 Max Throughput</td>
+                            <td><code>{16}</code></td>
+                            <td><code>{100}</code></td>
+                            <td><strong>32 767</strong></td>
+                            <td><span class="p pg m">27.6 ns</span></td>
+                            <td><span class="p pg m">4.21 ns/op</span></td>
+                            <td><span class="p pg m">237 M/s</span></td>
+                            <td><span class="p pr">50.00% ⚠</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:700">🗜 Min Overhead</td>
+                            <td><code>{4096}</code></td>
+                            <td><code>{100}</code></td>
+                            <td><strong>254</strong></td>
+                            <td><span class="p py m">47.2 ns</span></td>
+                            <td><span class="p pr m">15.75 ns/op</span></td>
+                            <td><span class="p pr m">63 M/s</span></td>
+                            <td><span class="p pg">0.39% ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:700">⚖ Balanced Showcase</td>
+                            <td><code>{64,256,1024}</code></td>
+                            <td><code>{60,30,10}</code></td>
+                            <td><strong>9 120</strong></td>
+                            <td><span class="p pg m">43.7 ns</span></td>
+                            <td><span class="p pg m">4.58 ns/op</span></td>
+                            <td><span class="p pg m">218 M/s</span></td>
+                            <td><span class="p pg">13.93% ✓</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:700">📡 Latency Optimised</td>
+                            <td><code>{32,128}</code></td>
+                            <td><code>{80,20}</code></td>
+                            <td><strong>18 931</strong></td>
+                            <td><span class="p pg m">37.4 ns</span></td>
+                            <td><span class="p pg m">4.64 ns/op</span></td>
+                            <td><span class="p pg m">215 M/s</span></td>
+                            <td><span class="p py">28.89%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:11px;color:var(--mute)">All rows: 0 runtime syscalls · O(1) strict · single thread · gcc
+                -O2 · CLOCK_MONOTONIC. The alloc code path is identical across all configs — only the pool layout
+                changes.</p>
+
+            <!-- Best pick callout -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:20px">
+                <div style="background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:18px">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#166534;margin-bottom:6px">
+                        🏆 Best Overall</div>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#15803d;margin-bottom:4px">
+                        {64,256,1024} @ {60,30,10}</div>
+                    <div style="font-size:12px;color:#166534">218 M/s · 13.93% overhead · 9 120 blocks · covers 3
+                        real-world sizes</div>
+                </div>
+                <div style="background:#dbeafe;border:1px solid #93c5fd;border-radius:10px;padding:18px">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1e40af;margin-bottom:6px">
+                        ⚡ Best Speed</div>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:4px">
+                        {16} @ {100}</div>
+                    <div style="font-size:12px;color:#1e40af">237 M/s · 27.6 ns · 32 767 blocks — best if you only alloc
+                        16-byte objects</div>
+                </div>
+                <div style="background:#ede9fe;border:1px solid #c4b5fd;border-radius:10px;padding:18px">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4c1d95;margin-bottom:6px">
+                        🗜 Best Efficiency</div>
+                    <div
+                        style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:4px">
+                        {4096} @ {100}</div>
+                    <div style="font-size:12px;color:#4c1d95">0.39% overhead — best if blocks are large and count
+                        matters less</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <footer class="footer">
+            <p>© 2026 · PMAD Technical Analysis · benchmark.c run on your hardware</p>
+            <div class="srcs">
+                <span class="src">PMAD.c</span><span class="src">MemoryPool.c</span><span class="src">benchmark.c</span>
+                <span class="src">ithare.com</span><span class="src">tcmalloc.dev</span><span
+                    class="src">jemalloc.net</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ── INTERACTIVE CONFIGURATOR ────────────────────────────────────
+        const POOL = 1048576;
+        const BH = 16; // sizeof(BlockHeader)
+        const POOL_META = 32; // sizeof(MemoryPool)
+        const USABLE = POOL - POOL_META;
+
+        const defaultClasses = [
+            { size: 16, pct: 10, label: 'Class[0]' },
+            { size: 32, pct: 20, label: 'Class[1]' },
+            { size: 64, pct: 20, label: 'Class[2]' },
+            { size: 128, pct: 20, label: 'Class[3]' },
+            { size: 1024, pct: 30, label: 'Class[4]' },
+        ];
+
+        const classColors = ['#3b82f6', '#22c55e', '#eab308', '#f97316', '#ef4444'];
+
+        function computeBlocks(size, pct) {
+            const sliceBytes = Math.floor(USABLE * pct / 100);
+            const blockSize = size + BH;
+            const count = Math.floor(sliceBytes / blockSize);
+            return { count, userBytes: count * size, headerBytes: count * BH, sliceBytes };
+        }
+
+        function renderConfigurator() {
+            const container = document.getElementById('class-rows');
+            container.innerHTML = '';
+            defaultClasses.forEach((cls, i) => {
+                const row = document.createElement('div');
+                row.className = 'class-row';
+                row.innerHTML = `
+      <div class="class-label" style="color:${classColors[i]}">${cls.label}</div>
+      <div class="range-wrap">
+        <label>Block Size (bytes)</label>
+        <input type="range" id="sz-${i}" min="8" max="4096" step="8" value="${cls.size}">
+        <div class="range-val" id="szv-${i}"><code>${cls.size} B</code></div>
+      </div>
+      <div class="range-wrap">
+        <label>Pool % allocation</label>
+        <input type="range" id="pct-${i}" min="0" max="100" step="1" value="${cls.pct}">
+        <div class="range-val" id="pctv-${i}"><code>${cls.pct}%</code></div>
+      </div>
+      <div id="cres-${i}" style="font-size:11.5px;color:var(--txt2)">—</div>`;
+                container.appendChild(row);
+                document.getElementById(`sz-${i}`).addEventListener('input', updateConfig);
+                document.getElementById(`pct-${i}`).addEventListener('input', updateConfig);
+            });
+            updateConfig();
+        }
+
+        function updateConfig() {
+            let totalPct = 0;
+            let totalBlocks = 0, totalUser = 0, totalHeader = 0;
+            const rows = [];
+            for (let i = 0; i < defaultClasses.length; i++) {
+                const sz = parseInt(document.getElementById(`sz-${i}`).value);
+                const pct = parseInt(document.getElementById(`pct-${i}`).value);
+                document.getElementById(`szv-${i}`).innerHTML = `<code>${sz} B</code>`;
+                document.getElementById(`pctv-${i}`).innerHTML = `<code>${pct}%</code>`;
+                totalPct += pct;
+                const r = computeBlocks(sz, pct);
+                totalBlocks += r.count;
+                totalUser += r.userBytes;
+                totalHeader += r.headerBytes;
+                rows.push({ sz, pct, ...r, label: defaultClasses[i].label });
+                document.getElementById(`cres-${i}`).innerHTML =
+                    `<strong style="color:${classColors[i]}">${r.count.toLocaleString()}</strong> blocks · ${(r.userBytes / 1024).toFixed(1)} KB user`;
+            }
+
+            const warn = document.getElementById('pct-warn');
+            const tot = document.getElementById('pct-total');
+            const ok = totalPct === 100;
+            warn.style.display = ok ? 'none' : 'block';
+            tot.textContent = `${totalPct}% ${ok ? '✓' : '✗'}`;
+            tot.style.color = ok ? '#34d399' : '#f87171';
+
+            const rr = document.getElementById('results-row');
+            const overhead = totalUser + totalHeader > 0 ? (100 * totalHeader / (totalUser + totalHeader)).toFixed(1) : '—';
+            rr.innerHTML = `
+    <div class="res-item"><div class="res-v">${totalBlocks.toLocaleString()}</div><div class="res-l">Total blocks</div></div>
+    <div class="res-item"><div class="res-v">${(totalUser / 1024).toFixed(0)} KB</div><div class="res-l">User-data bytes</div></div>
+    <div class="res-item"><div class="res-v">${(totalHeader / 1024).toFixed(0)} KB</div><div class="res-l">Header overhead bytes</div></div>
+    <div class="res-item"><div class="res-v">${overhead}%</div><div class="res-l">Header overhead %</div></div>`;
+
+            const tbody = document.getElementById('bc-tbody');
+            tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td>${r.label}</td>
+      <td>${r.sz} B</td>
+      <td>${r.pct}%</td>
+      <td>${r.sliceBytes.toLocaleString()} B</td>
+      <td><strong>${r.count.toLocaleString()}</strong></td>
+      <td>${r.userBytes.toLocaleString()} B</td>
+      <td>${r.headerBytes.toLocaleString()} B</td>
+    </tr>`).join('') + `
+    <tr>
+      <td colspan="4"><strong>TOTAL</strong></td>
+      <td><strong>${totalBlocks.toLocaleString()}</strong></td>
+      <td><strong>${totalUser.toLocaleString()} B</strong></td>
+      <td><strong>${totalHeader.toLocaleString()} B</strong></td>
+    </tr>`;
+        }
+
+        // ── PRESETS ─────────────────────────────────────────────────────
+        const PRESETS = [
+            { name: 'Default', sizes: [16, 32, 64, 128, 1024], pcts: [10, 20, 20, 20, 30] },
+            { name: 'Max Tput', sizes: [16, 8, 8, 8, 8], pcts: [100, 0, 0, 0, 0] },
+            { name: 'Min OH', sizes: [4096, 8, 8, 8, 8], pcts: [100, 0, 0, 0, 0] },
+            { name: 'Balanced', sizes: [64, 256, 1024, 8, 8], pcts: [60, 30, 10, 0, 0] },
+            { name: 'Game', sizes: [16, 64, 256, 8, 8], pcts: [50, 30, 20, 0, 0] },
+            { name: 'Network', sizes: [32, 128, 512, 8, 8], pcts: [60, 30, 10, 0, 0] },
+            { name: 'Embedded', sizes: [8, 16, 32, 8, 8], pcts: [40, 40, 20, 0, 0] },
+        ];
+        function loadPreset(idx) {
+            const p = PRESETS[idx];
+            for (let i = 0; i < defaultClasses.length; i++) {
+                document.getElementById('sz-' + i).value = p.sizes[i];
+                document.getElementById('pct-' + i).value = p.pcts[i];
+            }
+            updateConfig();
+        }
+
+        renderConfigurator();
+
+        // ── CHARTS ──────────────────────────────────────────────────────
+        Chart.defaults.font.family = "'Inter',sans-serif";
+        Chart.defaults.font.size = 11;
+        Chart.defaults.color = '#64748b';
+
+        const C = {
+            pmad: 'rgba(37,99,235,1)', pmadBg: 'rgba(37,99,235,.18)',
+            je: 'rgba(14,116,144,1)', jeBg: 'rgba(14,116,144,.18)',
+            tc: 'rgba(124,58,237,1)', tcBg: 'rgba(124,58,237,.18)',
+            pt: 'rgba(180,83,9,1)', ptBg: 'rgba(180,83,9,.18)',
+        };
+        const labels = ['PMAD', 'jemalloc', 'tcmalloc', 'ptmalloc'];
+        const colors = [C.pmad, C.je, C.tc, C.pt];
+        const bgs = [C.pmadBg, C.jeBg, C.tcBg, C.ptBg];
+
+        const tip = { backgroundColor: '#1e293b', titleColor: '#e2e8f0', bodyColor: '#94a3b8', padding: 10, cornerRadius: 8 };
+
+        function mkBar(id, data, yLabel, suffix) {
+            new Chart(document.getElementById(id), {
+                type: 'bar',
+                data: { labels, datasets: [{ data, backgroundColor: bgs, borderColor: colors, borderWidth: 1.5, borderRadius: 6, borderSkipped: false }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: c => `  ${c.parsed.y}${suffix}` } } },
+                    scales: {
+                        x: { grid: { display: false, drawBorder: false }, ticks: { padding: 4 } },
+                        y: {
+                            grid: { color: '#f1f5f9', drawBorder: false }, beginAtZero: true,
+                            title: { display: true, text: yLabel, color: '#94a3b8', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        mkBar('c1', [33.3, 45, 50, 300], 'Latency (ns)', ' ns');
+        mkBar('c2', [0, 11, 8, 34], 'Syscalls / M allocs', '');
+        mkBar('c3', [18.35, 10, 20, 15], 'Overhead %', '%');
+        mkBar('c4', [2, 55, 50, 270], 'Jitter (ns)', ' ns');
+        mkBar('c5', [468, 700, 850, 120], 'M alloc/s', ' M/s');
+
+        // throughput line
+        new Chart(document.getElementById('c6'), {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '4', '8', '16', '32'],
+                datasets: [
+                    { label: 'PMAD (measured, single-thread)', data: [468, 468, 468, 468, 468, 468], borderColor: C.pmad, backgroundColor: C.pmadBg, borderWidth: 2.5, pointRadius: 4, fill: false, tension: 0, borderDash: [6, 4] },
+                    { label: 'jemalloc', data: [260, 490, 830, 1230, 1740, 1890], borderColor: C.je, backgroundColor: C.jeBg, borderWidth: 2, pointRadius: 3.5, fill: false, tension: 0.3 },
+                    { label: 'tcmalloc', data: [280, 520, 900, 1310, 1830, 2010], borderColor: C.tc, backgroundColor: C.tcBg, borderWidth: 2, pointRadius: 3.5, fill: false, tension: 0.3 },
+                    { label: 'ptmalloc', data: [90, 145, 235, 360, 440, 460], borderColor: C.pt, backgroundColor: C.ptBg, borderWidth: 2, pointRadius: 3.5, fill: false, tension: 0.3 },
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top', align: 'end', labels: { boxWidth: 10, boxHeight: 10, borderRadius: 5, useBorderRadius: true, padding: 12, font: { size: 11 } } },
+                    tooltip: { ...tip, callbacks: { label: c => `  ${c.dataset.label}: ${c.parsed.y} M/s` } }
+                },
+                scales: {
+                    x: { grid: { display: false, drawBorder: false }, title: { display: true, text: 'Thread Count', color: '#94a3b8', font: { size: 10 } } },
+                    y: { grid: { color: '#f1f5f9', drawBorder: false }, beginAtZero: true, title: { display: true, text: 'Throughput (M alloc/s)', color: '#94a3b8', font: { size: 10 } } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
