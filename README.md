@@ -2,7 +2,7 @@
   <img src="docs/images/pmad_architecture.png" alt="PMAD Architecture" width="720"/>
 </p>
 
-<h1 align="center">PMAD — Predictive Memory Allocator with Determinism</h1>
+<h1 align="center">PMAD — Predictive Memory Allocator by Dimitar Anastasov</h1>
 
 <p align="center">
   <strong>A deterministic, O(1) memory allocator for latency-critical systems</strong>
@@ -31,21 +31,52 @@ PMAD is built for environments where **deterministic latency** is non-negotiable
 | **Game Engines** | Predictable frame-time budgets with zero allocation jitter |
 | **High-Frequency Trading** | Nanosecond-class allocation latency under sustained throughput |
 
-> *Standard allocators (`ptmalloc`, `jemalloc`, `tcmalloc`) optimize for average-case throughput. PMAD optimizes for **worst-case determinism**.*
+> *Standard allocators (`ptmalloc`, `jemalloc`, `tcmalloc`) optimize for average-case throughput. PMAD optimizes for **worst-case determinism** and a lot of other things.*
 
 ---
 
 ## Key Characteristics
 
-| Feature | PMAD | ptmalloc (glibc) | jemalloc | tcmalloc |
-|---|:---:|:---:|:---:|:---:|
-| **Allocation complexity** | O(1) strict | O(1) amortized | O(1) amortized | O(1) amortized |
-| **Runtime syscalls** | **0** | ~30–50 | ~10–20 | ~10–15 |
-| **Runtime overhead** | **0 (no locks, no branching)** | Occasional (brk/mmap) | Periodic timer | Periodic rebalance/brk |
-| **Configurable size classes** | ✅ Full control | ❌ | Partial (≤71 fixed) | Partial (≤80 fixed) |
-| **Configurable pool layout** | ✅ | ❌ | ❌ | ❌ |
-| **Deterministic** | ✅ (provably) | ❌ | Partial | Partial |
-| **Suitable for RTOS** | ✅ | ❌ | ❌ | ❌ |
+<p align="center">
+  <img src="docs/images/pmad_comparison_table.png" alt="PMAD vs jemalloc vs tcmalloc vs ptmalloc — Full Comparison" width="900"/>
+</p>
+
+<p align="center">
+  <em>PMAD values are measured. Competitor values from published benchmarks (~approx).<br/>Sources: ithare.com, AppFolio Engineering, tcmalloc.dev, jemalloc.net.</em>
+</p>
+
+---
+
+## Fully Customizable — Designed Around Your Workload
+
+PMAD is built from the ground up to be **fully customizable**. Unlike `jemalloc` (71 fixed classes), `tcmalloc` (~80 fixed bands), or `ptmalloc` (unpredictable dynamic bins), PMAD lets you define **exactly which sizes matter** for your workload and **exactly how much memory each gets** — then guarantees the outcome mathematically.
+
+Everything is configurable at initialization:
+
+- **Size classes** — you choose which block sizes exist
+- **Pool percentages** — you control how much of the pool each class gets
+- **Pool size** — the total memory footprint is yours to define
+- **Block counts** — computed exactly before a single line of application code runs
+
+### 🎮 Tested & Benchmarked Configurations
+
+These configurations have been benchmarked and are ready to use out of the box. Each uses the **same 4-op alloc path** and **0 runtime syscalls** — only the pool layout changes:
+
+| Configuration | Size Classes | Pool Split (%) | Best For |
+|---|---|---|---|
+| **Default** | `{16, 32, 64, 128, 1024}` | `{10, 20, 20, 20, 30}` | General-purpose, demo & testing |
+| **🏎 Max Throughput** | `{16, 32}` | `{60, 40}` | Maximum alloc/s, streaming workloads |
+| **🗜 Min Overhead** | `{128, 256, 512}` | `{30, 40, 30}` | Lowest header %, large object pools |
+| **⚖ Balanced** | `{16, 64, 256}` | `{33, 34, 33}` | Even distribution, mixed workloads |
+| **🎮 Game Engine** | `{16, 64, 256}` | `{50, 30, 20}` | Frame-budget allocation, ECS systems |
+| **📡 Network / HFT** | `{32, 128, 512}` | `{60, 30, 10}` | Packet buffers, order books |
+| **🔌 Embedded / RTOS** | `{8, 16, 32}` | `{40, 40, 20}` | Minimal footprint, sensor data |
+
+### 🛠 Live Pool Configurator
+
+The included [interactive infographics dashboard](allocator_info_graphics/allocator_infographics.html) features a **Live Pool Configurator** where you can adjust size classes, percentages, and pool size in real-time. All results (block counts, usable bytes, header overhead, utilisation per class) update instantly — every number is mathematically exact, computed before any code runs.
+
+> *Pick a preset or build your own configuration. PMAD adapts to you — not the other way around.*
 
 ---
 
@@ -76,7 +107,7 @@ PMAD is built for environments where **deterministic latency** is non-negotiable
               └─────────────────────┘
 ```
 
-1. **Initialization** — A single `mmap` call reserves a 1 MB pool. The pool is split into size classes by user-defined percentages.
+1. **Initialization** — A single `mmap` call reserves a 1 MB pool (by default, you can customize this depending on your needs). The pool is split into size classes by user-defined percentages and size classes sizes (fully customizable).
 2. **Allocation** — A lookup table maps the requested size to the correct class index in O(1). A block is popped from that class's free list.
 3. **Deallocation** — The block header identifies its size class; the block is pushed back onto the free list.
 4. **Destruction** — A single `munmap` releases all memory at once.
@@ -230,7 +261,7 @@ int main() {
 
 - **User-Defined Memory Layout** — Size classes and their pool share are fully configurable at initialization, allowing precise tuning for known workload profiles.
 
-- **Minimal Metadata Overhead** — Each block carries only a 9-byte `BlockHeader` (pointer + class ID), keeping overhead below 4% for typical configurations.
+- **Minimal Metadata Overhead** — Each block carries only a 9-byte `BlockHeader`(after alignment it becomes 16 bytes) (pointer + class ID), keeping overhead below 4% for typical configurations.
 
 - **No External Dependencies** — Pure C with POSIX `mmap`. No third-party libraries, no runtime allocator dependency.
 
