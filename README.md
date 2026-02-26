@@ -142,7 +142,7 @@ PMAD/
 ├── allocator_info_graphics/    # Visual documentation
 │   └── allocator_infographics.html  # Interactive charts & architecture diagrams
 │
-├── docs/                       # Documentation assets
+├── docs/                       # Documentation assets (for the readme)
 │   └── images/                 #   Architecture diagrams & visuals
 │
 ├── main.c                      # Example usage / demo entry point
