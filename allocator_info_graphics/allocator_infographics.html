@@ -990,94 +990,9 @@
             </div>
         </section>
 
-        <!-- ARCHITECTURE -->
-        <section id="arch">
-            <div class="sl">Section 02 · src/ anatomy</div>
-            <div class="st">Layered Architecture</div>
-            <div class="sd">Four layers, one syscall. Real function and struct names from your source. Struct sizes
-                measured by <code>sizeof()</code> on your machine.</div>
-            <div class="card">
-                <div class="ch">
-                    <div class="ct">PMAD Internal Architecture</div>
-                    <div class="cs">sizeof(PMAD)=1200 B · sizeof(BlockHeader)=16 B · sizeof(SizeClass)=32 B ·
-                        sizeof(MemoryPool)=32 B</div>
-                </div>
-                <div class="cb">
-                    <div class="arch">
-                        <div class="arow">
-                            <div class="lb l1">
-                                <div class="lb-tag">Layer 1 · incPMAD.h / incPmad.c</div>
-                                <div class="lb-title">Public API — Singleton</div>
-                                <div class="chips">
-                                    <span class="chip">pmad_init(class_sizes[], percentages[])</span>
-                                    <span class="chip">pmad_alloc(size)</span>
-                                    <span class="chip">pmad_free(ptr)</span>
-                                    <span class="chip">pmad_destroy()</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="aconn"><span class="apill">↓ delegates to PMAD_alloc / PMAD_free</span></div>
-                        <div class="arow">
-                            <div class="lb l2">
-                                <div class="lb-tag">Layer 2 · PMAD.c · PMAD.h</div>
-                                <div class="lb-title">Allocator Core — 4-op alloc, 3-op free</div>
-                                <div class="chips">
-                                    <span class="chip">build_lookup_table() → size_class_reference[257] (O(1)
-                                        index)</span>
-                                    <span class="chip">roundUp(size) = (size+15)&amp;~15 · ALIGNMENT=16</span>
-                                    <span class="chip">PMAD_alloc → array lookup + pop free_list head</span>
-                                    <span class="chip">PMAD_free → recover header + push free_list head</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="aconn"><span class="apill">↓ reads slabs built by split_pool_by_percentage()</span>
-                        </div>
-                        <div style="display:flex;gap:12px">
-                            <div class="lb l3" style="flex:1.6">
-                                <div class="lb-tag">Layer 3 · MemoryPool.c · SizeClass.h</div>
-                                <div class="lb-title">MemoryPool + SizeClass[NUM_CLASSES]</div>
-                                <div class="chips">
-                                    <span class="chip">attach_new_pool() → maps mmap'd region</span>
-                                    <span class="chip">split_pool_by_percentage() → carves slabs by % config</span>
-                                    <span class="chip">SizeClass: block_size · free_list · total_blocks ·
-                                        allocated_blocks</span>
-                                    <span class="chip">Default: {16B 10%} {32B 20%} {64B 20%} {128B 20%} {1024B
-                                        30%}</span>
-                                </div>
-                            </div>
-                            <div class="lb l3b" style="flex:1">
-                                <div class="lb-tag">Layer 3b · BlockHeader.h</div>
-                                <div class="lb-title">Block Layout (16 B)</div>
-                                <div class="chips">
-                                    <span class="chip">next ptr → 8 B</span>
-                                    <span class="chip">size_class → 1 B</span>
-                                    <span class="chip">padding → 7 B</span>
-                                    <span class="chip">user data → follows</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="aconn"><span class="apill">↓ one mmap(MAP_ANON|MAP_PRIVATE, 1 MB) at
-                                pmad_init()</span></div>
-                        <div class="arow">
-                            <div class="lb l4">
-                                <div class="lb-tag">Layer 4 · OS</div>
-                                <div class="lb-title">OS Memory Interface — 1 syscall total</div>
-                                <div class="chips">
-                                    <span class="chip">mmap(NULL, POOL_SIZE, PROT_READ|PROT_WRITE, MAP_ANON|MAP_PRIVATE,
-                                        -1, 0)</span>
-                                    <span class="chip">ZERO runtime syscalls in alloc / free</span>
-                                    <span class="chip">munmap() only at pmad_destroy()</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- REAL NUMBERS -->
         <section id="realnums">
-            <div class="sl">Section 03 · benchmark.c output (gcc -O2 · macOS · your hardware)</div>
+            <div class="sl">Section 02 · benchmark.c output (gcc -O2 · macOS · hardware made on)</div>
             <div class="st">Measured Numbers — Default Config {16,32,64,128,1024} @ {10,20,20,20,30}%</div>
             <div class="realnum">
                 <h3>Struct Sizes (sizeof, 64-bit LP64)</h3>
@@ -1205,7 +1120,7 @@
 
         <!-- COMPARISON TABLE -->
         <section id="table">
-            <div class="sl">Section 04 · Comparative Analysis</div>
+            <div class="sl">Section 03 · Comparative Analysis</div>
             <div class="st">PMAD vs jemalloc vs tcmalloc vs ptmalloc</div>
             <div class="sd">PMAD values are measured. Competitor values are from published benchmarks (marked ~). The
                 configurability column is binary — either an allocator supports it or it doesn't.</div>
@@ -1348,7 +1263,7 @@
 
         <!-- CHARTS -->
         <section id="charts">
-            <div class="sl">Section 05 · Charts</div>
+            <div class="sl">Section 04 · Charts</div>
             <div class="st">Performance Visualisations</div>
             <div class="sd">PMAD bars use real measured values. Competitor bars are representative published-benchmark
                 values. Dashed PMAD line in throughput reflects single-threaded design.</div>
@@ -1396,7 +1311,7 @@
 
         <!-- CONFIG COMPARISON -->
         <section id="configs">
-            <div class="sl">Section 06 · bench_configs.c · gcc -O2 · measured on your hardware</div>
+            <div class="sl">Section 05 · bench_configs.c · gcc -O2 · measured on Mac os hardware</div>
             <div class="st">5 Configurations — Real Measured Results</div>
             <div class="sd">Every config uses the <strong>same 4-op alloc path</strong> and <strong>0 runtime
                     syscalls</strong>. What changes is how you carve the pool. All numbers below were produced by
@@ -1524,7 +1439,7 @@
 
         <!-- footer -->
         <footer class="footer">
-            <p>© 2026 · PMAD Technical Analysis · benchmark.c run on your hardware</p>
+            <p>© 2026 · PMAD Technical Analysis · benchmark.c run on MacOS hardware</p>
             <div class="srcs">
                 <span class="src">PMAD.c</span><span class="src">MemoryPool.c</span><span class="src">benchmark.c</span>
                 <span class="src">ithare.com</span><span class="src">tcmalloc.dev</span><span
