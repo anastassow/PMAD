@@ -12,7 +12,15 @@ void attach_new_pool(PMAD* pmad, void* mem) {
     pmad->pool_head = pool;
 }
 
-void split_pool_by_percentage(struct PMAD* pmad, size_t percentage[NUM_CLASSES]){
+int split_pool_by_percentage(struct PMAD* pmad, size_t percentage[NUM_CLASSES]){
+    size_t sumOfPercentages = 0;
+    for (size_t i = 0; i < NUM_CLASSES; i++) {
+        sumOfPercentages += percentage[i];
+    }
+
+    if (sumOfPercentages != 100)
+        return 0;
+
     uint8_t* ptr = (uint8_t*)pmad->pool_head->start;
 
     for (uint8_t i = 0; i < NUM_CLASSES; i++) {
@@ -28,4 +36,6 @@ void split_pool_by_percentage(struct PMAD* pmad, size_t percentage[NUM_CLASSES])
             ptr += block_size;
         }
     }
+
+    return 1;
 }
