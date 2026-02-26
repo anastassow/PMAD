@@ -207,8 +207,8 @@ gcc -O2 -Iinclude src/PMAD.c src/incPMAD.c src/MemoryPool.c src/BlockHeader.c \
 
 int main() {
     // Define size classes and their pool share (%)
-    size_t classes[]     = { 16, 32, 64, 128, 1024 };
-    size_t percentages[] = { 10, 20, 20,  20,   30 };
+    size_t classes[]     = { 16, 32, 64, 128, 256 };
+    size_t percentages[] = { 10, 20, 20, 20, 30 };
 
     // Initialize — single mmap, zero further syscalls
     pmad_init(classes, percentages);
@@ -264,20 +264,6 @@ int main() {
 - **Minimal Metadata Overhead** — Each block carries only a 9-byte `BlockHeader`(after alignment it becomes 16 bytes) (pointer + class ID), keeping overhead below 4% for typical configurations.
 
 - **No External Dependencies** — Pure C with POSIX `mmap`. No third-party libraries, no runtime allocator dependency.
-
----
-
-## Performance
-
-> Benchmarked on a single thread. Results from `benchmarks/benchmark.c`.
-
-| Metric | 16-byte blocks | 1024-byte blocks |
-|---|---|---|
-| **Alloc latency (avg)** | ~15–25 ns | ~15–30 ns |
-| **Free latency (avg)** | ~10–20 ns | ~10–20 ns |
-| **Throughput** | >50 M alloc/s | >30 M alloc/s |
-| **Runtime syscalls** | 0 | 0 |
-| **Header overhead** | < 4% | < 1% |
 
 ---
 
