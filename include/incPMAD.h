@@ -3,7 +3,7 @@
 
 #include "PMAD.h"
 
-void pmad_init(size_t* class_sizes, size_t* percentages);
+int pmad_init(size_t* class_sizes, size_t* percentages);
 void* pmad_alloc(size_t size);
 void pmad_free(void* ptr);
 void pmad_destroy();
