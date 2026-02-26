@@ -17,7 +17,6 @@ void build_lookup_table(PMAD* pmad) {
 }
 
 void PMAD_init(PMAD* pmad, const size_t* class_sizes) {
-
     for (size_t i = 0; i < NUM_CLASSES; i++) {
         pmad->size_classes[i].block_size = class_sizes[i];
         pmad->size_classes[i].free_list = NULL;
@@ -43,7 +42,6 @@ void* get_memory_pool_from_os() {
         exit(1);
     }
 
-    printf("Memmory allocated successfully\n");
     return mem;
 }
 
@@ -51,8 +49,6 @@ void free_memory_pool(void* mem) {
     if (munmap(mem, POOL_SIZE) != 0) {
         perror("munmap failed");
     }
-
-    printf("Memmory freed!");
 }
 
 size_t roundUp(size_t size) {
