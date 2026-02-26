@@ -2,7 +2,7 @@
   <img src="docs/images/pmad_architecture.png" alt="PMAD Architecture" width="720"/>
 </p>
 
-<h1 align="center">PMAD — Pool-based Memory Allocator with Determinism</h1>
+<h1 align="center">PMAD — Predictive Memory Allocator with Determinism</h1>
 
 <p align="center">
   <strong>A deterministic, O(1) memory allocator for latency-critical systems</strong>
