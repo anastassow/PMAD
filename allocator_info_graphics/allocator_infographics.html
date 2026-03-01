@@ -1169,13 +1169,7 @@
                             <td><span class="p py m">~50 ns</span></td>
                             <td><span class="p pr m">~300 ns</span></td>
                         </tr>
-                        <tr>
-                            <td>Bulk throughput</td>
-                            <td><span class="p pg m">468 M alloc/s (measured)</span></td>
-                            <td><span class="p py m">~500–900 M/s</span></td>
-                            <td><span class="p py m">~600–1000 M/s</span></td>
-                            <td><span class="p pr m">~80–150 M/s</span></td>
-                        </tr>
+
                         <tr>
                             <td>Runtime syscalls</td>
                             <td><span class="p pg m">0 (post-init)</span></td>
@@ -1225,13 +1219,7 @@
                             <td><span class="p py m">~8–24 B avg</span></td>
                             <td><span class="p py m">~16–32 B avg</span></td>
                         </tr>
-                        <tr>
-                            <td>Header overhead %</td>
-                            <td><span class="p py m">18.35% (measured)</span></td>
-                            <td><span class="p pg m">~5–15%</span></td>
-                            <td><span class="p py m">~15–25%</span></td>
-                            <td><span class="p py m">~10–20%</span></td>
-                        </tr>
+
                         <tr>
                             <td>Max alloc size</td>
                             <td><span class="p py m">4096 B (configurable)</span></td>
@@ -1285,21 +1273,11 @@
                     <div class="cw"><canvas id="c2"></canvas></div>
                 </div>
             </div>
-            <div class="cg3" style="margin-bottom:20px">
-                <div class="cc">
-                    <div class="cc-t">Header Overhead %</div>
-                    <div class="cc-s">Lower is better · PMAD: 18.35%</div>
-                    <div class="cw"><canvas id="c3"></canvas></div>
-                </div>
+            <div class="cg2" style="margin-bottom:20px">
                 <div class="cc">
                     <div class="cc-t">Latency Jitter (p99−p50)</div>
                     <div class="cc-s">Lower is better · PMAD near-zero</div>
                     <div class="cw"><canvas id="c4"></canvas></div>
-                </div>
-                <div class="cc">
-                    <div class="cc-t">Bulk Throughput (1 thread)</div>
-                    <div class="cc-s">Higher is better · M alloc/s</div>
-                    <div class="cw"><canvas id="c5"></canvas></div>
                 </div>
             </div>
             <div class="cc">
@@ -1339,8 +1317,6 @@
                             <th>Total Blocks</th>
                             <th>Alloc avg (ns)</th>
                             <th>Bulk (ns/op)</th>
-                            <th>Throughput</th>
-                            <th>Header Overhead</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1352,8 +1328,6 @@
                             <td><strong>12 023</strong></td>
                             <td><span class="p py m">43.7 ns</span></td>
                             <td><span class="p py m">4.88 ns/op</span></td>
-                            <td><span class="p py m">204 M/s</span></td>
-                            <td><span class="p py">18.36%</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight:700">🏎 Max Throughput</td>
@@ -1362,8 +1336,6 @@
                             <td><strong>32 767</strong></td>
                             <td><span class="p pg m">27.6 ns</span></td>
                             <td><span class="p pg m">4.21 ns/op</span></td>
-                            <td><span class="p pg m">237 M/s</span></td>
-                            <td><span class="p pr">50.00% ⚠</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight:700">🗜 Min Overhead</td>
@@ -1372,8 +1344,6 @@
                             <td><strong>254</strong></td>
                             <td><span class="p py m">47.2 ns</span></td>
                             <td><span class="p pr m">15.75 ns/op</span></td>
-                            <td><span class="p pr m">63 M/s</span></td>
-                            <td><span class="p pg">0.39% ✓</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight:700">⚖ Balanced Showcase</td>
@@ -1382,8 +1352,6 @@
                             <td><strong>9 120</strong></td>
                             <td><span class="p pg m">43.7 ns</span></td>
                             <td><span class="p pg m">4.58 ns/op</span></td>
-                            <td><span class="p pg m">218 M/s</span></td>
-                            <td><span class="p pg">13.93% ✓</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight:700">📡 Latency Optimised</td>
@@ -1392,8 +1360,6 @@
                             <td><strong>18 931</strong></td>
                             <td><span class="p pg m">37.4 ns</span></td>
                             <td><span class="p pg m">4.64 ns/op</span></td>
-                            <td><span class="p pg m">215 M/s</span></td>
-                            <td><span class="p py">28.89%</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1411,8 +1377,7 @@
                     <div
                         style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#15803d;margin-bottom:4px">
                         {64,256,1024} @ {60,30,10}</div>
-                    <div style="font-size:12px;color:#166534">218 M/s · 13.93% overhead · 9 120 blocks · covers 3
-                        real-world sizes</div>
+                    <div style="font-size:12px;color:#166534">9 120 blocks · covers 3 real-world sizes</div>
                 </div>
                 <div style="background:#dbeafe;border:1px solid #93c5fd;border-radius:10px;padding:18px">
                     <div
@@ -1421,8 +1386,8 @@
                     <div
                         style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:4px">
                         {16} @ {100}</div>
-                    <div style="font-size:12px;color:#1e40af">237 M/s · 27.6 ns · 32 767 blocks — best if you only alloc
-                        16-byte objects</div>
+                    <div style="font-size:12px;color:#1e40af">27.6 ns · 32 767 blocks — best if you only alloc 16-byte
+                        objects</div>
                 </div>
                 <div style="background:#ede9fe;border:1px solid #c4b5fd;border-radius:10px;padding:18px">
                     <div
@@ -1431,8 +1396,7 @@
                     <div
                         style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:4px">
                         {4096} @ {100}</div>
-                    <div style="font-size:12px;color:#4c1d95">0.39% overhead — best if blocks are large and count
-                        matters less</div>
+                    <div style="font-size:12px;color:#4c1d95">Best if blocks are large and count matters less</div>
                 </div>
             </div>
         </section>
@@ -1609,9 +1573,7 @@
 
         mkBar('c1', [33.3, 45, 50, 300], 'Latency (ns)', ' ns');
         mkBar('c2', [0, 11, 8, 34], 'Syscalls / M allocs', '');
-        mkBar('c3', [18.35, 10, 20, 15], 'Overhead %', '%');
         mkBar('c4', [2, 55, 50, 270], 'Jitter (ns)', ' ns');
-        mkBar('c5', [468, 700, 850, 120], 'M alloc/s', ' M/s');
 
         // throughput line
         new Chart(document.getElementById('c6'), {

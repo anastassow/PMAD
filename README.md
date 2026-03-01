@@ -66,7 +66,7 @@ These configurations have been benchmarked and are ready to use out of the box. 
 |---|---|---|---|
 | **Default** | `{16, 32, 64, 128, 1024}` | `{10, 20, 20, 20, 30}` | General-purpose, demo & testing |
 | **🏎 Max Throughput** | `{16, 32}` | `{60, 40}` | Maximum alloc/s, streaming workloads |
-| **🗜 Min Overhead** | `{128, 256, 512}` | `{30, 40, 30}` | Lowest header %, large object pools |
+| **🗜 Min Overhead** | `{128, 256, 512}` | `{30, 40, 30}` | Large object pools |
 | **⚖ Balanced** | `{16, 64, 256}` | `{33, 34, 33}` | Even distribution, mixed workloads |
 | **🎮 Game Engine** | `{16, 64, 256}` | `{50, 30, 20}` | Frame-budget allocation, ECS systems |
 | **📡 Network / HFT** | `{32, 128, 512}` | `{60, 30, 10}` | Packet buffers, order books |
@@ -74,7 +74,7 @@ These configurations have been benchmarked and are ready to use out of the box. 
 
 ### 🛠 Live Pool Configurator
 
-The included [interactive infographics dashboard](allocator_info_graphics/allocator_infographics.html) features a **Live Pool Configurator** where you can adjust size classes, percentages, and pool size in real-time. All results (block counts, usable bytes, header overhead, utilisation per class) update instantly — every number is mathematically exact, computed before any code runs.
+The included [interactive infographics dashboard](allocator_info_graphics/allocator_infographics.html) features a **Live Pool Configurator** where you can adjust size classes, percentages, and pool size in real-time. All results (block counts, usable bytes, utilisation per class) update instantly — every number is mathematically exact, computed before any code runs.
 
 > *Pick a preset or build your own configuration. PMAD adapts to you — not the other way around.*
 
@@ -135,9 +135,7 @@ PMAD/
 │   ├── BlockHeader.c           #   Block creation & free-list insertion
 │   └── SizeClass.c             #   (Reserved for future size class utilities)
 │
-├── benchmarks/                 # Performance measurement suite
-│   ├── benchmark.c             #   Latency, throughput & overhead benchmarks
-│   └── bench_configs.c         #   Multi-configuration comparison harness
+│   ├── benchmark.c             #   Latency & overhead benchmarks
 │
 ├── allocator_info_graphics/    # Visual documentation
 │   └── allocator_infographics.html  # Interactive charts & architecture diagrams
@@ -187,7 +185,7 @@ make clean
 ### Run Benchmarks
 
 ```bash
-# Full latency, throughput & overhead benchmark
+# Full latency & overhead benchmark
 gcc -O2 -Iinclude src/PMAD.c src/incPMAD.c src/MemoryPool.c src/BlockHeader.c \
     benchmarks/benchmark.c -o benchmarks/benchmark
 ./benchmarks/benchmark
@@ -261,7 +259,7 @@ int main() {
 
 - **User-Defined Memory Layout** — Size classes and their pool share are fully configurable at initialization, allowing precise tuning for known workload profiles.
 
-- **Minimal Metadata Overhead** — Each block carries only a 9-byte `BlockHeader`(after alignment it becomes 16 bytes) (pointer + class ID), keeping overhead below 4% for typical configurations.
+- **Minimal Metadata Overhead** — Each block carries only a 16-byte `BlockHeader` (pointer + class ID), ensuring predictable and low memory overhead for typical configurations.
 
 - **No External Dependencies** — Pure C with POSIX `mmap`. No third-party libraries, no runtime allocator dependency.
 
