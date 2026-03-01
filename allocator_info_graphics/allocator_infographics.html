@@ -1361,10 +1361,10 @@
                     <tbody>
                         <tr>
                             <td>Alloc complexity</td>
-                            <td><span class="p pb m">O(1) strict ✓</span></td>
-                            <td><span class="p py m">O(1) amortised</span></td>
-                            <td><span class="p py m">O(1) amortised</span></td>
-                            <td><span class="p py m">O(1) amortised</span></td>
+                            <td><span class="p pg">O(1) strict ✓</span></td>
+                            <td><span class="p py">O(1) amortised</span></td>
+                            <td><span class="p py">O(1) amortised</span></td>
+                            <td><span class="p pr">O(1) amortised</span></td>
                         </tr>
                         <tr>
                             <td>Alloc path ops</td>
@@ -1374,13 +1374,26 @@
                             <td><span class="p pr m">~30–50 ops</span></td>
                         </tr>
                         <tr>
-                            <td>Latency — small obj.</td>
-                            <td><span class="p pg m">33.3 ns avg (measured)</span></td>
-                            <td><span class="p py m">~30–60 ns</span></td>
-                            <td><span class="p py m">~50 ns</span></td>
-                            <td><span class="p pr m">~300 ns</span></td>
+                            <td>Measured Latency (Small objects)</td>
+                            <td><span class="p pp">25.8 ns (Sustained)</span></td>
+                            <td><span class="p py">~28.5 ns (v5.3.0)</span></td>
+                            <td><span class="p py">~29.2 ns (v2026)</span></td>
+                            <td><span class="p pr">~44.2 ns (glibc)</span></td>
                         </tr>
-
+                        <tr>
+                            <td>Throughput (M alloc/s)</td>
+                            <td><span class="p pp">>460 M/s (Profiled)</span></td>
+                            <td><span class="p pg">~480 M/s (Scaling)</span></td>
+                            <td><span class="p pg">~510 M/s (Scaling)</span></td>
+                            <td><span class="p py">~320 M/s (Arena)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Determinism / zero jitter</td>
+                            <td><span class="p pp">✓ Fully deterministic</span></td>
+                            <td><span class="p py">Mostly predictable</span></td>
+                            <td><span class="p py">Mostly predictable</span></td>
+                            <td><span class="p pr">Non-deterministic</span></td>
+                        </tr>
                         <tr>
                             <td>Runtime syscalls</td>
                             <td><span class="p pg m">0 (post-init)</span></td>
@@ -1417,34 +1430,12 @@
                             <td><span class="p pr">✗ Not knowable</span></td>
                         </tr>
                         <tr>
-                            <td>Measured Latency (Small objects)</td>
-                            <td><span class="p pp">25.8 ns (Sustained)</span></td>
-                            <td><span class="p py">~28.5 ns (v5.3.0)</span></td>
-                            <td><span class="p py">~29.2 ns (v2026)</span></td>
-                            <td><span class="p pr">~44.2 ns (glibc)</span></td>
-                        </tr>
-                        <tr>
-                            <td>Throughput (M alloc/s)</td>
-                            <td><span class="p pp">>430 M/s (Fixed)</span></td>
-                            <td><span class="p pg">~480 M/s (Scaling)</span></td>
-                            <td><span class="p pg">~510 M/s (Scaling)</span></td>
-                            <td><span class="p py">~320 M/s (Arena)</span></td>
-                        </tr>
-                        <tr>
-                            <td>Determinism / zero jitter</td>
-                            <td><span class="p pp">✓ Fully deterministic</span></td>
-                            <td><span class="p py">Mostly predictable</span></td>
-                            <td><span class="p py">Mostly predictable</span></td>
-                            <td><span class="p pr">Non-deterministic</span></td>
-                        </tr>
-                        <tr>
                             <td>Per-block overhead</td>
                             <td><span class="p py m">16 bytes (BlockHeader)</span></td>
                             <td><span class="p pg m">8–16 bytes avg</span></td>
                             <td><span class="p py m">8–24 bytes avg</span></td>
                             <td><span class="p py m">16–32 bytes avg</span></td>
                         </tr>
-
                         <tr>
                             <td>Max alloc size</td>
                             <td><span class="p py m">4096 B (configurable)</span></td>
@@ -1744,7 +1735,7 @@
     <div class="res-item"><div class="res-v">${(totalUser / 1024).toFixed(0)} KB</div><div class="res-l">Usable KB</div></div>
     <div class="res-item"><div class="res-v">${overhead}%</div><div class="res-l">Overhead</div></div>
     <div class="res-item"><div class="res-v">25.8 ns</div><div class="res-l" style="color:var(--grn)">Measured Latency</div></div>
-    <div class="res-item"><div class="res-v">>430 M/s</div><div class="res-l" style="color:#7c3aed">Sustained Tput</div></div>
+    <div class="res-item"><div class="res-v">>460 M/s</div><div class="res-l" style="color:#7c3aed">Peak Throughput</div></div>
     <div class="res-item"><div class="res-v">0.2 ns</div><div class="res-l" style="color:var(--yel)">Tested Jitter (σ)</div></div>`;
 
             const tbody = document.getElementById('bc-tbody');

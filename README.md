@@ -73,7 +73,7 @@ PMAD isn't just another allocator; it's a **determinism engine**. For business-c
 ### 📊 Performance At-a-Glance
 
 - **Latency**: **25.8 ns** (measured sustained average)
-- **Throughput**: **>430 Million** allocations per second (sustained)
+- **Throughput**: **>460 Million** allocations per second (Profiled peak)
 - **Determinism**: **Hard O(1)** (Verified via instruction-path analysis)
 - **Jitter (σ)**: **< 0.2 ns** (Algorithmic jitter is zero; measured σ includes OS noise)
 - **System Calls**: 1 at boot, 0 at runtime, 1 at shutdown.
