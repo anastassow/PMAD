@@ -8,6 +8,7 @@
 #include "structures/BlockHeader.h"
 #include "structures/MemoryPool.h"
 #include "structures/SizeClass.h"
+#include <math.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -108,11 +109,31 @@ void run_config(const Config *cfg) {
       fmax = dt;
     ptrs[i] = NULL;
   }
+  double aavg = (double)atot / ac;
+  double favg = (double)ftot / ac;
+  double asumsq = 0, fsumsq = 0;
+
+  // Second pass for stddev (exact jitter)
+  pmad_destroy();
+  pmad_init((size_t *)cfg->sizes, (size_t *)cfg->pcts);
+  for (size_t i = 0; i < n0; i++) {
+    uint64_t t0 = ns_now();
+    void *p = pmad_alloc(bs0);
+    uint64_t dt = ns_now() - t0;
+    if (p) {
+      double diff = (double)dt - aavg;
+      asumsq += diff * diff;
+      pmad_free(p);
+    }
+  }
+  double ajitter = sqrt(asumsq / ac);
+
   printf("\n  Latency (%zu-byte, %d samples):\n", bs0, ac);
-  printf("    Alloc  avg=%.1f ns   min=%llu ns   max=%llu ns\n",
-         (double)atot / ac, (unsigned long long)amin, (unsigned long long)amax);
-  printf("    Free   avg=%.1f ns   min=%llu ns   max=%llu ns\n",
-         (double)ftot / ac, (unsigned long long)fmin, (unsigned long long)fmax);
+  printf("    Alloc  avg=%.2f ns   jitter (σ)=%.2f ns   min=%llu ns   max=%llu "
+         "ns\n",
+         aavg, ajitter, (unsigned long long)amin, (unsigned long long)amax);
+  printf("    Free   avg=%.2f ns   min=%llu ns   max=%llu ns\n", favg,
+         (unsigned long long)fmin, (unsigned long long)fmax);
 
   /* ── bulk throughput ── */
   /* need fresh blocks — re-init */
@@ -148,29 +169,31 @@ int main(void) {
          sizeof(BlockHeader));
 
   Config configs[] = {
-      {"MAX THROUGHPUT: single 16-byte class, 100%",
+      {"🏎 MAX THROUGHPUT (Single Class)",
        {16, 0, 0, 0, 0},
        {100, 0, 0, 0, 0},
        1},
-      {"MIN OVERHEAD: single 4096-byte class, 100%",
+      {"🗜 MIN OVERHEAD (Large Blocks)",
        {4096, 0, 0, 0, 0},
        {100, 0, 0, 0, 0},
        1},
-      {"DEFAULT (your main.c): {16,32,64,128,1024}",
-       {16, 32, 64, 128, 1024},
-       {10, 20, 20, 20, 30},
+      {"⚖ BALANCED SHOWCASE", {64, 256, 1024, 0, 0}, {60, 30, 10, 0, 0}, 3},
+      {"📡 LATENCY OPTIMISED", {32, 128, 0, 0, 0}, {80, 20, 0, 0, 0}, 2},
+      {"🎮 GAME ENGINE (ECS/Small Objects)",
+       {16, 64, 256, 1024, 2048},
+       {40, 30, 15, 10, 5},
        5},
-      {"BALANCED SHOWCASE: {64,256,1024} @ {60,30,10}",
-       {64, 256, 1024, 0, 0},
-       {60, 30, 10, 0, 0},
-       3},
-      {"LATENCY-OPTIMISED: {32,128} @ {80,20}",
-       {32, 128, 0, 0, 0},
-       {80, 20, 0, 0, 0},
-       2},
+      {"📡 NETWORK / HFT (Packet Buffers)",
+       {32, 128, 512, 1024, 2048},
+       {60, 20, 10, 5, 5},
+       5},
+      {"🔌 EMBEDDED / RTOS (SRAM Optimized)",
+       {8, 16, 32, 64, 128},
+       {30, 30, 20, 10, 10},
+       5},
   };
 
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < 7; i++)
     run_config(&configs[i]);
 
   printf("\n═══════════════════════════════════════════════════════\n");
