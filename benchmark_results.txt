@@ -1,0 +1,141 @@
+PMAD Configuration Comparison
+POOL_SIZE=1048576 bytes  sizeof(BlockHeader)=16
+
+
+╔══════════════════════════════════════════════════════╗
+║  Config: 🏎 MAX THROUGHPUT (Single Class)         ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     16          100         32767       524272      50.0%
+  ─────────────────────────────────────────────────────
+  TOTAL                                32767       524272      50.00%
+
+  Latency (16-byte, 32767 samples):
+    Alloc  avg=31.2 ns   min=0 ns   max=166000 ns
+    Free   avg=26.3 ns   min=0 ns   max=19000 ns
+
+  Bulk Throughput (32767 allocs of 16 B):
+    3.81 ns/op  →  262.1 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 50.00%
+
+╔══════════════════════════════════════════════════════╗
+║  Config: 🗜 MIN OVERHEAD (Large Blocks)           ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     4096        100         254         1040384     0.4%
+  ─────────────────────────────────────────────────────
+  TOTAL                                254         1040384     0.39%
+
+  Latency (4096-byte, 254 samples):
+    Alloc  avg=15.7 ns   min=0 ns   max=1000 ns
+    Free   avg=15.7 ns   min=0 ns   max=1000 ns
+
+  Bulk Throughput (254 allocs of 4096 B):
+    11.81 ns/op  →  84.7 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 0.39%
+
+╔══════════════════════════════════════════════════════╗
+║  Config: ⚖ BALANCED SHOWCASE                      ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     64          60          7864        503296      20.0%
+  Class[1]     256         30          1156        295936      5.9%
+  Class[2]     1024        10          100         102400      1.5%
+  ─────────────────────────────────────────────────────
+  TOTAL                                9120        901632      13.93%
+
+  Latency (64-byte, 7864 samples):
+    Alloc  avg=15.9 ns   min=0 ns   max=1000 ns
+    Free   avg=18.7 ns   min=0 ns   max=11000 ns
+
+  Bulk Throughput (7864 allocs of 64 B):
+    3.05 ns/op  →  327.7 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 13.93%
+
+╔══════════════════════════════════════════════════════╗
+║  Config: 📡 LATENCY OPTIMISED                     ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     32          80          17475       559200      33.3%
+  Class[1]     128         20          1456        186368      11.1%
+  ─────────────────────────────────────────────────────
+  TOTAL                                18931       745568      28.89%
+
+  Latency (32-byte, 17475 samples):
+    Alloc  avg=17.2 ns   min=0 ns   max=7000 ns
+    Free   avg=16.9 ns   min=0 ns   max=1000 ns
+
+  Bulk Throughput (17475 allocs of 32 B):
+    1.83 ns/op  →  546.1 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 28.89%
+
+╔══════════════════════════════════════════════════════╗
+║  Config: 🎮 GAME ENGINE (ECS/Small Objects)       ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     16          40          13106       209696      50.0%
+  Class[1]     64          30          3932        251648      20.0%
+  Class[2]     256         15          578         147968      5.9%
+  Class[3]     1024        10          100         102400      1.5%
+  Class[4]     2048        5           25          51200       0.8%
+  ─────────────────────────────────────────────────────
+  TOTAL                                17741       762912      27.12%
+
+  Latency (16-byte, 13106 samples):
+    Alloc  avg=15.0 ns   min=0 ns   max=1000 ns
+    Free   avg=15.9 ns   min=0 ns   max=1000 ns
+
+  Bulk Throughput (13106 allocs of 16 B):
+    1.60 ns/op  →  624.1 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 27.12%
+
+╔══════════════════════════════════════════════════════╗
+║  Config: 📡 NETWORK / HFT (Packet Buffers)        ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     32          60          13106       419392      33.3%
+  Class[1]     128         20          1456        186368      11.1%
+  Class[2]     512         10          198         101376      3.0%
+  Class[3]     1024        5           50          51200       1.5%
+  Class[4]     2048        5           25          51200       0.8%
+  ─────────────────────────────────────────────────────
+  TOTAL                                14835       809536      22.67%
+
+  Latency (32-byte, 13106 samples):
+    Alloc  avg=15.6 ns   min=0 ns   max=12000 ns
+    Free   avg=16.4 ns   min=0 ns   max=1000 ns
+
+  Bulk Throughput (13106 allocs of 32 B):
+    1.53 ns/op  →  655.3 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 22.67%
+
+╔══════════════════════════════════════════════════════╗
+║  Config: 🔌 EMBEDDED / RTOS (SRAM Optimized)      ║
+╚══════════════════════════════════════════════════════╝
+  Class         BlockSz     % Pool      Blocks      UserBytes   Overhead
+  Class[0]     8           30          13106       104848      66.7%
+  Class[1]     16          30          9830        157280      50.0%
+  Class[2]     32          20          4368        139776      33.3%
+  Class[3]     64          10          1310        83840       20.0%
+  Class[4]     128         10          728         93184       11.1%
+  ─────────────────────────────────────────────────────
+  TOTAL                                29342       578928      44.78%
+
+  Latency (8-byte, 9830 samples):
+    Alloc  avg=14.8 ns   min=0 ns   max=1000 ns
+    Free   avg=14.5 ns   min=0 ns   max=1000 ns
+
+  Bulk Throughput (9830 allocs of 8 B):
+    1.73 ns/op  →  578.2 M alloc/s
+
+  Syscalls (runtime): 0  |  Header overhead: 44.78%
+
+═══════════════════════════════════════════════════════
+KEY: All configs have 0 runtime syscalls and O(1) alloc.
+Throughput/latency difference = sample size + cache effects.
