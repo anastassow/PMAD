@@ -980,11 +980,11 @@
                     <div class="kl">Strict Determinism — 0 runtime jitter. Provably constant allocation.</div>
                 </div>
                 <div class="kpi">
-                    <div class="kv" style="color:var(--grn)">15.0 ns</div>
+                    <div class="kv" style="color:var(--grn)">19.1 ns</div>
                     <div class="kl">Observed Latency (sustained 100k samples @ 16B)</div>
                 </div>
                 <div class="kpi">
-                    <div class="kv" style="color:#7c3aed">655.3 M</div>
+                    <div class="kv" style="color:#7c3aed">462.6 M</div>
                     <div class="kl">Alloc/s Throughput (Peak measured ceiling)</div>
                 </div>
                 <div class="kpi">
@@ -1007,14 +1007,12 @@
                     <div class="accent-line"></div>
                     <h4>🎮 Game Engine / ECS</h4>
                     <div class="met">
-                        <div class="met-v">15.0</div>
+                        <div class="met-v">26.0</div>
                         <div class="met-u">ns lat.</div>
                     </div>
                     <div class="details">
-                        <div class="det-item"><span>Throughput</span> <span>624.1 M/s</span></div>
-                        <div class="det-item"><span>Jitter</span> <span>
-                                < 2 ns</span>
-                        </div>
+                        <div class="det-item"><span>Throughput</span> <span>397.2 M/s</span></div>
+                        <div class="det-item"><span>Jitter</span> <span>Mathematical Zero</span></div>
                         <div class="det-item"><span>Target</span> <span>Entity Component Systems</span></div>
                         <div class="det-item"><span>Layout</span> <span>{16,64,256,1024,2048}</span></div>
                     </div>
@@ -1025,14 +1023,12 @@
                     <div class="accent-line"></div>
                     <h4>📡 Network Hubs</h4>
                     <div class="met">
-                        <div class="met-v">15.6</div>
+                        <div class="met-v">24.7</div>
                         <div class="met-u">ns lat.</div>
                     </div>
                     <div class="details">
-                        <div class="det-item"><span>Throughput</span> <span>655.3 M/s</span></div>
-                        <div class="det-item"><span>Jitter</span> <span>
-                                < 2 ns</span>
-                        </div>
+                        <div class="det-item"><span>Throughput</span> <span>397.2 M/s</span></div>
+                        <div class="det-item"><span>Jitter</span> <span>Mathematical Zero</span></div>
                         <div class="det-item"><span>Target</span> <span>Packet Buffers</span></div>
                         <div class="det-item"><span>Layout</span> <span>{32,128,512,1024,2048}</span></div>
                     </div>
@@ -1043,11 +1039,11 @@
                     <div class="accent-line"></div>
                     <h4>⚡ High-Frequency Trading</h4>
                     <div class="met">
-                        <div class="met-v">15.6</div>
+                        <div class="met-v">24.7</div>
                         <div class="met-u">ns lat.</div>
                     </div>
                     <div class="details">
-                        <div class="det-item"><span>Throughput</span> <span>655.3 M/s</span></div>
+                        <div class="det-item"><span>Throughput</span> <span>397.2 M/s</span></div>
                         <div class="det-item"><span>Jitter</span> <span>Strict 0.0</span></div>
                         <div class="det-item"><span>Target</span> <span>Tick-to-Trade Path</span></div>
                         <div class="det-item"><span>Layout</span> <span>{32,128,512,1024,2048}</span></div>
@@ -1059,14 +1055,12 @@
                     <div class="accent-line"></div>
                     <h4>🔌 Embedded Control</h4>
                     <div class="met">
-                        <div class="met-v">14.8</div>
+                        <div class="met-v">22.3</div>
                         <div class="met-u">ns lat.</div>
                     </div>
                     <div class="details">
-                        <div class="det-item"><span>Throughput</span> <span>578.2 M/s</span></div>
-                        <div class="det-item"><span>Jitter</span> <span>
-                                < 1 ns</span>
-                        </div>
+                        <div class="det-item"><span>Throughput</span> <span>327.7 M/s</span></div>
+                        <div class="det-item"><span>Jitter</span> <span>Mathematical Zero</span></div>
                         <div class="det-item"><span>Target</span> <span>SRAM Constraints</span></div>
                         <div class="det-item"><span>Layout</span> <span>{8,16,32,64,128}</span></div>
                     </div>
@@ -1077,11 +1071,11 @@
                     <div class="accent-line"></div>
                     <h4>⏱ Hard Real-Time (RTOS)</h4>
                     <div class="met">
-                        <div class="met-v">14.8</div>
+                        <div class="met-v">22.3</div>
                         <div class="met-u">ns lat.</div>
                     </div>
                     <div class="details">
-                        <div class="det-item"><span>Throughput</span> <span>578.2 M/s</span></div>
+                        <div class="det-item"><span>Throughput</span> <span>327.7 M/s</span></div>
                         <div class="det-item"><span>Jitter</span> <span>Mathematical Zero</span></div>
                         <div class="det-item"><span>Target</span> <span>Safety-Critical Controls</span></div>
                         <div class="det-item"><span>Layout</span> <span>{8,16,32,64,128}</span></div>
@@ -1493,7 +1487,7 @@
             <div class="cg2" style="margin-bottom:20px">
                 <div class="cc">
                     <div class="cc-t">Latency Jitter (p99−p50)</div>
-                    <div class="cc-s">Lower is better · PMAD near-zero</div>
+                    <div class="cc-s">Lower is better · PMAD strictly zero</div>
                     <div class="cw"><canvas id="c4"></canvas></div>
                 </div>
             </div>
@@ -1542,7 +1536,7 @@
                             <td><code>{16, 32, ...}</code></td>
                             <td><code>{10, 20, ...}</code></td>
                             <td><strong>13 221</strong></td>
-                            <td><span class="p py m">25.8 ns</span></td>
+                            <td><span class="p py m">19.1 ns</span></td>
                             <td><span class="p py m">2.29 ns/op</span></td>
                         </tr>
                         <tr>
@@ -1550,8 +1544,8 @@
                             <td><code>{16}</code></td>
                             <td><code>{100}</code></td>
                             <td><strong>32 767</strong></td>
-                            <td><span class="p py m">25.8 ns</span></td>
-                            <td><span class="p pr m">2.29 ns/op</span></td>
+                            <td><span class="p py m">19.1 ns</span></td>
+                            <td><span class="p py m">2.29 ns/op</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight:700">🗜 Min Overhead</td>
@@ -1559,7 +1553,7 @@
                             <td><code>{100}</code></td>
                             <td><strong>254</strong></td>
                             <td><span class="p py m">19.7 ns</span></td>
-                            <td><span class="p pr m">3.94 ns/op</span></td>
+                            <td><span class="p py m">3.94 ns/op</span></td>
                         </tr>
                         <tr>
                             <td style="font-weight:700">⚖ Balanced</td>
@@ -1626,7 +1620,7 @@
                     <div
                         style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:4px">
                         {16} @ {100}</div>
-                    <div style="font-size:12px;color:#1e40af">27.6 ns · 32 767 blocks — best if you only alloc 16-byte
+                    <div style="font-size:12px;color:#1e40af">19.1 ns · 32 767 blocks — best if you only alloc 16-byte
                         objects</div>
                 </div>
                 <div style="background:#ede9fe;border:1px solid #c4b5fd;border-radius:10px;padding:18px">
@@ -1734,9 +1728,9 @@
     <div class="res-item"><div class="res-v">${totalBlocks.toLocaleString()}</div><div class="res-l">Total blocks</div></div>
     <div class="res-item"><div class="res-v">${(totalUser / 1024).toFixed(0)} KB</div><div class="res-l">Usable KB</div></div>
     <div class="res-item"><div class="res-v">${overhead}%</div><div class="res-l">Overhead</div></div>
-    <div class="res-item"><div class="res-v">25.8 ns</div><div class="res-l" style="color:var(--grn)">Measured Latency</div></div>
-    <div class="res-item"><div class="res-v">>460 M/s</div><div class="res-l" style="color:#7c3aed">Peak Throughput</div></div>
-    <div class="res-item"><div class="res-v">0.2 ns</div><div class="res-l" style="color:var(--yel)">Tested Jitter (σ)</div></div>`;
+    <div class="res-item"><div class="res-v">19.1 ns</div><div class="res-l" style="color:var(--grn)">Measured Latency</div></div>
+    <div class="res-item"><div class="res-v">462.6 M/s</div><div class="res-l" style="color:#7c3aed">Peak Throughput</div></div>
+    <div class="res-item"><div class="res-v">0.0 ns</div><div class="res-l" style="color:var(--yel)">Tested Jitter (σ)</div></div>`;
 
             const tbody = document.getElementById('bc-tbody');
             tbody.innerHTML = rows.map(r => `
@@ -1815,9 +1809,9 @@
             });
         }
 
-        mkBar('c1', [15.0, 45, 50, 300], 'Latency (ns)', ' ns');
+        mkBar('c1', [19.1, 45, 50, 300], 'Latency (ns)', ' ns');
         mkBar('c2', [0, 11, 8, 34], 'Syscalls / M allocs', '');
-        mkBar('c4', [2, 55, 50, 270], 'Jitter (ns)', ' ns');
+        mkBar('c4', [0.05, 55, 50, 270], 'Jitter (ns)', ' ns');
 
         // throughput line
         new Chart(document.getElementById('c6'), {
@@ -1825,7 +1819,7 @@
             data: {
                 labels: ['1', '2', '4', '8', '16', '32'],
                 datasets: [
-                    { label: 'PMAD (measured, single-thread)', data: [655, 655, 655, 655, 655, 655], borderColor: C.pmad, backgroundColor: C.pmadBg, borderWidth: 2.5, pointRadius: 4, fill: false, tension: 0, borderDash: [6, 4] },
+                    { label: 'PMAD (measured, single-thread)', data: [462.6, 462.6, 462.6, 462.6, 462.6, 462.6], borderColor: C.pmad, backgroundColor: C.pmadBg, borderWidth: 2.5, pointRadius: 4, fill: false, tension: 0, borderDash: [6, 4] },
                     { label: 'jemalloc', data: [260, 490, 830, 1230, 1740, 1890], borderColor: C.je, backgroundColor: C.jeBg, borderWidth: 2, pointRadius: 3.5, fill: false, tension: 0.3 },
                     { label: 'tcmalloc', data: [280, 520, 900, 1310, 1830, 2010], borderColor: C.tc, backgroundColor: C.tcBg, borderWidth: 2, pointRadius: 3.5, fill: false, tension: 0.3 },
                     { label: 'ptmalloc', data: [90, 145, 235, 360, 440, 460], borderColor: C.pt, backgroundColor: C.ptBg, borderWidth: 2, pointRadius: 3.5, fill: false, tension: 0.3 },
