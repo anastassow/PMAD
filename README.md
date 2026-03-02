@@ -54,7 +54,7 @@ PMAD is built for environments where **deterministic latency** is non-negotiable
 </p>
 
 <p align="center">
-  <em>PMAD values are measured on macOS hardware. Competitor values are from 2025/2026 industry benchmarks.<br/>Sources: ithare.com, AppFolio Engineering, tcmalloc.dev, jemalloc.net.</em>
+  <em>PMAD values are measured on macOS (Apple Silicon) hardware. Competitor values are from 2025/2026 industry benchmarks.<br/>Sources: ithare.com, AppFolio Engineering, tcmalloc.dev, jemalloc.net.</em>
 </p>
 
 ---
@@ -94,7 +94,7 @@ Everything is configurable at initialization:
 
 ### 🏆 Optimal Performance Configurations
 
-The following configurations were benchmarked using `bench_configs.c` on macOS (Apple Silicon). Each represents the absolute best possible setup for its target environment.
+The following configurations were benchmarked using `bench_configs.c` on macOS (M3 Max / Apple Silicon). Each represents the absolute best possible setup for its target environment.
 
 | Profile | Size Classes (B) | Split (%) | Avg. Latency | Throughput | Suitability |
 |---|---|---|---|---|---|
@@ -166,12 +166,16 @@ PMAD/
 │
 ├── src/                        # Implementation source files
 │   ├── PMAD.c                  #   Core allocator logic (init, alloc, free, lookup table)
-│   ├── incPmad.c               #   Singleton wrapper — public API entry points
+│   ├── incPMAD.c               #   Singleton wrapper — public API entry points
 │   ├── MemoryPool.c            #   Pool attachment & percentage-based splitting
 │   ├── BlockHeader.c           #   Block creation & free-list insertion
 │   └── SizeClass.c             #   (Reserved for future size class utilities)
 │
-│   ├── benchmark.c             #   Latency & overhead benchmarks
+├── benchmarks/                 # Performance & comparative benchmarks 
+│   ├── benchmark.c             #   Sustained latency & overhead tests
+│   ├── bench_configs.c         #   Multi-configuration profile runner
+│   ├── bench_results_updated.txt # Latest results measured on your machine
+│   └── benchmark_results.txt   # Historical latency baseline
 │
 ├── allocator_info_graphics/    # Visual documentation
 │   └── allocator_infographics.html  # Interactive charts & architecture diagrams
@@ -179,6 +183,7 @@ PMAD/
 ├── docs/                       # Documentation assets (for the readme)
 │   └── images/                 #   Architecture diagrams & visuals
 │
+├── Presentation - PMAD Predictive Memory Allocator.pptx # Project showcase
 ├── main.c                      # Example usage / demo entry point
 ├── Makefile                    # Build system
 ├── Documentation_v1.0.pdf      # Full project documentation (39 pages)
