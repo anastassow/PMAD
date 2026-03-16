@@ -9,6 +9,15 @@
 #define ALIGNMENT 16
 #define MAX_SIZE_OF_SIZE_CLASS 4096 // 256 entities max
 
+typedef enum {
+    PMAD_STATUS_ALLOCATED = 0,
+    PMAD_STATUS_INITIALIZED = 1,
+    PMAD_STATUS_INIT_FAILED = 2,
+    PMAD_STATUS_MAP_FAILED = 3,
+    PMAD_STATUS_INCOMPLETE_PERCENTAGE = 4,
+    PMAD_STATUS_READY = 5
+} PmadStatus;
+
 typedef struct PMAD{
     MemoryPool* pool_head;
     SizeClass size_classes[NUM_CLASSES];
@@ -16,7 +25,7 @@ typedef struct PMAD{
     int size_class_reference[MAX_SIZE_OF_SIZE_CLASS / ALIGNMENT + 1];
 } PMAD;
 
-void PMAD_init(PMAD* pmad, const size_t* class_sizes);
+PmadStatus PMAD_init(PMAD* pmad, const size_t* class_sizes);
 void build_lookup_table(PMAD* pmad);
 
 void* get_memory_pool_from_os();

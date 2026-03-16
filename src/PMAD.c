@@ -16,7 +16,7 @@ void build_lookup_table(PMAD* pmad) {
     }
 }
 
-void PMAD_init(PMAD* pmad, const size_t* class_sizes) {
+PmadStatus PMAD_init(PMAD* pmad, const size_t* class_sizes) {
     for (size_t i = 0; i < NUM_CLASSES; i++) {
         pmad->size_classes[i].block_size = class_sizes[i];
         pmad->size_classes[i].free_list = NULL;
@@ -26,6 +26,8 @@ void PMAD_init(PMAD* pmad, const size_t* class_sizes) {
 
     pmad->pool_head = NULL;
     build_lookup_table(pmad);
+
+    return PMAD_STATUS_READY;
 }
 
 void* get_memory_pool_from_os() {
@@ -38,8 +40,7 @@ void* get_memory_pool_from_os() {
     );
 
     if (mem == MAP_FAILED) {
-        perror("mmap failed");
-        exit(1);
+        return NULL;
     }
 
     return mem;
@@ -64,7 +65,6 @@ void* PMAD_alloc(PMAD* pmad, size_t size) {
 
     void* memory = sc->free_list;
     if (!memory) {
-        perror("No memory left!");
         return NULL;
     }
 
