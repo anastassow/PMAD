@@ -15,6 +15,5 @@ typedef struct MemoryPool {
 
 typedef struct PMAD PMAD;
 void attach_new_pool(struct PMAD* pmad, void* mem);
-int split_pool_by_percentage(struct PMAD* pmad, size_t percentage[NUM_CLASSES]);
 
 #endif
