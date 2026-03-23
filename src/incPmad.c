@@ -5,27 +5,27 @@
 static PMAD incPMAD_instance;
 
 PmadStatus pmad_init(size_t* class_sizes, size_t* percentages) {
-    if (PMAD_init(&incPMAD_instance, class_sizes) != PMAD_STATUS_READY)
-        return PMAD_STATUS_INIT_FAILED;
+    if (PMAD_init(&incPMAD_instance, class_sizes) != PMAD_OK)
+        return PMAD_ERR_INIT_FAILED;
 
     void* pool_mem = get_memory_pool_from_os();
     if (!pool_mem)
-        return PMAD_STATUS_MAP_FAILED;
+        return PMAD_ERR_MAP_FAILED;
 
     attach_new_pool(&incPMAD_instance, pool_mem);
 
-    if (split_pool_by_percentage(&incPMAD_instance, percentages))
-        return PMAD_STATUS_INCOMPLETE_PERCENTAGE;
+    if (split_pool_by_percentage(&incPMAD_instance, percentages) != PMAD_OK)
+        return PMAD_ERR_INCOMPLETE_PERCENTAGE;
         
-    return PMAD_STATUS_INITIALIZED;
+    return PMAD_OK;
 }
 
 void* pmad_alloc(size_t size) {
     return PMAD_alloc(&incPMAD_instance, size);
 }
 
-void pmad_free(void* ptr) {
-    PMAD_free(&incPMAD_instance, ptr);
+PmadStatus pmad_free(void* ptr) {
+    return PMAD_free(&incPMAD_instance, ptr);
 }
 
 void pmad_destroy() {
