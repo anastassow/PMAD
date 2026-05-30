@@ -3,10 +3,12 @@
 #include "incPMAD.h"
 
 int main() {
-    size_t class_sizes[NUM_CLASSES] = {16, 32, 64, 128, 256};
-    size_t percentages[NUM_CLASSES] = {10, 20, 20, 20, 30};
+    size_t class_sizes[5] = {16, 32, 64, 128, 256};
+    size_t percentages[5] = {10, 20, 20, 20, 30};
+    uint8_t num_classes   = 5;
+    size_t pool_size      = 1024 * 1024; // 1MB
 
-    if (pmad_init(class_sizes, percentages) != PMAD_OK) {
+    if (pmad_init(class_sizes, num_classes, percentages, pool_size) != PMAD_OK) {
         printf("Init failed!\n");
         exit(-1);
     }
@@ -33,5 +35,5 @@ int main() {
     pmad_free(something);
     pmad_destroy();
     
-return 0;
+    return 0;
 }

@@ -3,13 +3,14 @@
 
 #include "BlockHeader.h"
 #include <stddef.h>
+#include <stdint.h>
 
 typedef struct SizeClass {
     size_t block_size;
     BlockHeader* free_list;
 
-    size_t total_blocks;
-    size_t allocated_blocks;
+    uint32_t total_blocks;
+    uint32_t allocated_blocks;
 } SizeClass;
 
 #endif

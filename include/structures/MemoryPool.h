@@ -1,10 +1,7 @@
 #ifndef MEMORY_POOL_H
 #define MEMORY_POOL_H
 
-#include <stdlib.h>
 #include <stdio.h>
-
-#define NUM_CLASSES 5
 
 typedef struct MemoryPool {
     void* start;
@@ -14,6 +11,6 @@ typedef struct MemoryPool {
 } MemoryPool;
 
 typedef struct PMAD PMAD;
-void attach_new_pool(struct PMAD* pmad, void* mem);
+void attach_new_pool(struct PMAD* pmad, void* mem, size_t pool_size);
 
 #endif
