@@ -23,7 +23,7 @@
 ## Contents
 
 **[TL;DR](#tldr)** · **[Benchmarks](#benchmarks)** · **[When to use PMAD](#when-to-use-pmad--and-when-not-to)** · **[Architecture](#how-it-works)** · **[quicx integration](#real-world-integration-quicx)** <br/>
-**[Quick start](#quick-start)** · **[Usage & API](#usage)** · **[Limitations](#limitations--honest-tradeoffs)** · **[Reproducibility](#reproducibility)** · **[Roadmap](#roadmap)**
+**[Quick start](#quick-start)** · **[Usage & API](#usage)** · **[Limitations](#limitations--honest-tradeoffs)** · **[Reproducibility](#reproducibility)**
 
 ---
 
@@ -465,39 +465,24 @@ PMAD/
 
 ---
 
-## Roadmap
-
-- [ ] **Thread safety via per-thread / per-core pools** — enables shared-nothing
-      engines like quicx without locks
-- [ ] **Blocks larger than 4 KB** — bucket-indexed size→class lookup
-- [ ] **Debug build with double-free / use-after-free detection**
-- [ ] Dynamic pool expansion (additional `mmap` pools on demand)
-- [ ] Per-class custom alignment; statistics & monitoring API
-- [ ] Integration examples for embedded RTOS (FreeRTOS, Zephyr)
-
----
-
 ## Contributing
 
-Contributions are welcome.
-
-1. **Fork** and create a feature branch.
-2. **Follow the existing style** — K&R braces, 4-space indentation, descriptive names, C99.
-3. **Add benchmarks** for performance-sensitive changes (use `benchmarks/v2`).
-4. **Update documentation** if the public API changes.
-5. Submit a **pull request** with a clear description.
-
-Header guards with `#ifndef`/`#define`/`#endif`; struct typedefs in
-`include/structures/`; public API via `incPMAD.h`, internals via `PMAD.h`.
+PMAD is free for anyone to use, study, and build on. If you've done something with
+it — an improvement, a port, a bug fix, or a project built on top — you're very
+welcome to send it my way: open a pull request or reach out to
+[Dimitar Anastasov](https://github.com/anastassow). I'd genuinely love to see what
+you make with it.
 
 ---
 
 ## Documentation & license
 
-Full technical documentation: [`Documentation_v1.0.pdf`](Documentation_v1.0.pdf)
-(architecture & design rationale, allocator comparison, development stages,
-complexity analysis). Benchmark methodology and head-to-head results:
-[`benchmarks/v2/REPORT.md`](benchmarks/v2/REPORT.md). Interactive dashboard:
+The full technical write-up is in [`Documentation_v1.0.pdf`](Documentation_v1.0.pdf) —
+this is the **v1** documentation. The implementation has changed a little since then
+(for example, the size-class metadata now lives inside the pool), and an updated
+version is currently in the works. In the meantime, the most up-to-date details are
+the benchmark methodology and results in [`benchmarks/v2/REPORT.md`](benchmarks/v2/REPORT.md)
+and the interactive dashboard at
 [`allocator_info_graphics/allocator_infographics.html`](allocator_info_graphics/allocator_infographics.html).
 
 Licensed under the **MIT License** — see [LICENSE](LICENSE).
