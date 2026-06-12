@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/pmad_architecture.png" alt="PMAD Architecture" width="720"/>
+  <img src="docs/images/PMAD.png" alt="PMAD Architecture Overview" width="940"/>
 </p>
 
 <h1 align="center">PMAD — Predictive Memory Allocator by Dimitar Anastasov</h1>
@@ -17,6 +17,13 @@
   <img src="https://img.shields.io/badge/Language-C99-A8B9CC?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
   <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey?style=for-the-badge" alt="Platform"/>
 </p>
+
+---
+
+## Contents
+
+**[TL;DR](#tldr)** · **[Benchmarks](#benchmarks)** · **[When to use PMAD](#when-to-use-pmad--and-when-not-to)** · **[Architecture](#how-it-works)** · **[quicx integration](#real-world-integration-quicx)** <br/>
+**[Quick start](#quick-start)** · **[Usage & API](#usage)** · **[Limitations](#limitations--honest-tradeoffs)** · **[Reproducibility](#reproducibility)** · **[Roadmap](#roadmap)**
 
 ---
 
@@ -215,6 +222,13 @@ pair PMAD-for-small-buffers with a fallback allocator for large payloads.
 ---
 
 ## How it works
+
+The architecture diagram at the top of this README shows the full picture: the
+static `PMAD` struct holds the O(1) lookup table and two pointers into a single
+`mmap` pool, whose **front** holds the `MemoryPool` header and the `SizeClass[]`
+metadata, with the block arena filling the rest.
+
+**The layered call path** (top → bottom):
 
 ```
 ┌─────────────────────────────────────────────────────────┐
