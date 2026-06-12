@@ -1,0 +1,22 @@
+### Bench 5: memory overhead (RSS) — fast
+### Bench 3: latency-by-size (K=32 body) + throughput, reps=5
+  rep 1/5 done (lat+tput)
+  rep 2/5 done (lat+tput)
+  rep 3/5 done (lat+tput)
+  rep 4/5 done (lat+tput)
+  rep 5/5 done (lat+tput)
+### Bench 1: headline tail @64B (K=1 single-op exceedance), reps=5
+  rep 1/5 done (tail)
+  rep 2/5 done (tail)
+  rep 3/5 done (tail)
+  rep 4/5 done (tail)
+  rep 5/5 done (tail)
+### Bench 4a: churn DRIFT @64B (one long run/backend, per-window trend)
+### Bench 4b: churn distribution @64B & @1024B (K=32 body + K=1 tail), creps=3
+  crep 1/3 done
+  crep 2/3 done
+  crep 3/3 done
+### ALL RUNS COMPLETE. raw -> raw/all_results.txt, windows -> raw/churn_windows.txt
+     355 raw/all_results.txt
+     500 raw/churn_windows.txt
+     855 total

@@ -1,0 +1,14 @@
+# Built harness binaries (reproduce with `make`)
+bench_pmad
+bench_system
+bench_jemalloc
+bench_tcmalloc
+bench_mimalloc
+pmad_test
+pmad_mem
+
+# Bulky/noisy harness log (just repeated harness-header lines).
+# The committed evidence is raw/all_results.txt, raw/churn_windows.txt,
+# raw/env.txt, raw/progress.log, and results/.
+raw/stderr.log
+raw/win.tmp
