@@ -2,7 +2,7 @@
   <img src="docs/images/PMAD.png" alt="PMAD Architecture Overview" width="940"/>
 </p>
 
-<h1 align="center">PMAD — Predictive Memory Allocator by Dimitar Anastasov</h1>
+<h1 align="center">PMAD — Pool-Based Memory Allocator by Dimitar Anastasov</h1>
 
 <p align="center">
   <strong>A deterministic, O(1) slab allocator with a provable latency ceiling —<br/>
