@@ -1,7 +1,7 @@
 #ifndef SIZE_CLASS_H
 #define SIZE_CLASS_H
 
-#include "BlockHeader.h"
+#include "./BlockHeader.h"
 #include <stddef.h>
 #include <stdint.h>
 

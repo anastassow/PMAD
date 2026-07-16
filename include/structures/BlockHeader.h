@@ -8,8 +8,4 @@ typedef struct BlockHeader {
     uint8_t size_class;
 } BlockHeader;
 
-
-struct PMAD;
-void createBlock(uint8_t* ptr, uint8_t class_index, PMAD* pmad);
-
 #endif

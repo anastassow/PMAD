@@ -1,28 +1,38 @@
-CC = gcc
-CFLAGS = -g -Iinclude
+CC       ?= gcc
+CSTD     := -std=c11
+WARN     := -Wall -Wextra
+CPPFLAGS := -Iinclude
+CFLAGS   ?= -g -O0
+LDFLAGS  :=
 
-SRC = src/PMAD.c src/incPMAD.c src/MemoryPool.c src/BlockHeader.c
-OBJ = PMAD.o incPMAD.o MemoryPool.o BlockHeader.o main.o 
+BUILD_DIR := build
+BIN       := main
 
-all: main
+SRCS := main.c $(wildcard src/*.c)
+OBJS := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRCS))
+DEPS := $(OBJS:.o=.d)
 
-main: $(OBJ)
-	$(CC) $(OBJ) -o main
+.PHONY: all run debug release clean
 
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c -o main.o
+all: $(BIN)
 
-PMAD.o: src/PMAD.c
-	$(CC) $(CFLAGS) -c src/PMAD.c -o PMAD.o
+$(BIN): $(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
 
-incPMAD.o: src/incPMAD.c
-	$(CC) $(CFLAGS) -c src/incPMAD.c -o incPMAD.o
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CSTD) $(WARN) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
-MemoryPool.o: src/MemoryPool.c
-	$(CC) $(CFLAGS) -c src/MemoryPool.c -o MemoryPool.o
+run: all
+	./$(BIN)
 
-BlockHeader.o: src/BlockHeader.c
-	$(CC) $(CFLAGS) -c src/BlockHeader.c -o BlockHeader.o
+debug: CFLAGS := -g -O0 -DDEBUG
+debug: clean all
+
+release: CFLAGS := -O2 -DNDEBUG
+release: clean all
 
 clean:
-	rm -f $(OBJ) main
+	rm -rf $(BUILD_DIR) $(BIN)
+
+-include $(DEPS)

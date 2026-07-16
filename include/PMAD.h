@@ -1,8 +1,9 @@
 #ifndef PMAD_H
 #define PMAD_H
 
-#include "structures/MemoryPool.h"
-#include "structures/SizeClass.h"
+#include "./structures/BlockHeader.h"
+#include "./structures/MemoryPool.h"
+#include "./structures/SizeClass.h"
 #include <stdint.h>
 
 #define ALIGNMENT 16
@@ -40,5 +41,8 @@ PmadStatus PMAD_free(PMAD *pmad, void *memoryToFree);
 
 PmadStatus split_pool_by_percentage(PMAD *pmad, const size_t *percentage,
                                     uint8_t num_classes);
+
+void createBlock(uint8_t *ptr, uint8_t class_index, PMAD *pmad);
+void attach_new_pool(PMAD *pmad, void *mem, size_t pool_size);
 
 #endif

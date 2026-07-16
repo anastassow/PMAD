@@ -1,7 +1,7 @@
 #ifndef INCPMAD_H
 #define INCPMAD_H
 
-#include "PMAD.h"
+#include "./PMAD.h"
 
 #define MAX_PMAD_CLASSES 32
 

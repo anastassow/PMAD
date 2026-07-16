@@ -1,5 +1,4 @@
-#include "structures/MemoryPool.h"
-#include "PMAD.h"
+#include "../include/PMAD.h"
 
 void attach_new_pool(PMAD* pmad, void* mem, size_t pool_size) {
     MemoryPool* pool = (MemoryPool*)mem;

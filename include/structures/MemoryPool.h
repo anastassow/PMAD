@@ -10,7 +10,4 @@ typedef struct MemoryPool {
     struct MemoryPool* next;
 } MemoryPool;
 
-typedef struct PMAD PMAD;
-void attach_new_pool(struct PMAD* pmad, void* mem, size_t pool_size);
-
 #endif
