@@ -1,0 +1,5 @@
+RESULT CHURN backend=PMAD     size=64   K=32 N=2000000 mean=7.54 p50=7.81 p90=9.12 p99=11.72 p99.9=14.34 p99.99=66.41 max=1136.72 tail_ratio=8.5 ge100ns=178(89.0ppm) ge1us=1(0.50ppm) ge10us=0(0.000ppm)
+RESULT CHURN backend=system   size=64   K=32 N=2000000 mean=35.03 p50=33.84 p90=40.34 p99=61.22 p99.9=216.16 p99.99=391.91 max=28773.44 tail_ratio=11.6 ge100ns=5772(2886.0ppm) ge1us=27(13.50ppm) ge10us=3(1.500ppm)
+RESULT CHURN backend=jemalloc size=64   K=32 N=2000000 mean=8.30 p50=7.81 p90=9.12 p99=10.41 p99.9=14.31 p99.99=167.97 max=3813.81 tail_ratio=21.5 ge100ns=283(141.5ppm) ge1us=5(2.50ppm) ge10us=0(0.000ppm)
+RESULT CHURN backend=tcmalloc size=64   K=32 N=2000000 mean=5.57 p50=5.22 p90=6.53 p99=7.81 p99.9=9.12 p99.99=19.53 max=1354.16 tail_ratio=3.7 ge100ns=174(87.0ppm) ge1us=1(0.50ppm) ge10us=0(0.000ppm)
+RESULT CHURN backend=mimalloc size=64   K=32 N=2000000 mean=16.92 p50=16.91 p90=19.53 p99=26.03 p99.9=46.88 p99.99=247.41 max=1208.34 tail_ratio=14.6 ge100ns=507(253.5ppm) ge1us=3(1.50ppm) ge10us=0(0.000ppm)

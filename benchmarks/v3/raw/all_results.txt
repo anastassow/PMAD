@@ -1,0 +1,438 @@
+rep=1 RESULT MEM backend=system   size=16   count=500000 got=500000 requested_bytes=8000000 rss_delta_bytes=8044544 bytes_per_obj=16.09 overhead_pct=0.56
+rep=1 RESULT MEM backend=system   size=32   count=500000 got=500000 requested_bytes=16000000 rss_delta_bytes=16056320 bytes_per_obj=32.11 overhead_pct=0.35
+rep=1 RESULT MEM backend=system   size=64   count=500000 got=500000 requested_bytes=32000000 rss_delta_bytes=32129024 bytes_per_obj=64.26 overhead_pct=0.40
+rep=1 RESULT MEM backend=system   size=128  count=500000 got=500000 requested_bytes=64000000 rss_delta_bytes=64258048 bytes_per_obj=128.52 overhead_pct=0.40
+rep=1 RESULT MEM backend=system   size=256  count=500000 got=500000 requested_bytes=128000000 rss_delta_bytes=128499712 bytes_per_obj=257.00 overhead_pct=0.39
+rep=1 RESULT MEM backend=system   size=512  count=500000 got=500000 requested_bytes=256000000 rss_delta_bytes=256999424 bytes_per_obj=514.00 overhead_pct=0.39
+rep=1 RESULT MEM backend=system   size=1024 count=500000 got=500000 requested_bytes=512000000 rss_delta_bytes=514015232 bytes_per_obj=1028.03 overhead_pct=0.39
+rep=1 RESULT MEM backend=jemalloc size=16   count=500000 got=500000 requested_bytes=8000000 rss_delta_bytes=8192000 bytes_per_obj=16.38 overhead_pct=2.40
+rep=1 RESULT MEM backend=jemalloc size=32   count=500000 got=500000 requested_bytes=16000000 rss_delta_bytes=16367616 bytes_per_obj=32.74 overhead_pct=2.30
+rep=1 RESULT MEM backend=jemalloc size=64   count=500000 got=500000 requested_bytes=32000000 rss_delta_bytes=32784384 bytes_per_obj=65.57 overhead_pct=2.45
+rep=1 RESULT MEM backend=jemalloc size=128  count=500000 got=500000 requested_bytes=64000000 rss_delta_bytes=65568768 bytes_per_obj=131.14 overhead_pct=2.45
+rep=1 RESULT MEM backend=jemalloc size=256  count=500000 got=500000 requested_bytes=128000000 rss_delta_bytes=131072000 bytes_per_obj=262.14 overhead_pct=2.40
+rep=1 RESULT MEM backend=jemalloc size=512  count=500000 got=500000 requested_bytes=256000000 rss_delta_bytes=262144000 bytes_per_obj=524.29 overhead_pct=2.40
+rep=1 RESULT MEM backend=jemalloc size=1024 count=500000 got=500000 requested_bytes=512000000 rss_delta_bytes=524271616 bytes_per_obj=1048.54 overhead_pct=2.40
+rep=1 RESULT MEM backend=tcmalloc size=16   count=500000 got=500000 requested_bytes=8000000 rss_delta_bytes=8028160 bytes_per_obj=16.06 overhead_pct=0.35
+rep=1 RESULT MEM backend=tcmalloc size=32   count=500000 got=500000 requested_bytes=16000000 rss_delta_bytes=16023552 bytes_per_obj=32.05 overhead_pct=0.15
+rep=1 RESULT MEM backend=tcmalloc size=64   count=500000 got=500000 requested_bytes=32000000 rss_delta_bytes=32096256 bytes_per_obj=64.19 overhead_pct=0.30
+rep=1 RESULT MEM backend=tcmalloc size=128  count=500000 got=500000 requested_bytes=64000000 rss_delta_bytes=64208896 bytes_per_obj=128.42 overhead_pct=0.33
+rep=1 RESULT MEM backend=tcmalloc size=256  count=500000 got=500000 requested_bytes=128000000 rss_delta_bytes=128385024 bytes_per_obj=256.77 overhead_pct=0.30
+rep=1 RESULT MEM backend=tcmalloc size=512  count=500000 got=500000 requested_bytes=256000000 rss_delta_bytes=256786432 bytes_per_obj=513.57 overhead_pct=0.31
+rep=1 RESULT MEM backend=tcmalloc size=1024 count=500000 got=500000 requested_bytes=512000000 rss_delta_bytes=513605632 bytes_per_obj=1027.21 overhead_pct=0.31
+rep=1 RESULT MEM backend=mimalloc size=16   count=500000 got=500000 requested_bytes=8000000 rss_delta_bytes=8011776 bytes_per_obj=16.02 overhead_pct=0.15
+rep=1 RESULT MEM backend=mimalloc size=32   count=500000 got=500000 requested_bytes=16000000 rss_delta_bytes=16039936 bytes_per_obj=32.08 overhead_pct=0.25
+rep=1 RESULT MEM backend=mimalloc size=64   count=500000 got=500000 requested_bytes=32000000 rss_delta_bytes=32096256 bytes_per_obj=64.19 overhead_pct=0.30
+rep=1 RESULT MEM backend=mimalloc size=128  count=500000 got=500000 requested_bytes=64000000 rss_delta_bytes=64241664 bytes_per_obj=128.48 overhead_pct=0.38
+rep=1 RESULT MEM backend=mimalloc size=256  count=500000 got=500000 requested_bytes=128000000 rss_delta_bytes=128761856 bytes_per_obj=257.52 overhead_pct=0.60
+rep=1 RESULT MEM backend=mimalloc size=512  count=500000 got=500000 requested_bytes=256000000 rss_delta_bytes=258539520 bytes_per_obj=517.08 overhead_pct=0.99
+rep=1 RESULT MEM backend=mimalloc size=1024 count=500000 got=500000 requested_bytes=512000000 rss_delta_bytes=512999424 bytes_per_obj=1026.00 overhead_pct=0.20
+rep=1 RESULT LAT backend=PMAD     size=16   K=32 N=500000 mean=2.95 p50=2.62 p90=3.91 p99=3.91 p99.9=6.50 p99.99=7.81 max=1145.81 tail_ratio=3.0 ge100ns=6(12.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=32   K=32 N=500000 mean=2.95 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=434.91 tail_ratio=3.0 ge100ns=14(28.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=64   K=32 N=500000 mean=2.90 p50=2.59 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=1167.97 tail_ratio=3.0 ge100ns=24(48.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=128  K=32 N=500000 mean=2.84 p50=2.59 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=376.31 tail_ratio=3.0 ge100ns=17(34.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=256  K=32 N=500000 mean=2.96 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=467.47 tail_ratio=3.0 ge100ns=16(32.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=512  K=32 N=500000 mean=2.98 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=1049.47 tail_ratio=3.0 ge100ns=31(62.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=1024 K=32 N=500000 mean=2.95 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=341.12 tail_ratio=3.0 ge100ns=10(20.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=16   K=32 N=500000 mean=14.88 p50=14.34 p90=15.62 p99=18.25 p99.9=22.16 p99.99=535.16 max=673.16 tail_ratio=37.3 ge100ns=299(598.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=32   K=32 N=500000 mean=16.25 p50=15.62 p90=16.94 p99=22.12 p99.9=44.28 p99.99=372.41 max=8990.88 tail_ratio=23.8 ge100ns=232(464.0ppm) ge1us=5(10.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=64   K=32 N=500000 mean=15.82 p50=15.62 p90=16.94 p99=20.84 p99.9=24.75 p99.99=337.25 max=876.28 tail_ratio=21.6 ge100ns=232(464.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=128  K=32 N=500000 mean=16.41 p50=15.62 p90=19.53 p99=20.84 p99.9=28.66 p99.99=203.12 max=712.25 tail_ratio=13.0 ge100ns=100(200.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=256  K=32 N=500000 mean=16.14 p50=15.62 p90=16.94 p99=19.53 p99.9=22.16 p99.99=194.00 max=1214.84 tail_ratio=12.4 ge100ns=74(148.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=512  K=32 N=500000 mean=16.37 p50=15.62 p90=18.22 p99=22.12 p99.9=24.75 p99.99=285.16 max=744.81 tail_ratio=18.2 ge100ns=156(312.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=system   size=1024 K=32 N=500000 mean=20.13 p50=19.53 p90=22.12 p99=23.44 p99.9=29.94 p99.99=213.56 max=537.75 tail_ratio=10.9 ge100ns=88(176.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=16   K=32 N=500000 mean=7.12 p50=6.53 p90=7.81 p99=10.44 p99.9=16.91 p99.99=18.25 max=501.28 tail_ratio=2.8 ge100ns=22(44.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=32   K=32 N=500000 mean=6.98 p50=6.53 p90=7.81 p99=11.72 p99.9=16.94 p99.99=18.25 max=470.06 tail_ratio=2.8 ge100ns=12(24.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=64   K=32 N=500000 mean=7.12 p50=6.53 p90=7.81 p99=10.41 p99.9=16.94 p99.99=20.81 max=1184.88 tail_ratio=3.2 ge100ns=24(48.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=128  K=32 N=500000 mean=7.18 p50=6.53 p90=7.81 p99=10.41 p99.9=13.03 p99.99=18.22 max=604.16 tail_ratio=2.8 ge100ns=21(42.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=256  K=32 N=500000 mean=7.99 p50=6.53 p90=9.09 p99=19.53 p99.9=22.12 p99.99=179.69 max=5828.12 tail_ratio=27.5 ge100ns=57(114.0ppm) ge1us=4(8.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=512  K=32 N=500000 mean=7.45 p50=7.81 p90=9.09 p99=11.72 p99.9=16.94 p99.99=18.25 max=592.44 tail_ratio=2.3 ge100ns=24(48.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=jemalloc size=1024 K=32 N=500000 mean=7.30 p50=7.81 p90=7.81 p99=10.41 p99.9=13.03 p99.99=18.22 max=460.94 tail_ratio=2.3 ge100ns=18(36.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=16   K=32 N=500000 mean=3.47 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=257.81 tail_ratio=2.0 ge100ns=6(12.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=32   K=32 N=500000 mean=3.60 p50=3.91 p90=3.91 p99=5.22 p99.9=6.50 p99.99=7.81 max=540.38 tail_ratio=2.0 ge100ns=13(26.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=64   K=32 N=500000 mean=3.48 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=218.75 tail_ratio=2.0 ge100ns=6(12.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=128  K=32 N=500000 mean=3.48 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=505.22 tail_ratio=2.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=256  K=32 N=500000 mean=3.47 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=345.03 tail_ratio=2.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=512  K=32 N=500000 mean=3.49 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=9.12 max=585.94 tail_ratio=2.3 ge100ns=47(94.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=tcmalloc size=1024 K=32 N=500000 mean=3.46 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=497.38 tail_ratio=2.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=16   K=32 N=500000 mean=2.96 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=6.53 max=559.88 tail_ratio=2.5 ge100ns=11(22.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=32   K=32 N=500000 mean=2.89 p50=2.59 p90=3.91 p99=3.91 p99.9=3.91 p99.99=6.53 max=298.19 tail_ratio=2.5 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=64   K=32 N=500000 mean=2.95 p50=2.62 p90=3.91 p99=3.91 p99.9=5.19 p99.99=7.81 max=531.25 tail_ratio=3.0 ge100ns=10(20.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=128  K=32 N=500000 mean=2.98 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=540.38 tail_ratio=3.0 ge100ns=15(30.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=256  K=32 N=500000 mean=3.06 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=9.12 max=406.25 tail_ratio=3.5 ge100ns=9(18.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=512  K=32 N=500000 mean=3.40 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=9.12 max=540.34 tail_ratio=2.3 ge100ns=9(18.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=mimalloc size=1024 K=32 N=500000 mean=3.36 p50=3.91 p90=3.91 p99=3.91 p99.9=7.81 p99.99=10.44 max=328.12 tail_ratio=2.7 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=16   K=32 N=500000 mean=3.32 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=404.94 tail_ratio=2.0 ge100ns=12(24.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=32   K=32 N=500000 mean=3.32 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=536.47 tail_ratio=2.0 ge100ns=7(14.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=64   K=32 N=500000 mean=3.34 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=289.06 tail_ratio=2.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=128  K=32 N=500000 mean=3.25 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=328.12 tail_ratio=3.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=256  K=32 N=500000 mean=3.26 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=394.53 tail_ratio=3.0 ge100ns=7(14.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=512  K=32 N=500000 mean=3.14 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=117.19 max=269.53 tail_ratio=44.6 ge100ns=52(104.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=PMAD     size=1024 K=32 N=500000 mean=3.14 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=488.28 tail_ratio=3.0 ge100ns=9(18.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=16   K=32 N=500000 mean=14.96 p50=15.62 p90=15.62 p99=15.62 p99.9=20.84 p99.99=44.28 max=1567.69 tail_ratio=2.8 ge100ns=47(94.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=32   K=32 N=500000 mean=18.36 p50=18.22 p90=20.84 p99=23.44 p99.9=28.66 p99.99=141.94 max=967.47 tail_ratio=7.8 ge100ns=56(112.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=64   K=32 N=500000 mean=16.23 p50=15.62 p90=18.22 p99=19.53 p99.9=22.12 p99.99=69.03 max=653.62 tail_ratio=4.4 ge100ns=45(90.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=128  K=32 N=500000 mean=16.39 p50=16.91 p90=18.22 p99=18.25 p99.9=22.12 p99.99=32.53 max=691.41 tail_ratio=1.9 ge100ns=44(88.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=256  K=32 N=500000 mean=16.03 p50=15.62 p90=16.94 p99=16.94 p99.9=20.84 p99.99=100.25 max=605.47 tail_ratio=6.4 ge100ns=51(102.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=512  K=32 N=500000 mean=16.93 p50=16.94 p90=18.25 p99=18.25 p99.9=23.44 p99.99=37.78 max=781.25 tail_ratio=2.2 ge100ns=44(88.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=system   size=1024 K=32 N=500000 mean=19.25 p50=19.53 p90=20.84 p99=20.84 p99.9=26.06 p99.99=181.00 max=713.53 tail_ratio=9.3 ge100ns=81(162.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=16   K=32 N=500000 mean=7.17 p50=6.53 p90=7.81 p99=10.44 p99.9=16.94 p99.99=22.12 max=588.53 tail_ratio=3.4 ge100ns=26(52.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=32   K=32 N=500000 mean=7.02 p50=6.53 p90=7.81 p99=10.44 p99.9=18.22 p99.99=19.53 max=528.62 tail_ratio=3.0 ge100ns=35(70.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=64   K=32 N=500000 mean=7.07 p50=6.53 p90=7.81 p99=10.41 p99.9=18.22 p99.99=139.31 max=1059.91 tail_ratio=21.3 ge100ns=55(110.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=128  K=32 N=500000 mean=7.27 p50=6.53 p90=7.81 p99=14.31 p99.9=18.22 p99.99=18.25 max=593.75 tail_ratio=2.8 ge100ns=18(36.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=256  K=32 N=500000 mean=7.23 p50=6.53 p90=7.81 p99=10.44 p99.9=16.94 p99.99=18.25 max=591.16 tail_ratio=2.8 ge100ns=23(46.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=512  K=32 N=500000 mean=7.45 p50=7.81 p90=9.09 p99=13.03 p99.9=18.22 p99.99=128.91 max=626.31 tail_ratio=16.5 ge100ns=70(140.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=jemalloc size=1024 K=32 N=500000 mean=7.42 p50=7.81 p90=7.81 p99=11.72 p99.9=16.94 p99.99=18.25 max=585.94 tail_ratio=2.3 ge100ns=19(38.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=16   K=32 N=500000 mean=3.47 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=325.53 tail_ratio=2.0 ge100ns=7(14.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=32   K=32 N=500000 mean=3.55 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=9.09 max=1410.16 tail_ratio=2.3 ge100ns=15(30.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=64   K=32 N=500000 mean=3.61 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=579.44 tail_ratio=2.0 ge100ns=11(22.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=128  K=32 N=500000 mean=3.48 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=302.06 tail_ratio=2.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=256  K=32 N=500000 mean=3.48 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=385.44 tail_ratio=2.0 ge100ns=7(14.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=512  K=32 N=500000 mean=3.69 p50=3.91 p90=3.91 p99=5.22 p99.9=5.22 p99.99=7.81 max=493.50 tail_ratio=2.0 ge100ns=13(26.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=1024 K=32 N=500000 mean=3.52 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=546.88 tail_ratio=2.0 ge100ns=12(24.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=16   K=32 N=500000 mean=2.90 p50=2.59 p90=3.91 p99=3.91 p99.9=3.91 p99.99=6.53 max=257.81 tail_ratio=2.5 ge100ns=6(12.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=32   K=32 N=500000 mean=2.98 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=6.53 max=431.00 tail_ratio=2.5 ge100ns=14(28.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=64   K=32 N=500000 mean=2.93 p50=2.59 p90=3.91 p99=3.91 p99.9=5.19 p99.99=7.81 max=580.72 tail_ratio=3.0 ge100ns=9(18.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=128  K=32 N=500000 mean=2.97 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=286.47 tail_ratio=3.0 ge100ns=8(16.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=256  K=32 N=500000 mean=3.10 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=9.12 max=545.56 tail_ratio=3.5 ge100ns=10(20.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=512  K=32 N=500000 mean=3.41 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=10.41 max=556.00 tail_ratio=2.7 ge100ns=11(22.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT LAT backend=mimalloc size=1024 K=32 N=500000 mean=3.46 p50=3.91 p90=3.91 p99=3.91 p99.9=7.81 p99.99=10.44 max=510.44 tail_ratio=2.7 ge100ns=7(14.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=16   K=32 N=500000 mean=3.35 p50=3.91 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=169.25 tail_ratio=2.0 ge100ns=5(10.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=32   K=32 N=500000 mean=3.25 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=546.88 tail_ratio=3.0 ge100ns=12(24.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=64   K=32 N=500000 mean=3.13 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=438.78 tail_ratio=3.0 ge100ns=12(24.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=128  K=32 N=500000 mean=3.26 p50=2.62 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=580.75 tail_ratio=3.0 ge100ns=13(26.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=256  K=32 N=500000 mean=2.99 p50=2.62 p90=3.91 p99=3.91 p99.9=5.19 p99.99=7.81 max=423.19 tail_ratio=3.0 ge100ns=9(18.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=512  K=32 N=500000 mean=3.00 p50=2.62 p90=3.91 p99=3.91 p99.9=5.19 p99.99=7.81 max=539.06 tail_ratio=3.0 ge100ns=14(28.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=PMAD     size=1024 K=32 N=500000 mean=3.01 p50=2.62 p90=3.91 p99=3.91 p99.9=3.91 p99.99=6.53 max=542.97 tail_ratio=2.5 ge100ns=9(18.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=16   K=32 N=500000 mean=15.54 p50=15.62 p90=16.94 p99=18.25 p99.9=22.12 p99.99=36.47 max=563.81 tail_ratio=2.3 ge100ns=37(74.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=32   K=32 N=500000 mean=16.95 p50=16.94 p90=18.22 p99=18.25 p99.9=22.16 p99.99=136.72 max=796.88 tail_ratio=8.1 ge100ns=64(128.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=64   K=32 N=500000 mean=16.81 p50=16.94 p90=18.25 p99=19.53 p99.9=23.44 p99.99=132.81 max=654.97 tail_ratio=7.8 ge100ns=51(102.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=128  K=32 N=500000 mean=16.80 p50=16.94 p90=18.25 p99=19.53 p99.9=23.44 p99.99=35.16 max=644.53 tail_ratio=2.1 ge100ns=41(82.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=256  K=32 N=500000 mean=16.10 p50=15.62 p90=16.94 p99=20.84 p99.9=52.06 p99.99=361.97 max=1497.41 tail_ratio=23.2 ge100ns=250(500.0ppm) ge1us=5(10.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=512  K=32 N=500000 mean=16.86 p50=16.91 p90=18.25 p99=22.16 p99.9=24.75 p99.99=325.53 max=1398.44 tail_ratio=19.3 ge100ns=173(346.0ppm) ge1us=2(4.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=system   size=1024 K=32 N=500000 mean=19.38 p50=18.25 p90=20.84 p99=26.03 p99.9=32.56 p99.99=341.16 max=742.19 tail_ratio=18.7 ge100ns=217(434.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=16   K=32 N=500000 mean=7.17 p50=6.53 p90=7.81 p99=15.62 p99.9=18.22 p99.99=130.19 max=1145.84 tail_ratio=19.9 ge100ns=62(124.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=32   K=32 N=500000 mean=7.05 p50=6.53 p90=7.81 p99=14.31 p99.9=16.94 p99.99=157.53 max=375.00 tail_ratio=24.1 ge100ns=96(192.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=64   K=32 N=500000 mean=7.14 p50=6.53 p90=7.81 p99=14.31 p99.9=18.22 p99.99=136.72 max=929.69 tail_ratio=20.9 ge100ns=59(118.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=128  K=32 N=500000 mean=7.29 p50=6.53 p90=7.81 p99=13.03 p99.9=18.22 p99.99=26.03 max=1212.25 tail_ratio=4.0 ge100ns=46(92.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=256  K=32 N=500000 mean=7.47 p50=7.81 p90=9.09 p99=15.62 p99.9=18.22 p99.99=145.84 max=507.81 tail_ratio=18.7 ge100ns=58(116.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=512  K=32 N=500000 mean=7.51 p50=7.81 p90=9.12 p99=14.31 p99.9=18.22 p99.99=23.44 max=576.84 tail_ratio=3.0 ge100ns=35(70.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=jemalloc size=1024 K=32 N=500000 mean=7.32 p50=6.53 p90=7.81 p99=11.72 p99.9=16.94 p99.99=123.69 max=546.88 tail_ratio=18.9 ge100ns=53(106.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=16   K=32 N=500000 mean=3.67 p50=3.91 p90=3.91 p99=5.22 p99.9=5.22 p99.99=7.81 max=1244.78 tail_ratio=2.0 ge100ns=28(56.0ppm) ge1us=2(4.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=32   K=32 N=500000 mean=3.67 p50=3.91 p90=3.91 p99=5.22 p99.9=5.22 p99.99=7.81 max=484.38 tail_ratio=2.0 ge100ns=21(42.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=64   K=32 N=500000 mean=3.54 p50=3.91 p90=3.91 p99=5.19 p99.9=5.22 p99.99=117.19 max=807.31 tail_ratio=30.0 ge100ns=71(142.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=128  K=32 N=500000 mean=3.67 p50=3.91 p90=3.91 p99=5.22 p99.9=6.53 p99.99=9.12 max=385.44 tail_ratio=2.3 ge100ns=38(76.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=256  K=32 N=500000 mean=3.68 p50=3.91 p90=3.91 p99=5.22 p99.9=6.53 p99.99=9.12 max=388.03 tail_ratio=2.3 ge100ns=35(70.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=512  K=32 N=500000 mean=3.68 p50=3.91 p90=3.91 p99=5.22 p99.9=6.50 p99.99=9.12 max=369.78 tail_ratio=2.3 ge100ns=32(64.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=tcmalloc size=1024 K=32 N=500000 mean=3.60 p50=3.91 p90=3.91 p99=5.22 p99.9=6.53 p99.99=9.12 max=1122.41 tail_ratio=2.3 ge100ns=37(74.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=16   K=32 N=500000 mean=2.89 p50=2.59 p90=3.91 p99=3.91 p99.9=5.22 p99.99=7.81 max=4048.16 tail_ratio=3.0 ge100ns=27(54.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=32   K=32 N=500000 mean=2.91 p50=2.59 p90=3.91 p99=3.91 p99.9=5.22 p99.99=18.22 max=1311.19 tail_ratio=7.0 ge100ns=38(76.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=64   K=32 N=500000 mean=2.94 p50=2.59 p90=3.91 p99=3.91 p99.9=9.12 p99.99=170.56 max=1093.75 tail_ratio=65.8 ge100ns=68(136.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=128  K=32 N=500000 mean=2.93 p50=2.59 p90=3.91 p99=3.91 p99.9=5.22 p99.99=9.09 max=380.22 tail_ratio=3.5 ge100ns=19(38.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=256  K=32 N=500000 mean=3.07 p50=2.62 p90=3.91 p99=3.91 p99.9=6.50 p99.99=13.00 max=1441.41 tail_ratio=5.0 ge100ns=33(66.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=512  K=32 N=500000 mean=3.49 p50=3.91 p90=3.91 p99=3.91 p99.9=6.50 p99.99=10.41 max=1117.19 tail_ratio=2.7 ge100ns=16(32.0ppm) ge1us=1(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT LAT backend=mimalloc size=1024 K=32 N=500000 mean=3.41 p50=3.91 p90=3.91 p99=5.19 p99.9=7.81 p99.99=13.03 max=354.16 tail_ratio=3.3 ge100ns=32(64.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT LAT backend=PMAD     size=64   K=1 N=20000000 mean=8.29 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=32125.00 tail_ratio=0.0 ge100ns=1068(53.4ppm) ge1us=118(5.90ppm) ge10us=24(1.200ppm)
+rep=1 RESULT LAT backend=PMAD     size=1024 K=1 N=20000000 mean=8.28 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=17375.00 tail_ratio=0.0 ge100ns=945(47.2ppm) ge1us=74(3.70ppm) ge10us=16(0.800ppm)
+rep=1 RESULT LAT backend=system   size=64   K=1 N=20000000 mean=19.67 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=34667.00 tail_ratio=0.0 ge100ns=5631(281.6ppm) ge1us=173(8.65ppm) ge10us=31(1.550ppm)
+rep=1 RESULT LAT backend=system   size=1024 K=1 N=20000000 mean=21.58 p50=41.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=458.00 max=70833.00 tail_ratio=11.2 ge100ns=10739(537.0ppm) ge1us=301(15.05ppm) ge10us=49(2.450ppm)
+rep=1 RESULT LAT backend=jemalloc size=64   K=1 N=20000000 mean=11.25 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=19041.00 tail_ratio=0.0 ge100ns=3232(161.6ppm) ge1us=148(7.40ppm) ge10us=25(1.250ppm)
+rep=1 RESULT LAT backend=jemalloc size=1024 K=1 N=20000000 mean=11.36 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=22125.00 tail_ratio=0.0 ge100ns=3086(154.3ppm) ge1us=87(4.35ppm) ge10us=21(1.050ppm)
+rep=1 RESULT LAT backend=tcmalloc size=64   K=1 N=20000000 mean=8.53 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=14917.00 tail_ratio=0.0 ge100ns=987(49.4ppm) ge1us=48(2.40ppm) ge10us=10(0.500ppm)
+rep=1 RESULT LAT backend=tcmalloc size=1024 K=1 N=20000000 mean=8.54 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=42792.00 tail_ratio=0.0 ge100ns=961(48.0ppm) ge1us=109(5.45ppm) ge10us=19(0.950ppm)
+rep=1 RESULT LAT backend=mimalloc size=64   K=1 N=20000000 mean=7.88 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=16083.00 tail_ratio=0.0 ge100ns=527(26.4ppm) ge1us=80(4.00ppm) ge10us=9(0.450ppm)
+rep=1 RESULT LAT backend=mimalloc size=1024 K=1 N=20000000 mean=8.62 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=208.00 max=17209.00 tail_ratio=0.0 ge100ns=4772(238.6ppm) ge1us=106(5.30ppm) ge10us=17(0.850ppm)
+rep=2 RESULT LAT backend=PMAD     size=64   K=1 N=20000000 mean=8.24 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=18125.00 tail_ratio=0.0 ge100ns=730(36.5ppm) ge1us=65(3.25ppm) ge10us=14(0.700ppm)
+rep=2 RESULT LAT backend=PMAD     size=1024 K=1 N=20000000 mean=8.30 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=18500.00 tail_ratio=0.0 ge100ns=942(47.1ppm) ge1us=133(6.65ppm) ge10us=19(0.950ppm)
+rep=2 RESULT LAT backend=system   size=64   K=1 N=20000000 mean=19.71 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=16167.00 tail_ratio=0.0 ge100ns=9704(485.2ppm) ge1us=186(9.30ppm) ge10us=29(1.450ppm)
+rep=2 RESULT LAT backend=system   size=1024 K=1 N=20000000 mean=21.71 p50=41.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=209.00 max=41792.00 tail_ratio=5.1 ge100ns=11811(590.5ppm) ge1us=187(9.35ppm) ge10us=29(1.450ppm)
+rep=2 RESULT LAT backend=jemalloc size=64   K=1 N=20000000 mean=11.23 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=18542.00 tail_ratio=0.0 ge100ns=2855(142.8ppm) ge1us=93(4.65ppm) ge10us=17(0.850ppm)
+rep=2 RESULT LAT backend=jemalloc size=1024 K=1 N=20000000 mean=11.37 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=38000.00 tail_ratio=0.0 ge100ns=2847(142.3ppm) ge1us=127(6.35ppm) ge10us=14(0.700ppm)
+rep=2 RESULT LAT backend=tcmalloc size=64   K=1 N=20000000 mean=8.57 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=26875.00 tail_ratio=0.0 ge100ns=962(48.1ppm) ge1us=107(5.35ppm) ge10us=20(1.000ppm)
+rep=2 RESULT LAT backend=tcmalloc size=1024 K=1 N=20000000 mean=8.56 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=49250.00 tail_ratio=0.0 ge100ns=2610(130.5ppm) ge1us=36(1.80ppm) ge10us=4(0.200ppm)
+rep=2 RESULT LAT backend=mimalloc size=64   K=1 N=20000000 mean=7.92 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=16542.00 tail_ratio=0.0 ge100ns=692(34.6ppm) ge1us=108(5.40ppm) ge10us=17(0.850ppm)
+rep=2 RESULT LAT backend=mimalloc size=1024 K=1 N=20000000 mean=8.66 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=41083.00 tail_ratio=0.0 ge100ns=4843(242.2ppm) ge1us=120(6.00ppm) ge10us=18(0.900ppm)
+rep=3 RESULT LAT backend=PMAD     size=64   K=1 N=20000000 mean=8.26 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=18584.00 tail_ratio=0.0 ge100ns=822(41.1ppm) ge1us=71(3.55ppm) ge10us=14(0.700ppm)
+rep=3 RESULT LAT backend=PMAD     size=1024 K=1 N=20000000 mean=8.26 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=30875.00 tail_ratio=0.0 ge100ns=874(43.7ppm) ge1us=93(4.65ppm) ge10us=19(0.950ppm)
+rep=3 RESULT LAT backend=system   size=64   K=1 N=20000000 mean=19.80 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=22958.00 tail_ratio=0.0 ge100ns=5748(287.4ppm) ge1us=170(8.50ppm) ge10us=43(2.150ppm)
+rep=3 RESULT LAT backend=system   size=1024 K=1 N=20000000 mean=21.67 p50=41.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=458.00 max=42792.00 tail_ratio=11.2 ge100ns=8884(444.2ppm) ge1us=210(10.50ppm) ge10us=30(1.500ppm)
+rep=3 RESULT LAT backend=jemalloc size=64   K=1 N=20000000 mean=11.24 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=20625.00 tail_ratio=0.0 ge100ns=2973(148.7ppm) ge1us=120(6.00ppm) ge10us=15(0.750ppm)
+rep=3 RESULT LAT backend=jemalloc size=1024 K=1 N=20000000 mean=11.40 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=27417.00 tail_ratio=0.0 ge100ns=4974(248.7ppm) ge1us=119(5.95ppm) ge10us=14(0.700ppm)
+rep=3 RESULT LAT backend=tcmalloc size=64   K=1 N=20000000 mean=8.62 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=44625.00 tail_ratio=0.0 ge100ns=1347(67.3ppm) ge1us=127(6.35ppm) ge10us=22(1.100ppm)
+rep=3 RESULT LAT backend=tcmalloc size=1024 K=1 N=20000000 mean=8.54 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=17041.00 tail_ratio=0.0 ge100ns=972(48.6ppm) ge1us=79(3.95ppm) ge10us=10(0.500ppm)
+rep=3 RESULT LAT backend=mimalloc size=64   K=1 N=20000000 mean=7.88 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=22750.00 tail_ratio=0.0 ge100ns=703(35.1ppm) ge1us=90(4.50ppm) ge10us=5(0.250ppm)
+rep=3 RESULT LAT backend=mimalloc size=1024 K=1 N=20000000 mean=8.62 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=208.00 max=26458.00 tail_ratio=0.0 ge100ns=4390(219.5ppm) ge1us=92(4.60ppm) ge10us=21(1.050ppm)
+rep=4 RESULT LAT backend=PMAD     size=64   K=1 N=20000000 mean=8.21 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=17292.00 tail_ratio=0.0 ge100ns=725(36.2ppm) ge1us=65(3.25ppm) ge10us=11(0.550ppm)
+rep=4 RESULT LAT backend=PMAD     size=1024 K=1 N=20000000 mean=8.29 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=14042.00 tail_ratio=0.0 ge100ns=2010(100.5ppm) ge1us=41(2.05ppm) ge10us=4(0.200ppm)
+rep=4 RESULT LAT backend=system   size=64   K=1 N=20000000 mean=19.87 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=56708.00 tail_ratio=0.0 ge100ns=7310(365.5ppm) ge1us=173(8.65ppm) ge10us=28(1.400ppm)
+rep=4 RESULT LAT backend=system   size=1024 K=1 N=20000000 mean=21.80 p50=41.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=458.00 max=36750.00 tail_ratio=11.2 ge100ns=8992(449.6ppm) ge1us=212(10.60ppm) ge10us=42(2.100ppm)
+rep=4 RESULT LAT backend=jemalloc size=64   K=1 N=20000000 mean=11.30 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=36333.00 tail_ratio=0.0 ge100ns=3578(178.9ppm) ge1us=134(6.70ppm) ge10us=30(1.500ppm)
+rep=4 RESULT LAT backend=jemalloc size=1024 K=1 N=20000000 mean=11.46 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=38833.00 tail_ratio=0.0 ge100ns=3644(182.2ppm) ge1us=110(5.50ppm) ge10us=16(0.800ppm)
+rep=4 RESULT LAT backend=tcmalloc size=64   K=1 N=20000000 mean=8.56 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=22500.00 tail_ratio=0.0 ge100ns=1160(58.0ppm) ge1us=85(4.25ppm) ge10us=14(0.700ppm)
+rep=4 RESULT LAT backend=tcmalloc size=1024 K=1 N=20000000 mean=8.51 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=18250.00 tail_ratio=0.0 ge100ns=896(44.8ppm) ge1us=68(3.40ppm) ge10us=12(0.600ppm)
+rep=4 RESULT LAT backend=mimalloc size=64   K=1 N=20000000 mean=7.89 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=43500.00 tail_ratio=0.0 ge100ns=524(26.2ppm) ge1us=92(4.60ppm) ge10us=13(0.650ppm)
+rep=4 RESULT LAT backend=mimalloc size=1024 K=1 N=20000000 mean=8.66 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=36000.00 tail_ratio=0.0 ge100ns=4108(205.4ppm) ge1us=106(5.30ppm) ge10us=17(0.850ppm)
+rep=5 RESULT LAT backend=PMAD     size=64   K=1 N=20000000 mean=8.24 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=38750.00 tail_ratio=0.0 ge100ns=771(38.5ppm) ge1us=71(3.55ppm) ge10us=10(0.500ppm)
+rep=5 RESULT LAT backend=PMAD     size=1024 K=1 N=20000000 mean=8.24 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=18000.00 tail_ratio=0.0 ge100ns=866(43.3ppm) ge1us=107(5.35ppm) ge10us=18(0.900ppm)
+rep=5 RESULT LAT backend=system   size=64   K=1 N=20000000 mean=19.85 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=43292.00 tail_ratio=0.0 ge100ns=7973(398.6ppm) ge1us=230(11.50ppm) ge10us=49(2.450ppm)
+rep=5 RESULT LAT backend=system   size=1024 K=1 N=20000000 mean=21.83 p50=41.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=458.00 max=38791.00 tail_ratio=11.2 ge100ns=9097(454.9ppm) ge1us=183(9.15ppm) ge10us=29(1.450ppm)
+rep=5 RESULT LAT backend=jemalloc size=64   K=1 N=20000000 mean=11.27 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=35083.00 tail_ratio=0.0 ge100ns=2995(149.8ppm) ge1us=104(5.20ppm) ge10us=16(0.800ppm)
+rep=5 RESULT LAT backend=jemalloc size=1024 K=1 N=20000000 mean=11.44 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=21750.00 tail_ratio=0.0 ge100ns=3332(166.6ppm) ge1us=141(7.05ppm) ge10us=21(1.050ppm)
+rep=5 RESULT LAT backend=tcmalloc size=64   K=1 N=20000000 mean=8.71 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=36834.00 tail_ratio=0.0 ge100ns=1221(61.0ppm) ge1us=280(14.00ppm) ge10us=215(10.750ppm)
+rep=5 RESULT LAT backend=tcmalloc size=1024 K=1 N=20000000 mean=8.52 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=17000.00 tail_ratio=0.0 ge100ns=903(45.1ppm) ge1us=78(3.90ppm) ge10us=10(0.500ppm)
+rep=5 RESULT LAT backend=mimalloc size=64   K=1 N=20000000 mean=7.87 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=83.00 max=17584.00 tail_ratio=0.0 ge100ns=393(19.6ppm) ge1us=62(3.10ppm) ge10us=7(0.350ppm)
+rep=5 RESULT LAT backend=mimalloc size=1024 K=1 N=20000000 mean=8.70 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=167.00 max=37541.00 tail_ratio=0.0 ge100ns=4185(209.2ppm) ge1us=113(5.65ppm) ge10us=24(1.200ppm)
+rep=1 RESULT TPUT backend=PMAD     size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=1.785 Mops_per_s=560.13
+rep=1 RESULT TPUT backend=PMAD     size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=1.844 Mops_per_s=542.24
+rep=1 RESULT TPUT backend=PMAD     size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=1.863 Mops_per_s=536.79
+rep=1 RESULT TPUT backend=PMAD     size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=4.542 Mops_per_s=220.18
+rep=1 RESULT TPUT backend=PMAD     size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=5.227 Mops_per_s=191.30
+rep=1 RESULT TPUT backend=PMAD     size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=5.481 Mops_per_s=182.44
+rep=1 RESULT TPUT backend=PMAD     size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=5.251 Mops_per_s=190.44
+rep=1 RESULT TPUT backend=system   size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=6.821 Mops_per_s=146.60
+rep=1 RESULT TPUT backend=system   size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=7.769 Mops_per_s=128.72
+rep=1 RESULT TPUT backend=system   size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=7.585 Mops_per_s=131.83
+rep=1 RESULT TPUT backend=system   size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=7.600 Mops_per_s=131.58
+rep=1 RESULT TPUT backend=system   size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=7.957 Mops_per_s=125.68
+rep=1 RESULT TPUT backend=system   size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=10.195 Mops_per_s=98.09
+rep=1 RESULT TPUT backend=system   size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=17.450 Mops_per_s=57.31
+rep=1 RESULT TPUT backend=jemalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=7.157 Mops_per_s=139.72
+rep=1 RESULT TPUT backend=jemalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=7.229 Mops_per_s=138.33
+rep=1 RESULT TPUT backend=jemalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=7.410 Mops_per_s=134.95
+rep=1 RESULT TPUT backend=jemalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=7.610 Mops_per_s=131.41
+rep=1 RESULT TPUT backend=jemalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=8.074 Mops_per_s=123.85
+rep=1 RESULT TPUT backend=jemalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=8.701 Mops_per_s=114.93
+rep=1 RESULT TPUT backend=jemalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=9.701 Mops_per_s=103.09
+rep=1 RESULT TPUT backend=tcmalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=3.747 Mops_per_s=266.89
+rep=1 RESULT TPUT backend=tcmalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=3.807 Mops_per_s=262.66
+rep=1 RESULT TPUT backend=tcmalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=4.247 Mops_per_s=235.48
+rep=1 RESULT TPUT backend=tcmalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=4.531 Mops_per_s=220.70
+rep=1 RESULT TPUT backend=tcmalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=5.778 Mops_per_s=173.08
+rep=1 RESULT TPUT backend=tcmalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=6.687 Mops_per_s=149.54
+rep=1 RESULT TPUT backend=tcmalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=7.930 Mops_per_s=126.11
+rep=1 RESULT TPUT backend=mimalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=1.917 Mops_per_s=521.65
+rep=1 RESULT TPUT backend=mimalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=2.036 Mops_per_s=491.25
+rep=1 RESULT TPUT backend=mimalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=2.299 Mops_per_s=434.89
+rep=1 RESULT TPUT backend=mimalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=2.438 Mops_per_s=410.14
+rep=1 RESULT TPUT backend=mimalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=3.003 Mops_per_s=333.00
+rep=1 RESULT TPUT backend=mimalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=4.677 Mops_per_s=213.80
+rep=1 RESULT TPUT backend=mimalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=6.103 Mops_per_s=163.85
+rep=2 RESULT TPUT backend=PMAD     size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=1.770 Mops_per_s=564.99
+rep=2 RESULT TPUT backend=PMAD     size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=1.816 Mops_per_s=550.58
+rep=2 RESULT TPUT backend=PMAD     size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=1.847 Mops_per_s=541.30
+rep=2 RESULT TPUT backend=PMAD     size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=4.491 Mops_per_s=222.67
+rep=2 RESULT TPUT backend=PMAD     size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=5.323 Mops_per_s=187.85
+rep=2 RESULT TPUT backend=PMAD     size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=5.412 Mops_per_s=184.76
+rep=2 RESULT TPUT backend=PMAD     size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=5.939 Mops_per_s=168.38
+rep=2 RESULT TPUT backend=system   size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=6.979 Mops_per_s=143.28
+rep=2 RESULT TPUT backend=system   size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=7.794 Mops_per_s=128.30
+rep=2 RESULT TPUT backend=system   size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=7.633 Mops_per_s=131.01
+rep=2 RESULT TPUT backend=system   size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=7.620 Mops_per_s=131.24
+rep=2 RESULT TPUT backend=system   size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=8.146 Mops_per_s=122.76
+rep=2 RESULT TPUT backend=system   size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=10.454 Mops_per_s=95.65
+rep=2 RESULT TPUT backend=system   size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=17.755 Mops_per_s=56.32
+rep=2 RESULT TPUT backend=jemalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=7.292 Mops_per_s=137.13
+rep=2 RESULT TPUT backend=jemalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=7.158 Mops_per_s=139.70
+rep=2 RESULT TPUT backend=jemalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=7.480 Mops_per_s=133.70
+rep=2 RESULT TPUT backend=jemalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=7.682 Mops_per_s=130.18
+rep=2 RESULT TPUT backend=jemalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=8.047 Mops_per_s=124.27
+rep=2 RESULT TPUT backend=jemalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=8.758 Mops_per_s=114.19
+rep=2 RESULT TPUT backend=jemalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=9.973 Mops_per_s=100.27
+rep=2 RESULT TPUT backend=tcmalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=3.710 Mops_per_s=269.54
+rep=2 RESULT TPUT backend=tcmalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=3.888 Mops_per_s=257.20
+rep=2 RESULT TPUT backend=tcmalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=4.348 Mops_per_s=230.00
+rep=2 RESULT TPUT backend=tcmalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=4.607 Mops_per_s=217.06
+rep=2 RESULT TPUT backend=tcmalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=6.076 Mops_per_s=164.58
+rep=2 RESULT TPUT backend=tcmalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=6.996 Mops_per_s=142.93
+rep=2 RESULT TPUT backend=tcmalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=8.079 Mops_per_s=123.78
+rep=2 RESULT TPUT backend=mimalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=1.931 Mops_per_s=517.93
+rep=2 RESULT TPUT backend=mimalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=2.051 Mops_per_s=487.63
+rep=2 RESULT TPUT backend=mimalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=2.335 Mops_per_s=428.27
+rep=2 RESULT TPUT backend=mimalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=2.625 Mops_per_s=380.96
+rep=2 RESULT TPUT backend=mimalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=3.065 Mops_per_s=326.25
+rep=2 RESULT TPUT backend=mimalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=4.898 Mops_per_s=204.15
+rep=2 RESULT TPUT backend=mimalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=6.995 Mops_per_s=142.96
+rep=3 RESULT TPUT backend=PMAD     size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=1.796 Mops_per_s=556.82
+rep=3 RESULT TPUT backend=PMAD     size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=1.842 Mops_per_s=542.92
+rep=3 RESULT TPUT backend=PMAD     size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=1.860 Mops_per_s=537.69
+rep=3 RESULT TPUT backend=PMAD     size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=4.532 Mops_per_s=220.63
+rep=3 RESULT TPUT backend=PMAD     size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=5.222 Mops_per_s=191.49
+rep=3 RESULT TPUT backend=PMAD     size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=5.404 Mops_per_s=185.04
+rep=3 RESULT TPUT backend=PMAD     size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=5.389 Mops_per_s=185.57
+rep=3 RESULT TPUT backend=system   size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=7.038 Mops_per_s=142.09
+rep=3 RESULT TPUT backend=system   size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=7.914 Mops_per_s=126.37
+rep=3 RESULT TPUT backend=system   size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=7.668 Mops_per_s=130.40
+rep=3 RESULT TPUT backend=system   size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=7.727 Mops_per_s=129.41
+rep=3 RESULT TPUT backend=system   size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=7.950 Mops_per_s=125.78
+rep=3 RESULT TPUT backend=system   size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=10.485 Mops_per_s=95.38
+rep=3 RESULT TPUT backend=system   size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=17.641 Mops_per_s=56.69
+rep=3 RESULT TPUT backend=jemalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=7.073 Mops_per_s=141.37
+rep=3 RESULT TPUT backend=jemalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=7.320 Mops_per_s=136.61
+rep=3 RESULT TPUT backend=jemalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=7.441 Mops_per_s=134.39
+rep=3 RESULT TPUT backend=jemalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=7.658 Mops_per_s=130.59
+rep=3 RESULT TPUT backend=jemalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=8.046 Mops_per_s=124.28
+rep=3 RESULT TPUT backend=jemalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=8.831 Mops_per_s=113.23
+rep=3 RESULT TPUT backend=jemalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=10.586 Mops_per_s=94.46
+rep=3 RESULT TPUT backend=tcmalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=3.658 Mops_per_s=273.39
+rep=3 RESULT TPUT backend=tcmalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=3.897 Mops_per_s=256.59
+rep=3 RESULT TPUT backend=tcmalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=4.362 Mops_per_s=229.24
+rep=3 RESULT TPUT backend=tcmalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=4.642 Mops_per_s=215.41
+rep=3 RESULT TPUT backend=tcmalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=6.113 Mops_per_s=163.58
+rep=3 RESULT TPUT backend=tcmalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=7.020 Mops_per_s=142.45
+rep=3 RESULT TPUT backend=tcmalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=8.022 Mops_per_s=124.66
+rep=3 RESULT TPUT backend=mimalloc size=16   batch=100000 rounds=200 ops=40000000 ns_per_op=2.025 Mops_per_s=493.92
+rep=3 RESULT TPUT backend=mimalloc size=32   batch=100000 rounds=200 ops=40000000 ns_per_op=2.039 Mops_per_s=490.41
+rep=3 RESULT TPUT backend=mimalloc size=64   batch=100000 rounds=200 ops=40000000 ns_per_op=2.277 Mops_per_s=439.22
+rep=3 RESULT TPUT backend=mimalloc size=128  batch=100000 rounds=200 ops=40000000 ns_per_op=2.503 Mops_per_s=399.60
+rep=3 RESULT TPUT backend=mimalloc size=256  batch=100000 rounds=200 ops=40000000 ns_per_op=3.100 Mops_per_s=322.57
+rep=3 RESULT TPUT backend=mimalloc size=512  batch=100000 rounds=200 ops=40000000 ns_per_op=4.274 Mops_per_s=233.98
+rep=3 RESULT TPUT backend=mimalloc size=1024 batch=100000 rounds=200 ops=40000000 ns_per_op=6.175 Mops_per_s=161.95
+rep=1 RESULT CHURN backend=PMAD     size=64   K=32 N=1000000 mean=8.56 p50=7.81 p90=11.72 p99=18.22 p99.9=26.03 p99.99=233.06 max=1037.75 tail_ratio=29.8 ge100ns=301(301.0ppm) ge1us=2(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=PMAD     size=64   K=1 N=20000000 mean=12.06 p50=0.00 p90=42.00 p99=84.00 p99.9=125.00 p99.99=208.00 max=36417.00 tail_ratio=0.0 ge100ns=47824(2391.2ppm) ge1us=272(13.60ppm) ge10us=36(1.800ppm)
+rep=1 RESULT CHURN backend=PMAD     size=1024 K=32 N=1000000 mean=13.15 p50=13.03 p90=16.94 p99=20.84 p99.9=24.75 p99.99=218.75 max=787.75 tail_ratio=16.8 ge100ns=165(165.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=PMAD     size=1024 K=1 N=20000000 mean=19.77 p50=0.00 p90=83.00 p99=125.00 p99.9=167.00 p99.99=292.00 max=43042.00 tail_ratio=0.0 ge100ns=204944(10247.2ppm) ge1us=886(44.30ppm) ge10us=50(2.500ppm)
+rep=1 RESULT CHURN backend=system   size=64   K=32 N=1000000 mean=35.13 p50=32.56 p90=40.34 p99=72.91 p99.9=147.12 p99.99=406.25 max=14022.12 tail_ratio=12.5 ge100ns=3890(3890.0ppm) ge1us=8(8.00ppm) ge10us=1(1.000ppm)
+rep=1 RESULT CHURN backend=system   size=64   K=1 N=20000000 mean=32.10 p50=41.00 p90=42.00 p99=125.00 p99.9=209.00 p99.99=375.00 max=421708.00 tail_ratio=9.1 ge100ns=472454(23622.7ppm) ge1us=995(49.75ppm) ge10us=74(3.700ppm)
+rep=1 RESULT CHURN backend=system   size=1024 K=32 N=1000000 mean=160.23 p50=157.56 p90=170.56 p99=197.91 p99.9=428.41 p99.99=722.66 max=156347.66 tail_ratio=4.6 ge100ns=1000000(1000000.0ppm) ge1us=35(35.00ppm) ge10us=4(4.000ppm)
+rep=1 RESULT CHURN backend=system   size=1024 K=1 N=20000000 mean=152.52 p50=166.00 p90=208.00 p99=250.00 p99.9=334.00 p99.99=1500.00 max=3574958.00 tail_ratio=9.0 ge100ns=18611971(930598.6ppm) ge1us=3284(164.20ppm) ge10us=262(13.100ppm)
+rep=1 RESULT CHURN backend=jemalloc size=64   K=32 N=1000000 mean=8.21 p50=7.81 p90=9.12 p99=10.41 p99.9=11.72 p99.99=20.81 max=566.41 tail_ratio=2.7 ge100ns=62(62.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=jemalloc size=64   K=1 N=20000000 mean=12.65 p50=0.00 p90=42.00 p99=42.00 p99.9=125.00 p99.99=167.00 max=200750.00 tail_ratio=0.0 ge100ns=28393(1419.7ppm) ge1us=249(12.45ppm) ge10us=61(3.050ppm)
+rep=1 RESULT CHURN backend=jemalloc size=1024 K=32 N=1000000 mean=10.88 p50=10.44 p90=11.72 p99=15.62 p99.9=23.44 p99.99=154.94 max=963.53 tail_ratio=14.8 ge100ns=126(126.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=jemalloc size=1024 K=1 N=20000000 mean=12.59 p50=0.00 p90=42.00 p99=42.00 p99.9=84.00 p99.99=208.00 max=1003084.00 tail_ratio=0.0 ge100ns=19402(970.1ppm) ge1us=384(19.20ppm) ge10us=41(2.050ppm)
+rep=1 RESULT CHURN backend=tcmalloc size=64   K=32 N=1000000 mean=5.65 p50=5.22 p90=6.53 p99=9.12 p99.9=11.72 p99.99=167.97 max=2299.47 tail_ratio=32.2 ge100ns=129(129.0ppm) ge1us=3(3.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=tcmalloc size=64   K=1 N=20000000 mean=8.77 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=36875.00 tail_ratio=0.0 ge100ns=1402(70.1ppm) ge1us=113(5.65ppm) ge10us=21(1.050ppm)
+rep=1 RESULT CHURN backend=tcmalloc size=1024 K=32 N=1000000 mean=13.34 p50=13.03 p90=16.91 p99=19.53 p99.9=22.12 p99.99=181.00 max=640.62 tail_ratio=13.9 ge100ns=157(157.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=tcmalloc size=1024 K=1 N=20000000 mean=12.27 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=31291.00 tail_ratio=0.0 ge100ns=79801(3990.1ppm) ge1us=156(7.80ppm) ge10us=25(1.250ppm)
+rep=1 RESULT CHURN backend=mimalloc size=64   K=32 N=1000000 mean=16.74 p50=16.91 p90=19.53 p99=23.44 p99.9=45.56 p99.99=229.19 max=1325.53 tail_ratio=13.6 ge100ns=253(253.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=mimalloc size=64   K=1 N=20000000 mean=16.90 p50=0.00 p90=42.00 p99=84.00 p99.9=125.00 p99.99=208.00 max=80875.00 tail_ratio=0.0 ge100ns=78894(3944.7ppm) ge1us=348(17.40ppm) ge10us=40(2.000ppm)
+rep=1 RESULT CHURN backend=mimalloc size=1024 K=32 N=1000000 mean=128.97 p50=127.59 p90=147.12 p99=169.28 p99.9=335.94 p99.99=617.19 max=2143.22 tail_ratio=4.8 ge100ns=993454(993454.0ppm) ge1us=27(27.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT CHURN backend=mimalloc size=1024 K=1 N=20000000 mean=119.61 p50=125.00 p90=167.00 p99=209.00 p99.9=292.00 p99.99=875.00 max=127959.00 tail_ratio=7.0 ge100ns=12576698(628834.9ppm) ge1us=1957(97.85ppm) ge10us=153(7.650ppm)
+rep=2 RESULT CHURN backend=PMAD     size=64   K=32 N=1000000 mean=7.87 p50=7.81 p90=10.41 p99=14.31 p99.9=18.25 p99.99=191.41 max=569.00 tail_ratio=24.5 ge100ns=189(189.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=PMAD     size=64   K=1 N=20000000 mean=10.71 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=29292.00 tail_ratio=0.0 ge100ns=24555(1227.8ppm) ge1us=172(8.60ppm) ge10us=12(0.600ppm)
+rep=2 RESULT CHURN backend=PMAD     size=1024 K=32 N=1000000 mean=13.17 p50=13.03 p90=16.94 p99=20.84 p99.9=26.03 p99.99=270.84 max=1095.03 tail_ratio=20.8 ge100ns=307(307.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=PMAD     size=1024 K=1 N=20000000 mean=19.78 p50=0.00 p90=83.00 p99=84.00 p99.9=166.00 p99.99=209.00 max=35291.00 tail_ratio=0.0 ge100ns=166595(8329.8ppm) ge1us=287(14.35ppm) ge10us=37(1.850ppm)
+rep=2 RESULT CHURN backend=system   size=64   K=32 N=1000000 mean=35.69 p50=33.84 p90=41.66 p99=70.31 p99.9=151.03 p99.99=410.16 max=13917.97 tail_ratio=12.1 ge100ns=4273(4273.0ppm) ge1us=10(10.00ppm) ge10us=1(1.000ppm)
+rep=2 RESULT CHURN backend=system   size=64   K=1 N=20000000 mean=33.40 p50=41.00 p90=42.00 p99=125.00 p99.9=208.00 p99.99=375.00 max=436042.00 tail_ratio=9.1 ge100ns=623919(31196.0ppm) ge1us=956(47.80ppm) ge10us=59(2.950ppm)
+rep=2 RESULT CHURN backend=system   size=1024 K=32 N=1000000 mean=160.72 p50=158.84 p90=170.56 p99=200.53 p99.9=442.72 p99.99=746.09 max=114170.56 tail_ratio=4.7 ge100ns=1000000(1000000.0ppm) ge1us=36(36.00ppm) ge10us=4(4.000ppm)
+rep=2 RESULT CHURN backend=system   size=1024 K=1 N=20000000 mean=152.87 p50=166.00 p90=208.00 p99=250.00 p99.9=500.00 p99.99=2791.00 max=5243917.00 tail_ratio=16.8 ge100ns=18537938(926896.9ppm) ge1us=6481(324.05ppm) ge10us=333(16.650ppm)
+rep=2 RESULT CHURN backend=jemalloc size=64   K=32 N=1000000 mean=8.22 p50=7.81 p90=9.12 p99=10.41 p99.9=11.72 p99.99=132.81 max=1492.19 tail_ratio=17.0 ge100ns=109(109.0ppm) ge1us=2(2.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=jemalloc size=64   K=1 N=20000000 mean=12.11 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=40208.00 tail_ratio=0.0 ge100ns=3388(169.4ppm) ge1us=148(7.40ppm) ge10us=14(0.700ppm)
+rep=2 RESULT CHURN backend=jemalloc size=1024 K=32 N=1000000 mean=10.77 p50=10.41 p90=11.72 p99=15.62 p99.9=23.44 p99.99=170.56 max=1209.62 tail_ratio=16.4 ge100ns=130(130.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=jemalloc size=1024 K=1 N=20000000 mean=12.33 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=32000.00 tail_ratio=0.0 ge100ns=3382(169.1ppm) ge1us=154(7.70ppm) ge10us=20(1.000ppm)
+rep=2 RESULT CHURN backend=tcmalloc size=64   K=32 N=1000000 mean=5.58 p50=5.22 p90=6.53 p99=7.81 p99.9=9.12 p99.99=14.31 max=1143.22 tail_ratio=2.7 ge100ns=78(78.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=tcmalloc size=64   K=1 N=20000000 mean=8.84 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=33250.00 tail_ratio=0.0 ge100ns=1480(74.0ppm) ge1us=91(4.55ppm) ge10us=19(0.950ppm)
+rep=2 RESULT CHURN backend=tcmalloc size=1024 K=32 N=1000000 mean=13.52 p50=13.03 p90=16.94 p99=19.53 p99.9=22.16 p99.99=238.28 max=3884.12 tail_ratio=18.3 ge100ns=191(191.0ppm) ge1us=3(3.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=tcmalloc size=1024 K=1 N=20000000 mean=11.90 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=19792.00 tail_ratio=0.0 ge100ns=68534(3426.7ppm) ge1us=139(6.95ppm) ge10us=23(1.150ppm)
+rep=2 RESULT CHURN backend=mimalloc size=64   K=32 N=1000000 mean=17.67 p50=16.94 p90=20.84 p99=29.94 p99.9=50.78 p99.99=283.84 max=1130.22 tail_ratio=16.8 ge100ns=488(488.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=mimalloc size=64   K=1 N=20000000 mean=16.64 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=38583.00 tail_ratio=0.0 ge100ns=33658(1682.9ppm) ge1us=237(11.85ppm) ge10us=38(1.900ppm)
+rep=2 RESULT CHURN backend=mimalloc size=1024 K=32 N=1000000 mean=125.44 p50=123.69 p90=141.94 p99=165.38 p99.9=339.84 p99.99=660.16 max=2709.62 tail_ratio=5.3 ge100ns=988817(988817.0ppm) ge1us=21(21.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT CHURN backend=mimalloc size=1024 K=1 N=20000000 mean=114.72 p50=125.00 p90=167.00 p99=208.00 p99.9=292.00 p99.99=625.00 max=62000.00 tail_ratio=5.0 ge100ns=11216867(560843.3ppm) ge1us=1828(91.40ppm) ge10us=129(6.450ppm)
+rep=3 RESULT CHURN backend=PMAD     size=64   K=32 N=1000000 mean=7.92 p50=7.81 p90=10.41 p99=14.34 p99.9=19.53 p99.99=183.59 max=1165.34 tail_ratio=23.5 ge100ns=155(155.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=PMAD     size=64   K=1 N=20000000 mean=9.50 p50=0.00 p90=42.00 p99=42.00 p99.9=84.00 p99.99=125.00 max=16292.00 tail_ratio=0.0 ge100ns=8252(412.6ppm) ge1us=88(4.40ppm) ge10us=9(0.450ppm)
+rep=3 RESULT CHURN backend=PMAD     size=1024 K=32 N=1000000 mean=14.43 p50=14.31 p90=18.22 p99=22.16 p99.9=27.34 p99.99=294.28 max=1178.41 tail_ratio=20.6 ge100ns=336(336.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=PMAD     size=1024 K=1 N=20000000 mean=24.04 p50=0.00 p90=83.00 p99=125.00 p99.9=208.00 p99.99=292.00 max=105083.00 tail_ratio=0.0 ge100ns=347347(17367.3ppm) ge1us=767(38.35ppm) ge10us=132(6.600ppm)
+rep=3 RESULT CHURN backend=system   size=64   K=32 N=1000000 mean=33.33 p50=32.56 p90=36.47 p99=45.56 p99.9=56.00 p99.99=320.31 max=28550.78 tail_ratio=9.8 ge100ns=448(448.0ppm) ge1us=7(7.00ppm) ge10us=1(1.000ppm)
+rep=3 RESULT CHURN backend=system   size=64   K=1 N=20000000 mean=46.42 p50=42.00 p90=125.00 p99=208.00 p99.9=292.00 p99.99=2833.00 max=506750.00 tail_ratio=67.5 ge100ns=2396218(119810.9ppm) ge1us=2811(140.55ppm) ge10us=207(10.350ppm)
+rep=3 RESULT CHURN backend=system   size=1024 K=32 N=1000000 mean=161.22 p50=158.88 p90=171.88 p99=194.00 p99.9=441.41 p99.99=768.22 max=142570.31 tail_ratio=4.8 ge100ns=1000000(1000000.0ppm) ge1us=33(33.00ppm) ge10us=3(3.000ppm)
+rep=3 RESULT CHURN backend=system   size=1024 K=1 N=20000000 mean=156.72 p50=166.00 p90=208.00 p99=292.00 p99.9=458.00 p99.99=4292.00 max=3730916.00 tail_ratio=25.9 ge100ns=18706230(935311.5ppm) ge1us=5859(292.95ppm) ge10us=526(26.300ppm)
+rep=3 RESULT CHURN backend=jemalloc size=64   K=32 N=1000000 mean=8.30 p50=7.81 p90=9.12 p99=10.44 p99.9=14.31 p99.99=175.78 max=1111.97 tail_ratio=22.5 ge100ns=172(172.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=jemalloc size=64   K=1 N=20000000 mean=12.27 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=38000.00 tail_ratio=0.0 ge100ns=4139(206.9ppm) ge1us=142(7.10ppm) ge10us=16(0.800ppm)
+rep=3 RESULT CHURN backend=jemalloc size=1024 K=32 N=1000000 mean=10.87 p50=10.44 p90=11.72 p99=15.62 p99.9=23.44 p99.99=207.03 max=591.16 tail_ratio=19.8 ge100ns=171(171.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=jemalloc size=1024 K=1 N=20000000 mean=12.62 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=125.00 max=18584.00 tail_ratio=0.0 ge100ns=4221(211.1ppm) ge1us=141(7.05ppm) ge10us=12(0.600ppm)
+rep=3 RESULT CHURN backend=tcmalloc size=64   K=32 N=1000000 mean=5.69 p50=5.22 p90=6.53 p99=9.12 p99.9=11.72 p99.99=151.03 max=1330.72 tail_ratio=28.9 ge100ns=107(107.0ppm) ge1us=2(2.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=tcmalloc size=64   K=1 N=20000000 mean=8.94 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=44292.00 tail_ratio=0.0 ge100ns=1783(89.2ppm) ge1us=144(7.20ppm) ge10us=18(0.900ppm)
+rep=3 RESULT CHURN backend=tcmalloc size=1024 K=32 N=1000000 mean=14.32 p50=14.31 p90=16.94 p99=20.84 p99.9=23.44 p99.99=89.84 max=1246.09 tail_ratio=6.3 ge100ns=82(82.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=tcmalloc size=1024 K=1 N=20000000 mean=12.76 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=208.00 max=10250.00 tail_ratio=0.0 ge100ns=103872(5193.6ppm) ge1us=114(5.70ppm) ge10us=1(0.050ppm)
+rep=3 RESULT CHURN backend=mimalloc size=64   K=32 N=1000000 mean=17.19 p50=16.94 p90=20.81 p99=24.75 p99.9=48.16 p99.99=287.75 max=1222.66 tail_ratio=17.0 ge100ns=329(329.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=mimalloc size=64   K=1 N=20000000 mean=16.94 p50=0.00 p90=42.00 p99=84.00 p99.9=125.00 p99.99=208.00 max=37625.00 tail_ratio=0.0 ge100ns=75622(3781.1ppm) ge1us=318(15.90ppm) ge10us=27(1.350ppm)
+rep=3 RESULT CHURN backend=mimalloc size=1024 K=32 N=1000000 mean=129.81 p50=127.59 p90=148.44 p99=180.97 p99.9=359.38 p99.99=654.94 max=6563.81 tail_ratio=5.1 ge100ns=994518(994518.0ppm) ge1us=47(47.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT CHURN backend=mimalloc size=1024 K=1 N=20000000 mean=119.66 p50=125.00 p90=167.00 p99=209.00 p99.9=292.00 p99.99=3000.00 max=96083.00 tail_ratio=24.0 ge100ns=12297348(614867.4ppm) ge1us=2730(136.50ppm) ge10us=141(7.050ppm)
+rep=1 RESULT MIXED backend=PMAD     size=0    K=32 N=1000000 mean=16.25 p50=15.62 p90=18.25 p99=22.12 p99.9=26.03 p99.99=210.94 max=1319.00 tail_ratio=13.5 ge100ns=192(192.0ppm) ge1us=2(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT MIXED backend=PMAD     size=0    K=1 N=20000000 mean=12.79 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=22542.00 tail_ratio=0.0 ge100ns=37291(1864.5ppm) ge1us=157(7.85ppm) ge10us=27(1.350ppm)
+rep=1 RESULT MIXED backend=system   size=0    K=32 N=1000000 mean=64.08 p50=62.50 p90=74.22 p99=88.53 p99.9=199.22 p99.99=470.06 max=25399.72 tail_ratio=7.5 ge100ns=3347(3347.0ppm) ge1us=11(11.00ppm) ge10us=1(1.000ppm)
+rep=1 RESULT MIXED backend=system   size=0    K=1 N=20000000 mean=56.01 p50=42.00 p90=125.00 p99=209.00 p99.9=292.00 p99.99=1000.00 max=924917.00 tail_ratio=23.8 ge100ns=2318528(115926.4ppm) ge1us=2103(105.15ppm) ge10us=117(5.850ppm)
+rep=1 RESULT MIXED backend=jemalloc size=0    K=32 N=1000000 mean=15.83 p50=15.62 p90=16.94 p99=31.25 p99.9=58.59 p99.99=274.75 max=1324.22 tail_ratio=17.6 ge100ns=640(640.0ppm) ge1us=2(2.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT MIXED backend=jemalloc size=0    K=1 N=20000000 mean=13.63 p50=0.00 p90=42.00 p99=42.00 p99.9=167.00 p99.99=709.00 max=33042.00 tail_ratio=0.0 ge100ns=30011(1500.5ppm) ge1us=788(39.40ppm) ge10us=14(0.700ppm)
+rep=1 RESULT MIXED backend=tcmalloc size=0    K=32 N=1000000 mean=12.85 p50=13.03 p90=14.31 p99=15.62 p99.9=18.25 p99.99=210.94 max=959.66 tail_ratio=16.2 ge100ns=206(206.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT MIXED backend=tcmalloc size=0    K=1 N=20000000 mean=11.58 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=19292.00 tail_ratio=0.0 ge100ns=1424(71.2ppm) ge1us=165(8.25ppm) ge10us=13(0.650ppm)
+rep=1 RESULT MIXED backend=mimalloc size=0    K=32 N=1000000 mean=15.92 p50=15.62 p90=19.53 p99=24.75 p99.9=35.16 p99.99=259.12 max=1473.97 tail_ratio=16.6 ge100ns=427(427.0ppm) ge1us=4(4.00ppm) ge10us=0(0.000ppm)
+rep=1 RESULT MIXED backend=mimalloc size=0    K=1 N=20000000 mean=13.37 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=208.00 max=37000.00 tail_ratio=0.0 ge100ns=35343(1767.2ppm) ge1us=505(25.25ppm) ge10us=27(1.350ppm)
+rep=2 RESULT MIXED backend=PMAD     size=0    K=32 N=1000000 mean=16.96 p50=16.91 p90=19.53 p99=24.75 p99.9=28.66 p99.99=291.69 max=1183.59 tail_ratio=17.3 ge100ns=413(413.0ppm) ge1us=4(4.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT MIXED backend=PMAD     size=0    K=1 N=20000000 mean=12.35 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=18667.00 tail_ratio=0.0 ge100ns=33524(1676.2ppm) ge1us=381(19.05ppm) ge10us=23(1.150ppm)
+rep=2 RESULT MIXED backend=system   size=0    K=32 N=1000000 mean=61.16 p50=59.91 p90=70.31 p99=83.34 p99.9=165.38 p99.99=459.62 max=29959.62 tail_ratio=7.7 ge100ns=2331(2331.0ppm) ge1us=7(7.00ppm) ge10us=1(1.000ppm)
+rep=2 RESULT MIXED backend=system   size=0    K=1 N=20000000 mean=52.06 p50=42.00 p90=84.00 p99=208.00 p99.9=250.00 p99.99=792.00 max=504958.00 tail_ratio=18.9 ge100ns=1837443(91872.1ppm) ge1us=1289(64.45ppm) ge10us=99(4.950ppm)
+rep=2 RESULT MIXED backend=jemalloc size=0    K=32 N=1000000 mean=15.62 p50=14.34 p90=16.94 p99=31.25 p99.9=52.09 p99.99=279.97 max=1335.94 tail_ratio=19.5 ge100ns=390(390.0ppm) ge1us=5(5.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT MIXED backend=jemalloc size=0    K=1 N=20000000 mean=13.45 p50=0.00 p90=42.00 p99=42.00 p99.9=167.00 p99.99=709.00 max=33542.00 tail_ratio=0.0 ge100ns=30519(1526.0ppm) ge1us=750(37.50ppm) ge10us=24(1.200ppm)
+rep=2 RESULT MIXED backend=tcmalloc size=0    K=32 N=1000000 mean=12.70 p50=13.00 p90=14.31 p99=15.62 p99.9=18.25 p99.99=188.81 max=1355.47 tail_ratio=14.5 ge100ns=178(178.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT MIXED backend=tcmalloc size=0    K=1 N=20000000 mean=11.54 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=38958.00 tail_ratio=0.0 ge100ns=1417(70.8ppm) ge1us=177(8.85ppm) ge10us=18(0.900ppm)
+rep=2 RESULT MIXED backend=mimalloc size=0    K=32 N=1000000 mean=15.08 p50=14.34 p90=18.25 p99=23.44 p99.9=28.62 p99.99=216.16 max=1380.22 tail_ratio=15.1 ge100ns=207(207.0ppm) ge1us=4(4.00ppm) ge10us=0(0.000ppm)
+rep=2 RESULT MIXED backend=mimalloc size=0    K=1 N=20000000 mean=12.97 p50=0.00 p90=42.00 p99=42.00 p99.9=125.00 p99.99=167.00 max=17584.00 tail_ratio=0.0 ge100ns=24823(1241.2ppm) ge1us=463(23.15ppm) ge10us=23(1.150ppm)
+rep=3 RESULT MIXED backend=PMAD     size=0    K=32 N=1000000 mean=16.04 p50=15.62 p90=18.25 p99=22.12 p99.9=26.03 p99.99=257.81 max=1847.66 tail_ratio=16.5 ge100ns=238(238.0ppm) ge1us=4(4.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT MIXED backend=PMAD     size=0    K=1 N=20000000 mean=11.85 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=18042.00 tail_ratio=0.0 ge100ns=21757(1087.8ppm) ge1us=297(14.85ppm) ge10us=10(0.500ppm)
+rep=3 RESULT MIXED backend=system   size=0    K=32 N=1000000 mean=63.21 p50=61.22 p90=72.94 p99=89.84 p99.9=212.25 p99.99=466.12 max=29483.06 tail_ratio=7.6 ge100ns=4159(4159.0ppm) ge1us=17(17.00ppm) ge10us=2(2.000ppm)
+rep=3 RESULT MIXED backend=system   size=0    K=1 N=20000000 mean=51.40 p50=42.00 p90=84.00 p99=208.00 p99.9=250.00 p99.99=791.00 max=456250.00 tail_ratio=18.8 ge100ns=1723307(86165.4ppm) ge1us=1306(65.30ppm) ge10us=99(4.950ppm)
+rep=3 RESULT MIXED backend=jemalloc size=0    K=32 N=1000000 mean=15.65 p50=15.62 p90=16.94 p99=29.97 p99.9=48.19 p99.99=210.94 max=1325.50 tail_ratio=13.5 ge100ns=218(218.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT MIXED backend=jemalloc size=0    K=1 N=20000000 mean=13.46 p50=0.00 p90=42.00 p99=42.00 p99.9=167.00 p99.99=709.00 max=43917.00 tail_ratio=0.0 ge100ns=32529(1626.5ppm) ge1us=807(40.35ppm) ge10us=19(0.950ppm)
+rep=3 RESULT MIXED backend=tcmalloc size=0    K=32 N=1000000 mean=12.71 p50=13.00 p90=14.31 p99=16.91 p99.9=19.53 p99.99=263.03 max=858.06 tail_ratio=20.2 ge100ns=311(311.0ppm) ge1us=0(0.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT MIXED backend=tcmalloc size=0    K=1 N=20000000 mean=11.49 p50=0.00 p90=42.00 p99=42.00 p99.9=42.00 p99.99=84.00 max=25750.00 tail_ratio=0.0 ge100ns=1524(76.2ppm) ge1us=175(8.75ppm) ge10us=23(1.150ppm)
+rep=3 RESULT MIXED backend=mimalloc size=0    K=32 N=1000000 mean=15.32 p50=14.34 p90=19.53 p99=23.44 p99.9=33.84 p99.99=497.38 max=1483.06 tail_ratio=34.7 ge100ns=470(470.0ppm) ge1us=1(1.00ppm) ge10us=0(0.000ppm)
+rep=3 RESULT MIXED backend=mimalloc size=0    K=1 N=20000000 mean=13.23 p50=0.00 p90=42.00 p99=83.00 p99.9=125.00 p99.99=167.00 max=77875.00 tail_ratio=0.0 ge100ns=31381(1569.0ppm) ge1us=520(26.00ppm) ge10us=51(2.550ppm)
+rep=1 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=2.168 free_ns_op=1.703 pair_ns_op=3.870
+rep=1 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=6.750 free_ns_op=4.202 pair_ns_op=10.952
+rep=1 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=80.393 free_ns_op=14.878 pair_ns_op=95.271
+rep=1 RESULT FORDER backend=system   size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=8.398 free_ns_op=7.602 pair_ns_op=16.000
+rep=1 RESULT FORDER backend=system   size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=8.213 free_ns_op=7.420 pair_ns_op=15.634
+rep=1 RESULT FORDER backend=system   size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=8.312 free_ns_op=30.552 pair_ns_op=38.864
+rep=1 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=7.745 free_ns_op=7.283 pair_ns_op=15.028
+rep=1 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=7.929 free_ns_op=7.300 pair_ns_op=15.229
+rep=1 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=8.251 free_ns_op=12.364 pair_ns_op=20.614
+rep=1 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=3.725 free_ns_op=4.767 pair_ns_op=8.492
+rep=1 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=3.750 free_ns_op=4.866 pair_ns_op=8.616
+rep=1 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=9.977 free_ns_op=10.169 pair_ns_op=20.146
+rep=1 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=2.680 free_ns_op=2.157 pair_ns_op=4.837
+rep=1 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=2.560 free_ns_op=2.155 pair_ns_op=4.715
+rep=1 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=2.554 free_ns_op=4.258 pair_ns_op=6.812
+rep=2 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=2.098 free_ns_op=1.710 pair_ns_op=3.808
+rep=2 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=2.218 free_ns_op=1.682 pair_ns_op=3.900
+rep=2 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=80.183 free_ns_op=14.830 pair_ns_op=95.013
+rep=2 RESULT FORDER backend=system   size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=8.405 free_ns_op=7.509 pair_ns_op=15.914
+rep=2 RESULT FORDER backend=system   size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=8.108 free_ns_op=7.322 pair_ns_op=15.431
+rep=2 RESULT FORDER backend=system   size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=8.327 free_ns_op=30.650 pair_ns_op=38.977
+rep=2 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=7.834 free_ns_op=7.332 pair_ns_op=15.166
+rep=2 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=7.943 free_ns_op=7.251 pair_ns_op=15.194
+rep=2 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=8.319 free_ns_op=12.139 pair_ns_op=20.458
+rep=2 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=3.709 free_ns_op=4.884 pair_ns_op=8.593
+rep=2 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=3.743 free_ns_op=5.118 pair_ns_op=8.861
+rep=2 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=9.739 free_ns_op=10.307 pair_ns_op=20.047
+rep=2 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=2.676 free_ns_op=2.162 pair_ns_op=4.838
+rep=2 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=2.660 free_ns_op=2.123 pair_ns_op=4.783
+rep=2 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=2.852 free_ns_op=4.089 pair_ns_op=6.940
+rep=3 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=2.104 free_ns_op=1.727 pair_ns_op=3.831
+rep=3 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=2.175 free_ns_op=1.688 pair_ns_op=3.863
+rep=3 RESULT FORDER backend=PMAD     size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=80.395 free_ns_op=14.743 pair_ns_op=95.139
+rep=3 RESULT FORDER backend=system   size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=8.430 free_ns_op=7.537 pair_ns_op=15.968
+rep=3 RESULT FORDER backend=system   size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=7.995 free_ns_op=7.318 pair_ns_op=15.312
+rep=3 RESULT FORDER backend=system   size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=8.280 free_ns_op=31.924 pair_ns_op=40.204
+rep=3 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=8.605 free_ns_op=7.270 pair_ns_op=15.875
+rep=3 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=7.854 free_ns_op=7.289 pair_ns_op=15.143
+rep=3 RESULT FORDER backend=jemalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=8.307 free_ns_op=12.450 pair_ns_op=20.757
+rep=3 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=3.689 free_ns_op=5.077 pair_ns_op=8.766
+rep=3 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=3.776 free_ns_op=5.110 pair_ns_op=8.886
+rep=3 RESULT FORDER backend=tcmalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=9.536 free_ns_op=9.889 pair_ns_op=19.425
+rep=3 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=lifo rounds=10 alloc_ns_op=2.728 free_ns_op=2.160 pair_ns_op=4.888
+rep=3 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=fifo rounds=10 alloc_ns_op=2.747 free_ns_op=2.217 pair_ns_op=4.964
+rep=3 RESULT FORDER backend=mimalloc size=64   count=1000000 pattern=rand rounds=10 alloc_ns_op=2.593 free_ns_op=4.102 pair_ns_op=6.695
+rep=1 RESULT INIT backend=PMAD     size=64   count=1000000 got=1000000 init_ms=8.130 fill_ms=2.364 total_ms=10.494
+rep=1 RESULT INIT backend=system   size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=10.371 total_ms=10.371
+rep=1 RESULT INIT backend=jemalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=11.434 total_ms=11.434
+rep=1 RESULT INIT backend=tcmalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=6.616 total_ms=6.616
+rep=1 RESULT INIT backend=mimalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=5.385 total_ms=5.385
+rep=2 RESULT INIT backend=PMAD     size=64   count=1000000 got=1000000 init_ms=8.074 fill_ms=2.244 total_ms=10.317
+rep=2 RESULT INIT backend=system   size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=10.765 total_ms=10.766
+rep=2 RESULT INIT backend=jemalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=11.585 total_ms=11.585
+rep=2 RESULT INIT backend=tcmalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=6.777 total_ms=6.777
+rep=2 RESULT INIT backend=mimalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=5.734 total_ms=5.734
+rep=3 RESULT INIT backend=PMAD     size=64   count=1000000 got=1000000 init_ms=7.918 fill_ms=2.184 total_ms=10.102
+rep=3 RESULT INIT backend=system   size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=10.437 total_ms=10.437
+rep=3 RESULT INIT backend=jemalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=11.507 total_ms=11.507
+rep=3 RESULT INIT backend=tcmalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=6.813 total_ms=6.813
+rep=3 RESULT INIT backend=mimalloc size=64   count=1000000 got=1000000 init_ms=0.000 fill_ms=5.502 total_ms=5.502
