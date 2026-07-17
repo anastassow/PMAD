@@ -24,23 +24,34 @@ PmadStatus pmad_init(const size_t* class_sizes, uint8_t num_size_classes,
 }
 
 void* pmad_alloc(size_t size) {
-    return PMAD_alloc(&incPMAD_instance, size);
+    void* memory = NULL;
+    PmadStatus status = PMAD_alloc(&incPMAD_instance, size, &memory);
+    if (status != PMAD_OK) {
+        fprintf(stderr, "pmad_alloc failed: %d\n", status);
+        return NULL;
+    }
+
+    return memory;
 }
 
 PmadStatus pmad_free(void* ptr) {
     return PMAD_free(&incPMAD_instance, ptr);
 }
 
-void pmad_destroy(void) {
+PmadStatus pmad_destroy(void) {
     MemoryPool* pool = incPMAD_instance.pool_head;
     while (pool) {
         MemoryPool* next = pool->next;
-        free_memory_pool(pool, incPMAD_instance.pool_size);
+        PmadStatus status = free_memory_pool(pool, incPMAD_instance.pool_size);
+        if (status != PMAD_OK)
+            return status;
         pool = next;
     }
     incPMAD_instance.size_classes     = NULL;
     incPMAD_instance.pool_head        = NULL;
     incPMAD_instance.num_size_classes = 0;
+
+    return PMAD_OK;
 }
 
 int pmad_get_stats(PmadClassStats* out, int max_classes) {

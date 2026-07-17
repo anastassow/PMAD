@@ -5,9 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-void build_lookup_table(PMAD* pmad) {
+PmadStatus build_lookup_table(PMAD* pmad) {
+    if ((size_t)pmad->num_size_classes > (size_t)MAX_NUMBER_OF_SIZE_CLASSES) 
+        return PMAD_ERR_TOO_MANY_SIZE_CLASSES;
+   
     uint8_t class_index = 0;
-    for (uint16_t i = 1; i <= MAX_SIZE_OF_SIZE_CLASS / ALIGNMENT; i++) {
+    for (uint16_t i = 1; i <= MAX_NUMBER_OF_SIZE_CLASSES; i++) {
         size_t aligned_size = (size_t)i * ALIGNMENT;
 
         while (class_index < pmad->num_size_classes &&
@@ -19,6 +22,8 @@ void build_lookup_table(PMAD* pmad) {
                                         : -1;
     }
     pmad->size_class_reference[0] = -1;
+
+    return PMAD_OK;
 }
 
 PmadStatus PMAD_init(PMAD* pmad, const size_t* class_sizes,
@@ -27,7 +32,7 @@ PmadStatus PMAD_init(PMAD* pmad, const size_t* class_sizes,
         return PMAD_ERR_INIT_FAILED;
 
     size_t raw_size = (size_t)num_size_classes * sizeof(SizeClass);
-    size_t size_classes_bytes = (raw_size + ALIGNMENT - 1) & ~(size_t)(ALIGNMENT - 1);
+    size_t size_classes_bytes = ROUND_UP(raw_size, ALIGNMENT);
     
     if (pmad->pool_head->size < size_classes_bytes)
         return PMAD_ERR_OOM;
@@ -46,8 +51,10 @@ PmadStatus PMAD_init(PMAD* pmad, const size_t* class_sizes,
         pmad->size_classes[i].allocated_blocks = 0;
     }
 
-    build_lookup_table(pmad);
-    return PMAD_OK;
+    pmad->pool_head->used += size_classes_bytes;
+
+    PmadStatus build_table_status = build_lookup_table(pmad);
+    return build_table_status;
 }
 
 void* get_memory_pool_from_os(size_t pool_size) {
@@ -61,9 +68,10 @@ void* get_memory_pool_from_os(size_t pool_size) {
     return (mem == MAP_FAILED) ? NULL : mem;
 }
 
-void free_memory_pool(void* mem, size_t pool_size) {
+PmadStatus free_memory_pool(void* mem, size_t pool_size) {
     if (munmap(mem, pool_size) != 0)
-        perror("munmap failed");
+        return PMAD_ERR_DEALLOCATING_MMAP;
+    return PMAD_OK;
 }
 
 PmadStatus split_pool_by_percentage(PMAD* pmad, const size_t* percentage,
@@ -89,32 +97,45 @@ PmadStatus split_pool_by_percentage(PMAD* pmad, const size_t* percentage,
             pmad->size_classes[i].total_blocks++;
             ptr += block_size;
         }
+
+        pmad->pool_head->used += pmad->size_classes[i].total_blocks * sizeof(BlockHeader);
     }
 
     return PMAD_OK;
 }
 
-static size_t roundUp(size_t size) {
-    return (size + ALIGNMENT - 1) & ~(size_t)(ALIGNMENT - 1);
-}
-
-void* PMAD_alloc(PMAD* pmad, size_t size) {
-    size_t aligned = roundUp(size);
-    if (aligned == 0 || aligned > MAX_SIZE_OF_SIZE_CLASS) return NULL;
+PmadStatus PMAD_alloc(PMAD* pmad, size_t size, void** allocated_block_pointer) {
+    size_t aligned = ROUND_UP(size, ALIGNMENT);
+    if (aligned == 0 || aligned > MAX_SIZE_OF_SIZE_CLASS) {
+        *allocated_block_pointer = NULL;
+        return PMAD_ERR_ALLOCATION_TOO_BIG;
+    }
 
     int8_t index = pmad->size_class_reference[aligned / ALIGNMENT];
-    if (index < 0) return NULL;
+    if (index < 0) {
+        *allocated_block_pointer = NULL;
+        return PMAD_ERR_ALLOCATION_OF_0_NOT_ALLOWED;
+    }
 
     SizeClass* sc = &pmad->size_classes[(uint8_t)index];
-    if (!sc->free_list) return NULL;
+    if (!sc->free_list) {
+        *allocated_block_pointer = NULL;
+        return PMAD_ERR_OUT_OF_MEMORY;
+    }
 
     BlockHeader* block = sc->free_list;
     sc->free_list = block->next;
     sc->allocated_blocks++;
 
-    return (uint8_t*)block + sizeof(BlockHeader);
+    pmad->pool_head->used += aligned;
+
+    *allocated_block_pointer = (uint8_t*)block + sizeof(BlockHeader);
+    return PMAD_OK;
 }
 
+/*
+Function to check if the pointer given to pmad_free is allocated from PMAD
+*/
 static int pointer_in_pool(PMAD* pmad, const void* ptr) {
     for (MemoryPool* p = pmad->pool_head; p; p = p->next) {
         const uint8_t* start = (const uint8_t*)p->start;
@@ -137,6 +158,8 @@ PmadStatus PMAD_free(PMAD* pmad, void* memoryToFree) {
     block->next   = sc->free_list;
     sc->free_list = block;
     sc->allocated_blocks--;
+
+    pmad->pool_head->used -= pmad->size_classes[block->size_class].block_size;
 
     return PMAD_OK;
 }
