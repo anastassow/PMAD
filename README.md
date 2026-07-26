@@ -1,8 +1,10 @@
+# PMAD
+
+PMAD (Pool-Based Memory Allocator by Dimitar Anastasov) is a deterministic, O(1) slab allocator for C. At startup it reserves a single contiguous memory pool with one `mmap` call, splits that pool into user-defined fixed-size classes, and serves every `pmad_alloc`/`pmad_free` call as an O(1) free-list pop — no system calls on the hot path, no fragmentation, and a memory footprint that is fixed and known in advance. PMAD is built for software where worst-case latency matters more than average-case throughput: real-time systems, high-frequency trading, packet/message pools, and other latency-sensitive C codebases that can predeclare their allocation sizes.
+
 <p align="center">
   <img src="docs/images/PMAD.png" alt="PMAD Architecture Overview" width="940"/>
 </p>
-
-<h1 align="center">PMAD — Pool-Based Memory Allocator by Dimitar Anastasov</h1>
 
 <p align="center">
   <strong>A deterministic, O(1) slab allocator with a provable latency ceiling —<br/>
